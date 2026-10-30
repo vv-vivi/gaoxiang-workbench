@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>高项占分比备考台</title>
+<!-- 依据考情分值分布(信管网/希赛/课课家2026考情)整理，考试日2027-05-22 -->
+<style>
+:root{--ink:#1e293b;--muted:#64748b;--bg:#f1f5f9;--card:#fff;--line:#e2e8f0;--brand:#2b5fd9;--bad:#dc2626;--ok:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-text-size-adjust:100%;text-size-adjust:100%;padding-bottom:env(safe-area-inset-bottom)}
+.wrap{max-width:860px;margin:0 auto;padding:14px 12px 90px}
+header.hero{background:linear-gradient(135deg,#1e3a8a,#2b5fd9);color:#fff;border-radius:16px;padding:18px 16px}
+.hero h1{font-size:20px;font-weight:800}
+.hero .cd{font-size:15px;margin-top:6px}
+.hero .cd b{font-size:30px;font-weight:800;margin:0 4px}
+.hero .meta{font-size:12px;opacity:.9;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer;min-height:44px}
+.bp{background:var(--brand);color:#fff}.bg{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.bp:active,.bg:active{transform:scale(.97)}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs button{flex:1;border:none;background:none;padding:9px 2px 7px;font-size:11.5px;color:var(--muted);font-weight:600;cursor:pointer;min-height:48px}
+nav.tabs button svg{display:block;margin:0 auto 2px;width:22px;height:22px}
+nav.tabs button.on{color:var(--brand)}
+section.tab{display:none;margin-top:14px}
+section.tab.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}
+.card h2{font-size:16px;font-weight:800}
+.card h2 small{font-size:12px;color:var(--muted);font-weight:600;margin-left:6px}
+.sub{font-size:12.5px;color:var(--muted)}
+.phase-tag{display:inline-block;font-size:12px;font-weight:700;color:#fff;border-radius:999px;padding:2px 10px}
+.task{display:flex;align-items:flex-start;gap:10px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:8px;font-size:13.5px}
+.task input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--brand)}
+.task.done span{text-decoration:line-through;color:var(--muted)}
+.task.hot{border-left:4px solid var(--bad)}
+.rec{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px;background:#fff}
+.rec .rn{font-weight:800;font-size:14.5px}
+.rec .rs{font-size:12px;color:var(--muted)}
+.btn-rec{background:var(--ok);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;min-height:38px}
+.btn-rec.on{background:var(--line);color:var(--muted)}
+.scorebar{margin-top:10px}
+.sb-row{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12.5px}
+.sb-row .nm{width:110px;flex:none;font-weight:600;text-align:right}
+.sb-row .tr{flex:1;background:#eef2f7;border-radius:99px;height:18px;overflow:hidden;cursor:pointer}
+.sb-row .fl{height:100%;border-radius:99px}
+.sb-row .sc{width:52px;flex:none;color:var(--muted);font-weight:700}
+.mrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.mrow:last-child{border-bottom:none}
+.mrow .mn{font-weight:700;font-size:14px}
+.mrow .ms{font-size:12px;color:var(--muted)}
+.pts{margin-top:8px;display:none}
+.pts.open{display:block}
+.pt{background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:13px;margin-top:6px}
+.phase{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px;background:#fff;position:relative}
+.phase.cur{border:2px solid var(--brand);background:#f5f8ff}
+.phase h3{font-size:15.5px;font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.phase .pw{font-size:12.5px;color:var(--muted);margin-top:2px}
+.ph-stat{font-size:11.5px;font-weight:700;border-radius:6px;padding:1px 8px}
+.st-done{background:#dcfce7;color:var(--ok)}.st-cur{background:#dbeafe;color:var(--brand)}.st-todo{background:#f1f5f9;color:var(--muted)}
+.ms{display:flex;gap:10px;margin-top:8px;font-size:12.5px}
+.ms .d{flex:none;font-weight:800;color:var(--bad)}
+.streak{display:flex;gap:8px;margin-top:10px}
+.stk{flex:1;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center}
+.stk b{font-size:20px;font-weight:800}
+.stk div{font-size:11px;color:var(--muted)}
+#wxbar{display:none;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12.5px;border-radius:10px;padding:9px 12px;margin-top:10px}
+textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);border-radius:9px;padding:8px;font-family:monospace}
+#toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%) translateY(20px);background:#1e293b;color:#fff;padding:9px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.mindmap{margin-top:10px;overflow-x:auto}
+.mindmap svg{display:block;min-width:640px}
+.info-kv{display:flex;gap:8px;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.info-kv b{flex:none;width:88px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <h1>高项占分比备考台</h1>
+  <div class="cd">距考试 <b id="cdday">--</b> 天<span style="font-size:12px;opacity:.85">（2027-05-22 机考）</span></div>
+  <div class="meta">综合知识75分 · 案例75分 · 论文75分 · 三科各45分合格 · 一年一考无成绩保留</div>
+  <div id="wxbar"></div>
+</header>
+
+<!-- TAB 今日 -->
+<section class="tab on" id="tab-today">
+  <div class="card" id="card-phase-now"></div>
+  <div class="card">
+    <h2>今日背诵 <small>按分值权重轮转</small></h2>
+    <div class="sub">分值越高的模块出现频率越高；点「已背」打卡。</div>
+    <div id="recList"></div>
+  </div>
+  <div class="card">
+    <h2>今日任务 <small id="phaseSub"></small></h2>
+    <div id="taskList"></div>
+  </div>
+  <div class="card">
+    <h2>打卡数据</h2>
+    <div class="streak">
+      <div class="stk"><b id="stkDays">0</b><div>累计打卡(天)</div></div>
+      <div class="stk"><b id="stkStreak">0</b><div>连续(天)</div></div>
+      <div class="stk"><b id="stkRec">0</b><div>已背要点(次)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB 分值 -->
+<section class="tab" id="tab-score">
+  <div class="card">
+    <h2>综合知识考点分值脑图 <small>共75分</small></h2>
+    <div class="mindmap" id="mindmap"></div>
+    <div class="sub" style="margin-top:8px">案例75分 = 简答约50分(十大领域场景分析) + 计算约25分(挣值/关键路径必考)；论文75分从十大领域选一题写2500字。十大管理贯穿三科，是绝对核心。</div>
+  </div>
+  <div class="card">
+    <h2>分值排行 <small>点行展开背诵要点</small></h2>
+    <div class="scorebar" id="scorebar"></div>
+  </div>
+  <div class="card" id="detailCard"></div>
+</section>
+
+<!-- TAB 计划 -->
+<section class="tab" id="tab-plan">
+  <div class="card">
+    <h2>五阶段备考计划 <small>按考点占分倒排</small></h2>
+    <div class="sub">2026-10-30 开动 → 2027-05-22 开考，共约29周。顺序=先吃45分基本盘，再啃计算和案例，最后论文与冲刺。</div>
+  </div>
+  <div id="planList"></div>
+  <div class="card">
+    <h2>关键节点</h2>
+    <div id="msList"></div>
+  </div>
+</section>
+
+<!-- TAB 我的 -->
+<section class="tab" id="tab-mine">
+  <div class="card">
+    <h2>考试信息卡</h2>
+    <div class="info-kv"><b>考试名称</b><span>信息系统项目管理师（软考高级）</span></div>
+    <div class="info-kv"><b>考试时间</b><span>2027-05-22/23（预计，一年仅上半年1次）</span></div>
+    <div class="info-kv"><b>考试形式</b><span>机考；三科同考，无成绩滚动，任一科不过需全科重考</span></div>
+    <div class="info-kv"><b>合格线</b><span>三科各45分（满分75，60%）</span></div>
+    <div class="info-kv"><b>报名</b><span>预计2027年3月中旬起，分省错峰开放约10-20天，无补报名</span></div>
+    <div class="info-kv"><b>准考证</b><span>考前一周打印；考前10天左右开放机考模拟</span></div>
+  </div>
+  <div class="card">
+    <h2>数据备份</h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn bp" id="btnExp">导出JSON备份</button>
+      <button class="btn bg" id="btnImp">导入恢复</button>
+      <button class="btn bg" id="btnClr">清空数据</button>
+    </div>
+    <textarea class="io" id="ioBox" placeholder="导出的JSON会出现在这里；导入时粘贴JSON后点「导入恢复」"></textarea>
+  </div>
+  <div class="card">
+    <h2>微信使用提示</h2>
+    <div class="sub" id="wxTip">在微信里打开本页时，打卡数据只存在微信内置浏览器里，换浏览器会看不到。建议：点右上角「…」→ 在浏览器打开 → 添加到主屏幕，长期使用更稳定；换设备用「导出JSON备份」迁移。</div>
+  </div>
+</section>
+</div>
+
+<nav class="tabs" id="tabbar">
+  <button data-tab="today" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.2-6.3-4.5-6.3 4.5L8 13.6 2 9.2h7.6z"/></svg>今日</button>
+  <button data-tab="score"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>分值</button>
+  <button data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>计划</button>
+  <button data-tab="mine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>我的</button>
+</nav>
+<div id="toast">已复制</div>
+
+<script>
+var D={"modules":[{"id":"m5","name":"十大管理领域","score":30,"rng":"约30分","star":5,"case":"案例+论文绝对主战场","color":"#2b5fd9","kw":"49过程/ITTO/变更流程/挣值/关键路径","points":["49个过程数量必背：整合7、范围6、进度6、成本4、质量3、资源6、沟通3、风险7、采购3、干系人4","领域顺序口诀：整范进成质，资沟风采干","整合7过程口诀：章-计-导-知-控-变-终；章程由发起人发布，CCB负责变更审批","范围：WBS 100%原则/工作包80小时；范围蔓延(客户加需求) vs 镀金(团队多做)都不可取","进度：关键路径=最长路径决定最短工期；TF=LS-ES；三点估算 β=(O+4M+P)/6","成本：成本基准=估算+应急储备；预算=基准+管理储备；挣值 CV=EV-AC、CPI=EV/AC、EAC=BAC/CPI(典型)","质量：管理质量关注'过程'(执行组)、控制质量关注'成果'(监控组)；老七工具必背","资源：塔克曼五阶段 形成-震荡-规范-成熟-解散；冲突解决最优是'合作/解决问题'","沟通：渠道数=n(n-1)/2；交互式/推式/拉式三类方法","风险：威胁应对=上报规避转移减轻接受；机会应对=上报开拓分享提高接受","采购：总价合同卖方风险大、成本补偿买方风险大、工料居中","干系人：权力/利益方格四象限；参与度C-U-N-S-L(不了解抵制中立支持领导)"]},{"id":"m6","name":"高级管理知识","score":10,"rng":"8-12分","star":4,"case":"案例常考配置与变更","color":"#7c3aed","kw":"配置三库/CMMI五级/项目集与组合","points":["配置库三库：开发库(动态)、受控库(主库)、产品库(静态)","基线三类：功能基线、分配基线、产品基线；基线变更必须走流程","配置管理6活动：计划/识别/控制/状态报告/审计/发布交付","变更程序：申请→评估→审批→实施→验证→归档","项目集5绩效域：战略一致性/效益管理/干系人参与/生命周期/治理","项目组合5绩效域：战略管理/治理/能力容量/干系人参与/价值","CMMI五级：初始-已管理-已定义-量化管理-优化；阶段式vs连续式","PRINCE2：7原则/7主题/7流程，受控环境+商业论证"]},{"id":"m1","name":"信息技术与信息化","score":7,"rng":"6-8分","star":3,"case":"案例少、综合必考","color":"#16a34a","kw":"新一代信息技术/数字中国/元宇宙","points":["数字中国'2522'框架：两大基础(数字基础设施+数据资源)、五位一体融合、两大能力(技术创新+数字安全)、两个环境(国内国际)","新型基础设施：信息基础设施/融合基础设施/创新基础设施","物联网三层：感知层/网络层/应用层","云计算：IaaS/PaaS/SaaS；大数据5V：Volume/Variety/Value/Velocity/Veracity","区块链：去中心化、不可篡改、可追溯","元宇宙3特征(教材)：沉浸式体验、虚拟身份、虚拟经济","信息安全CIA：机密性/完整性/可用性"]},{"id":"m4","name":"项目管理概论与立项","score":5,"rng":"4-6分","star":3,"case":"立项可研偶考案例","color":"#0d9488","kw":"过程组/绩效域/可行性研究/NPV","points":["项目三特征：临时性、独特性、渐进明细","五大过程组：启动/规划/执行/监控/收尾；八大绩效域：干系人/团队/开发方法/规划/项目工作/交付/度量/不确定性","PMI人才三角：技术项目管理/领导力/战略和商务管理","组织结构PM权力：职能型<弱矩阵<平衡矩阵<强矩阵<项目型","立项流程：项目建议书→可行性研究→项目评估与决策→立项批准","可研六内容：技术/经济/财务/组织/社会/风险对策","NPV>0可行；IRR>基准收益率可行；投资回收期越短越好"]},{"id":"m7","name":"法律法规与标准","score":4,"rng":"3-5分","star":3,"case":"综合固定考2-4题","color":"#d97706","kw":"招投标/知识产权/网安法","points":["招投标：公开/邀请招标(邀请≥3家)；公告至投标截止≥20日；中标通知书发出30日内签合同","投标保证金≤估算价2%；履约保证金≤中标合同额10%；评标委员会5人以上单数","专利：发明20年/实用新型10年/外观设计15年，自申请日起","著作权：公民=终生+死后50年；法人=首次发表后50年","商标：注册有效期10年，可续展每次10年","网络安全法：网络运营者义务/关基重点保护/个人信息保护；数据安全法：分类分级","民法典：要约→承诺；合同法条常与招投标合考"]},{"id":"m8","name":"管理科学基础","score":4,"rng":"3-5分","star":3,"case":"计算题来源之一","color":"#ea580c","kw":"运筹学/决策树/图论","points":["资金时间价值：F=P(1+i)^n；NPV>0可行；IRR为NPV=0的折现率","线性规划三要素：决策变量/目标函数/约束条件","指派问题用匈牙利法；运输问题初始解用最小元素法/伏格尔法","最短路径=迪杰斯特拉；最小生成树=普里姆/克鲁斯卡尔；最大流=福特-福克森","不确定型决策五准则：乐观(大中取大)/悲观(小中取大)/折中/后悔值/等可能","决策树：从右向左算期望值EMV=概率×损益"]},{"id":"m9","name":"英语题","score":5,"rng":"固定5分","star":2,"case":"不考","color":"#3b82f6","kw":"项目管理术语","points":["固定5道单选，占5分，性价比高——考前1个月突击即可","先读题干找关键词，再回原文定位；主谓宾结构拆长句","必背术语：project charter项目章程/WBS/risk register风险登记册/stakeholder干系人/deliverable可交付成果/baseline基准","milestone里程碑/schedule进度/procurement采购/quality quality assurance质量保证(QA)/control控制"]},{"id":"m2","name":"信息系统治理与管理","score":4,"rng":"3-5分","star":2,"case":"偶考","color":"#4f46e5","kw":"IT治理/IT审计","points":["IT治理核心：IT与战略一致、价值交付、资源管理、风险管理、绩效度量","IT审计流程：审计准备→实施→报告→后续跟踪","审计方法：访谈/检查/观察/重演/数据分析","数据管理要点：数据治理、数据标准、数据质量、数据安全","运维管理：PDCA持续改进；信息系统管理=规划组织+设计实施+运维服务+优化改进"]},{"id":"m3","name":"信息系统工程","score":4,"rng":"约4分","star":2,"case":"偶考","color":"#db2777","kw":"软工/数据工程/集成/安全工程","points":["系统集成五类：集成基础/网络集成/数据集成/软件集成/应用集成","数据集成方式：数据复制/ETL/联邦虚拟视图/消息中间件","应用集成层次：界面/数据/业务逻辑(API)/流程","安全工程三体系：安全技术体系/安全管理体系/安全运维体系","等保2.0五级：一级最低五级最高(GB/T 22239)","中间件/ESB/API网关/微服务是集成关键技术"]},{"id":"m10","name":"时事政治","score":3,"rng":"2-3分","star":1,"case":"不考","color":"#64748b","kw":"数字经济/新质生产力","points":["考前2周突击，平时不用花时间","关注：数字经济发展、数据要素市场化、新质生产力、人工智能+行动、数字中国建设最新政策","来源：政府工作报告要点+网信办近期发布，信管网/希赛考前时政汇总即可"]}],"phases":[{"id":"p1","name":"基础精读期","start":"2026-10-30","end":"2027-01-17","weeks":"11周","color":"#2b5fd9","why":"先吃下45分基本盘：十大管理30分+高级知识10分+概论5分","tasks":["十大管理逐章精读：49过程名称+数量+口诀全默写（每天1个领域，滚动复习）","每个领域的ITTO关键工具/输出过一遍（配合记忆锚点）","高级知识：配置三库/CMMI/项目集组合绩效域 背完","概论+立项：过程组/绩效域/可研/NPV公式","信息技术与信息化：数字中国2522/新一代信息技术/等保","每周日做50道对应章节综合题，正确率<60%的章节标记回炉"]},{"id":"p2","name":"计算强化期","start":"2027-01-18","end":"2027-02-28","weeks":"6周","color":"#d97706","why":"案例计算25分+综合计算5-8分，全对是过45分的底气","tasks":["挣值计算100题：PV/EV/AC/CV/SV/CPI/SPI/EAC三式/ETC/VAC/TCPI","关键路径60题：正推逆推/TF/FF/赶工与快速跟进决策","运筹学30题：线性规划/指派/运输/决策树/图论/不确定型五准则","三点估算与储备分析计算","错题本：每道错题写'错在哪一步'，周末复盘"]},{"id":"p3","name":"案例实战期","start":"2027-03-01","end":"2027-04-04","weeks":"5周","color":"#ea580c","why":"案例75分=计算25+简答50，简答有答题套路","tasks":["近5年案例真题3轮：第1轮限时做、第2轮对照答案补漏、第3轮只做错题","简答模板：'判断+理论依据+结合案例'三段式","计算题限时25分钟内全对","高频场景专练：进度延误分析/质量问题/变更失控/风险应对/团队冲突"]},{"id":"p4","name":"论文写作期","start":"2027-04-05","end":"2027-05-02","weeks":"4周","color":"#7c3aed","why":"论文75分，考十大领域+绩效域，素材要提前备好","tasks":["定稿1个真实项目素材（近3年/你任PM/有量化数据），可套10个主题","十大高频主题各写1份提纲：摘要300字+正文结构","手写3篇全文（推荐整合/风险/质量，近年高频），每篇2500字内","背熟论文开头结尾模板+过渡句"]},{"id":"p5","name":"冲刺背诵期","start":"2027-05-03","end":"2027-05-21","weeks":"3周","color":"#db2777","why":"把背诵要点全量过2轮+套题找手感+时政英语突击","tasks":["综合知识真题8套（限时120分钟），错题回归背诵要点","本工作台全部背诵要点过2轮（每天按分值权重轮转）","时政突击2周+英语题每天5道找回感觉","准考证打印/考场踩点/机考模拟系统练习"]}],"milestones":[{"date":"2027-03-10","text":"报名窗口开启（预计3月中旬起，各省错峰，无补报名！）"},{"date":"2027-05-15","text":"准考证打印（考前一周）"},{"date":"2027-05-22","text":"考试日：综合知识+案例+论文（机考，三科各45分合格）"}],"examDate":"2027-05-22"};
+var KEY="wb_gaoxiang_kaofen_v1";
+var state={checks:{},recites:{}};
+function load(){try{var s=localStorage.getItem(KEY);if(s){var o=JSON.parse(s);if(o&&o.checks)state=o;}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function todayISO(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function dayNum(){var t=new Date(todayISO()+"T00:00:00"),b=new Date("2026-10-30T00:00:00");return Math.max(0,Math.round((t-b)/86400000))}
+function daysLeft(){var t=new Date(todayISO()+"T00:00:00"),e=new Date(D.examDate+"T00:00:00");return Math.ceil((e-t)/86400000)}
+function phaseOf(iso){
+  for(var i=0;i<D.phases.length;i++){var p=D.phases[i];
+    if(iso>=p.start&&iso<=p.end)return p;}
+  return iso>D.phases[D.phases.length-1].end?D.phases[D.phases.length-1]:D.phases[0];
+}
+function phaseState(p,iso){
+  if(iso>p.end)return "done";if(iso>=p.start&&iso<=p.end)return "cur";return "todo";
+}
+var ui={tab:"today",detail:null};
+// ---------- 渲染层（互不调用，refreshAll统一调度） ----------
+function renderHero(){
+  document.getElementById("cdday").textContent=daysLeft();
+  if(/MicroMessenger/i.test(navigator.userAgent)){document.getElementById("wxbar").style.display="block";
+    document.getElementById("wxbar").textContent="微信内打开提示：右上角「…」→在浏览器打开→添加到主屏幕，长期使用数据更稳；微信内打卡只存于微信浏览器。";}
+}
+function renderPhaseNow(){
+  var iso=todayISO(),p=phaseOf(iso),el=document.getElementById("card-phase-now");
+  el.innerHTML='<h2>当前阶段：'+p.name+' <span class="phase-tag" style="background:'+p.color+'">'+p.weeks+'</span></h2>'+
+    '<div class="sub">'+p.why+'</div><div class="sub">'+p.start+' ~ '+p.end+'</div>';
+  document.getElementById("phaseSub").textContent=p.name+" · "+p.weeks;
+}
+function recRotation(){
+  var slots=[];
+  D.modules.forEach(function(m){var n=Math.max(1,Math.round(m.score/4));for(var i=0;i<n;i++)slots.push(m)});
+  var d=dayNum(),a=slots[d%slots.length],b=slots[(d+Math.floor(slots.length/2))%slots.length];
+  return a.id===b.id?[a]:[a,b];
+}
+function renderRec(){
+  var box=document.getElementById("recList");box.innerHTML="";
+  var list=recRotation();
+  list.forEach(function(m){
+    var done=!!state.recites[todayISO()+":"+m.id];
+    var d=document.createElement("div");d.className="rec";
+    d.innerHTML='<div><div class="rn">'+m.name+'<span class="rs" style="margin-left:8px">'+m.rng+' · '+m.kw+'</span></div>'+
+      '<div class="rs">'+m.points[0]+'</div></div>';
+    var b=document.createElement("button");b.className="btn-rec"+(done?" on":"");b.textContent=done?"已背":"已背";
+    b.setAttribute("data-rec",m.id);
+    if(done)b.setAttribute("disabled","disabled");
+    d.appendChild(b);box.appendChild(d);
+  });
+  var tip=document.createElement("div");tip.className="sub";tip.style.marginTop="8px";
+  tip.textContent="完整要点在「分值」Tab点对应模块展开。";
+  box.appendChild(tip);
+}
+function renderTasks(){
+  var iso=todayISO(),p=phaseOf(iso),box=document.getElementById("taskList");box.innerHTML="";
+  var dayN=dayNum();
+  p.tasks.forEach(function(t,i){
+    var key=iso+":p"+i,done=!!state.checks[key];
+    var d=document.createElement("div");d.className="task"+(done?" done":"");
+    d.innerHTML='<input type="checkbox" '+(done?"checked":"")+' data-ck="'+key+'"><span>'+t+'</span>';
+    box.appendChild(d);
+  });
+}
+function renderStreak(){
+  var recs=Object.keys(state.recites),dset={};
+  Object.keys(state.checks).concat(recs).forEach(function(k){dset[k.split(":")[0]]=1});
+  var days=Object.keys(dset).sort(),n=days.length,streak=0;
+  if(days.length){
+    var one=new Date(days[days.length-1]+"T00:00:00"),now=new Date(todayISO()+"T00:00:00");
+    var cur=one;
+    while(true){
+      var iso=cur.getFullYear()+"-"+String(cur.getMonth()+1).padStart(2,"0")+"-"+String(cur.getDate()).padStart(2,"0");
+      if(dset[iso]){streak++;cur=new Date(cur.getTime()-86400000);}else break;
+      if((now-cur)/86400000>400)break;
+    }
+    if(days[days.length-1]!==todayISO()&&streak===1){/*仅昨有打卡不算断*/}
+  }
+  document.getElementById("stkDays").textContent=n;
+  document.getElementById("stkStreak").textContent=streak;
+  document.getElementById("stkRec").textContent=recs.length;
+}
+function renderMindmap(){
+  var ROW=54,GAP=12,PAD=20,total=D.modules.length*(ROW+GAP)-GAP+PAD*2;
+  var s='<svg viewBox="0 0 660 '+total+'" width="100%" xmlns="http://www.w3.org/2000/svg" role="img">';
+  s+='<rect width="660" height="'+total+'" rx="12" fill="#f8fafc"/>';
+  var ry=total/2,rootY=ry-42;
+  s+='<rect x="14" y="'+rootY+'" width="132" height="84" rx="12" fill="#1e293b"/>';
+  s+='<text x="80" y="'+(rootY+36)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">综合知识</text>';
+  s+='<text x="80" y="'+(rootY+60)+'" text-anchor="middle" font-size="11" fill="#fff" fill-opacity=".85">75分 · 机考单选</text>';
+  var sorted=D.modules.slice().sort(function(a,b){return b.score-a.score});
+  sorted.forEach(function(m,i){
+    var y=PAD+i*(ROW+GAP),cy=y+ROW/2,mx=166;
+    s+='<path d="M146 '+ry+' H'+mx+' V'+cy+' H206" fill="none" stroke="'+m.color+'" stroke-opacity=".45" stroke-width="1.4"/>';
+    s+='<rect x="206" y="'+y+'" width="440" height="'+ROW+'" rx="9" fill="#fff" stroke="'+m.color+'" stroke-width="1.4"/>';
+    s+='<rect x="206" y="'+y+'" width="5" height="'+ROW+'" rx="2.5" fill="'+m.color+'"/>';
+    s+='<text x="222" y="'+(y+21)+'" font-size="14" font-weight="700" fill="#1e293b">'+m.name+' · '+m.rng+'</text>';
+    s+='<text x="222" y="'+(y+43)+'" font-size="11" fill="#64748b">'+m.kw+'</text>';
+  });
+  s+='</svg>';
+  document.getElementById("mindmap").innerHTML=s;
+}
+function renderScorebar(){
+  var box=document.getElementById("scorebar");box.innerHTML="";
+  var max=D.modules[0].score;
+  var sorted=D.modules.slice().sort(function(a,b){return b.score-a.score});
+  sorted.forEach(function(m){
+    var r=document.createElement("div");r.className="sb-row";
+    r.innerHTML='<div class="nm">'+m.name+'</div><div class="tr"><div class="fl" style="width:'+Math.round(m.score/max*100)+'%;background:'+m.color+'"></div></div><div class="sc">'+m.rng+'</div>';
+    r.querySelector(".tr").setAttribute("data-mod",m.id);
+    box.appendChild(r);
+  });
+}
+function renderDetail(){
+  var box=document.getElementById("detailCard");
+  if(!ui.detail){box.innerHTML='<h2>背诵要点</h2><div class="sub">点上方分值条或下方模块名，展开该模块完整背诵要点。</div>';return}
+  var m=D.modules.filter(function(x){return x.id===ui.detail})[0];if(!m)return;
+  var h='<h2 style="color:'+m.color+'">'+m.name+' <small>'+m.rng+' · '+m.case+'</small></h2>';
+  h+='<div class="sub" style="margin-top:4px">论文权重：'+(m.id==="m5"?"十大主题皆可考，重点准备":"辅助素材")+' · 案例权重：'+m.case+'</div>';
+  m.points.forEach(function(p,i){h+='<div class="pt"><b>'+(i+1)+'.</b> '+p+'</div>'});
+  box.innerHTML=h;
+  ui.detail=null;
+}
+function renderScoreList(){
+  renderMindmap();
+  renderScorebar();
+  renderDetail();
+}
+function renderPlan(){
+  var iso=todayISO(),box=document.getElementById("planList");box.innerHTML="";
+  D.phases.forEach(function(p){
+    var st=phaseState(p,iso);
+    var d=document.createElement("div");d.className="phase"+(st==="cur"?" cur":"");
+    var stHtml=st==="done"?'<span class="ph-stat st-done">已完成</span>':st==="cur"?'<span class="ph-stat st-cur">进行中</span>':'<span class="ph-stat st-todo">未开始</span>';
+    var h='<h3>'+p.name+stHtml+'<span class="phase-tag" style="background:'+p.color+'">'+p.weeks+'</span></h3>';
+    h+='<div class="pw">'+p.start+' ~ '+p.end+' · '+p.why+'</div>';
+    if(st!=="todo"){
+      p.tasks.forEach(function(t,i){
+        var key=p.id+":"+i,done=!!state.checks[key];
+        h+='<div class="task'+(done?" done":"")+'"><input type="checkbox" '+(done?"checked":"")+' data-ck="'+key+'"><span>'+t+'</span></div>';
+      });
+    }else{
+      h+='<div class="sub" style="margin-top:6px">共'+p.tasks.length+'项任务，到该阶段自动展开勾选。</div>';
+    }
+    d.innerHTML=h;box.appendChild(d);
+  });
+  var ms=document.getElementById("msList");ms.innerHTML="";
+  D.milestones.forEach(function(m){
+    var left=Math.ceil((new Date(m.date+"T00:00:00")-new Date(todayISO()+"T00:00:00"))/86400000);
+    var d=document.createElement("div");d.className="ms";
+    d.innerHTML='<span class="d">'+m.date+'</span><span>'+m.text+(left>0?' <b style="color:var(--brand)">还有'+left+'天</b>':'')+'</span>';
+    ms.appendChild(d);
+  });
+}
+function renderMine(){
+  // 信息卡为静态内容，无需JS渲染
+}
+function refreshAll(){
+  renderHero();
+  renderPhaseNow();
+  renderRec();
+  renderTasks();
+  renderStreak();
+  renderScoreList();
+  renderPlan();
+  renderMine();
+}
+function switchTab(tab){
+  ui.tab=tab;
+  var secs=document.querySelectorAll("section.tab");
+  for(var i=0;i<secs.length;i++)secs[i].classList.toggle("on",secs[i].id==="tab-"+tab);
+  var btns=document.querySelectorAll("#tabbar button");
+  for(var j=0;j<btns.length;j++)btns[j].classList.toggle("on",btns[j].getAttribute("data-tab")===tab);
+  window.scrollTo(0,0);
+}
+function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1500)}
+function copyText(txt){
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast("已复制")},function(){fb(txt)})}
+  else fb(txt);
+}
+function fb(txt){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("已复制")}catch(e){toast("复制失败")}document.body.removeChild(ta)}
+// ---------- 事件（单向：改数据→refreshAll） ----------
+document.addEventListener("click",function(ev){
+  var t=ev.target;
+  var rec=t.closest?t.closest("[data-rec]"):null;
+  if(rec){state.recites[todayISO()+":"+rec.getAttribute("data-rec")]=1;save();refreshAll();toast("打卡成功");return}
+  var ck=t.closest?t.closest("[data-ck]"):null;
+  if(ck){var k=ck.getAttribute("data-ck");if(state.checks[k])delete state.checks[k];else state.checks[k]=1;save();refreshAll();return}
+  var mod=t.closest?t.closest("[data-mod]"):null;
+  if(mod){ui.detail=mod.getAttribute("data-mod");switchTab("score");renderDetail();return}
+  var tb=t.closest?t.closest("#tabbar button"):null;
+  if(tb){switchTab(tb.getAttribute("data-tab"));return}
+});
+document.addEventListener("change",function(ev){
+  if(ev.target&&ev.target.getAttribute&&ev.target.getAttribute("data-ck")){
+    var k=ev.target.getAttribute("data-ck");
+    if(ev.target.checked)state.checks[k]=1;else delete state.checks[k];
+    save();refreshAll();
+  }
+});
+document.getElementById("btnExp").addEventListener("click",function(){
+  document.getElementById("ioBox").value=JSON.stringify(state);
+  copyText(JSON.stringify(state));
+});
+document.getElementById("btnImp").addEventListener("click",function(){
+  var v=document.getElementById("ioBox").value.trim();
+  if(!v){toast("请先粘贴备份JSON");return}
+  try{var o=JSON.parse(v);if(!o||typeof o!=="object"||!o.checks)throw 0;state=o;save();refreshAll();toast("导入成功")}
+  catch(e){toast("JSON格式不对")}
+});
+document.getElementById("btnClr").addEventListener("click",function(){
+  if(!confirm("确定清空全部打卡数据？此操作不可恢复，建议先导出备份。"))return;
+  state={checks:{},recites:{}};save();refreshAll();toast("已清空");
+});
+document.addEventListener("DOMContentLoaded",function(){
+  load();
+  if(!Object.keys(state.checks).length&&!Object.keys(state.recites).length){
+    var iso=todayISO();
+    if(iso>="2026-10-30"&&iso<="2027-01-17"){state.checks[iso+":p0"]=1;} // 示例：今日第1项已完成
+  }
+  refreshAll();
+});
+</script>
+</body>
+</html>
