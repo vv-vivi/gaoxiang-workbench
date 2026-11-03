@@ -4,85 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>高项占分比备考台</title>
-<!-- 内容口径参考内网参考版工作台(172.16.10.81:8080)并按2026-10考情核对 -->
+<!-- 墨绿学院风 · 暖纸背景 · 参考设计 · 支持改日期重排 -->
 <style>
-:root{--ink:#0f172a;--muted:#64748b;--bg:#eef2f7;--card:#fff;--line:#e5eaf1;--brand:#2b5fd9;--brand2:#0d5c5c;--bad:#dc2626;--ok:#16a34a;--pc:#2b5fd9;--shadow:0 1px 2px rgba(15,23,42,.04),0 4px 14px rgba(15,23,42,.06)}
+:root{--ink:#1f2933;--muted:#8a8f7a;--paper:#f5f1e6;--card:#fffdf7;--line:#e7e1d2;--brand:#1e4d40;--brand2:#2c6e5f;--gold:#e8a23d;--bad:#c94f3d;--ok:#3a7d5a;--pc:#1e4d40;--shadow:0 1px 2px rgba(30,77,64,.05),0 6px 20px rgba(30,77,64,.08)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-text-size-adjust:100%;text-size-adjust:100%;padding-bottom:env(safe-area-inset-bottom)}
-.wrap{max-width:880px;margin:0 auto;padding:0 12px 96px}
-header.hero{background:radial-gradient(1200px 400px at 85% -10%,rgba(255,255,255,.18),transparent 60%),linear-gradient(135deg,#0d3b66 0%,#1e4e8c 45%,#2b5fd9 100%);color:#fff;border-radius:0 0 22px 22px;padding:24px 18px 20px;margin:0 -12px 4px;box-shadow:var(--shadow)}
-.hero h1{font-size:21px;font-weight:800;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
-.hero h1 i{display:inline-block;width:6px;height:20px;border-radius:3px;background:#7fd1c0}
-.hero .cd{display:flex;align-items:baseline;gap:10px;margin-top:12px}
-.hero .cd .num{font-size:44px;font-weight:800;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,.18)}
-.hero .cd .lbl{font-size:13px;opacity:.85}
-.hero .cd .dt{font-size:12px;opacity:.75;margin-left:auto;text-align:right}
-.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.hero .chip2{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(4px);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600}
-.card{background:var(--card);border:none;border-radius:16px;padding:16px;margin-top:14px;box-shadow:var(--shadow)}
-.card h2{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
-.card h2::before{content:"";width:4px;height:16px;border-radius:2px;background:linear-gradient(180deg,var(--brand),#7fd1c0)}
-.card h2 small{font-size:12px;color:var(--muted);font-weight:600;margin-left:2px}
+html,body{background:var(--paper)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);line-height:1.65;-webkit-text-size-adjust:100%;text-size-adjust:100%;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.serif{font-family:Georgia,"Times New Roman","Songti SC","SimSun",serif}
+.wrap{max-width:760px;margin:0 auto;padding:14px 14px 8px}
+.topbar{display:flex;align-items:center;gap:10px;padding:4px 2px 12px}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--brand);color:#fff;font-family:Georgia,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.topbar .tt{flex:1}
+.topbar .tt h1{font-size:18px;font-weight:800;font-family:Georgia,"Songti SC",serif;letter-spacing:.5px}
+.topbar .tt .st{font-size:12px;color:var(--muted)}
+.iconbtn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--brand);flex:none}
+.iconbtn:active{transform:scale(.94)}
+header.hero{background:var(--brand);color:#fff;border-radius:20px;padding:20px 18px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+header.hero::before{content:"";position:absolute;top:0;right:0;bottom:0;left:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--gold);color:#3a2a08;font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 11px}
+.hero .editdate{position:absolute;top:16px;right:16px;z-index:2;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.hero .editdate:active{transform:scale(.95)}
+.hero h2{font-family:Georgia,"Songti SC",serif;font-size:26px;line-height:1.28;margin-top:14px;position:relative;z-index:1;font-weight:700}
+.hero .lead{font-size:12.5px;opacity:.85;margin-top:6px;position:relative;z-index:1}
+.cdbox{display:flex;align-items:baseline;gap:8px;margin-top:16px;position:relative;z-index:1}
+.cdbox .n{font-size:40px;font-weight:800;font-family:Georgia,serif;line-height:1}
+.cdbox .u{font-size:13px;opacity:.85}
+.cdbox .wk{font-size:12px;opacity:.7;margin-left:auto}
+.pillrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative;z-index:1}
+.pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap}
+.hero .btns{display:flex;gap:9px;margin-top:16px;position:relative;z-index:1}
+.hbtn{flex:1;min-width:0;border:none;border-radius:12px;padding:12px 8px;font-size:13.5px;font-weight:800;cursor:pointer;min-height:46px}
+.hbtn.solid{background:#fff;color:var(--brand)}
+.hbtn.ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.hbtn:active{transform:scale(.98)}
+.hero .howto{font-size:11px;opacity:.7;margin-top:12px;position:relative;z-index:1}
+section.tab{display:none}
+section.tab.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px;box-shadow:var(--shadow)}
+.card h2{font-family:Georgia,"Songti SC",serif;font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card h2 small{font-size:12px;color:var(--muted);font-weight:500;margin-left:2px;font-family:-apple-system,"PingFang SC",sans-serif}
 .sub{font-size:12.5px;color:var(--muted)}
-.task{display:flex;align-items:flex-start;gap:10px;background:#f7f9fc;border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-top:9px;font-size:13.5px;transition:background .15s}
-.task:hover{background:#f0f4fa}
-.task input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--brand)}
-.task.done span{text-decoration:line-through;color:var(--muted)}
+.link{color:var(--brand2);font-weight:700;font-size:12.5px;cursor:pointer;text-decoration:none}
+.task{display:flex;align-items:center;gap:10px;background:#faf7ef;border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-top:9px;font-size:14px}
+.task input{width:20px;height:20px;flex:none;accent-color:var(--brand)}
+.task .tt{flex:1}
+.task.done .tt{text-decoration:line-through;color:var(--muted)}
+.task .go{flex:none;color:var(--brand2);font-weight:700;font-size:12.5px;cursor:pointer;padding:4px 2px}
 .task.hot{border-left:4px solid var(--bad)}
-.ringwrap{display:flex;align-items:center;gap:18px}
+.ringwrap{display:flex;align-items:center;gap:18px;margin-top:6px}
 .ringwrap svg{flex:none}
-.ringcenter{font-size:30px;font-weight:800;fill:#0f172a}
-.ringlbl{font-size:9px;fill:#64748b}
+.ringcenter{font-size:28px;font-weight:800;fill:#1f2933;font-family:Georgia,serif}
+.ringlbl{font-size:9px;fill:#8a8f7a}
 .rmeta{flex:1}
 .rmeta .row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px dashed var(--line)}
 .rmeta .row:last-child{border-bottom:none}
 .rmeta .row b{font-weight:800;color:var(--brand)}
 .streak{display:flex;gap:9px;margin-top:12px}
-.stk{flex:1;background:linear-gradient(180deg,#f8fafc,#f1f5f9);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
-.stk b{font-size:20px;font-weight:800;display:block}
+.stk{flex:1;background:#faf7ef;border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
+.stk b{font-size:20px;font-weight:800;display:block;color:var(--brand);font-family:Georgia,serif}
 .stk div{font-size:11px;color:var(--muted)}
-.d90{display:flex;gap:9px;margin-top:10px}
-.d90 div{flex:1;background:linear-gradient(180deg,#fff,#f6f9ff);border:1px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center}
-.d90 b{display:block;font-size:17px;background:linear-gradient(135deg,var(--brand),#7fd1c0);-webkit-background-clip:text;background-clip:text;color:transparent}
-.d90 span{font-size:11.5px;color:var(--muted)}
-#flashCard{border:none;border-radius:16px;padding:18px 16px;min-height:170px;margin-top:10px;cursor:pointer;background:linear-gradient(150deg,#eef4ff,#e8f6f2);box-shadow:inset 0 0 0 1.5px rgba(43,95,217,.25)}
-#flashCard .fq{font-size:11.5px;color:var(--brand);font-weight:800;letter-spacing:.5px}
-#flashCard .ft{font-size:16px;font-weight:800;margin-top:8px;line-height:1.55}
-#flashCard .fa{font-size:13.5px;margin-top:12px;display:none;color:#27364b;padding-top:10px;border-top:1px dashed rgba(43,95,217,.3)}
+.d90{display:flex;gap:8px;margin-top:10px}
+.d90 div{flex:1;background:#faf7ef;border:1px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center}
+.d90 b{display:block;font-size:17px;color:var(--brand);font-family:Georgia,serif}
+.d90 span{font-size:11px;color:var(--muted)}
+#flashCard{border:1px solid #cfd8c9;border-radius:16px;padding:18px 16px;min-height:170px;margin-top:10px;cursor:pointer;background:linear-gradient(150deg,#f2f7ee,#f6f1e2)}
+#flashCard .fq{font-size:11.5px;color:var(--brand2);font-weight:800;letter-spacing:.5px}
+#flashCard .ft{font-size:16px;font-weight:800;margin-top:8px;line-height:1.55;font-family:Georgia,"Songti SC",serif}
+#flashCard .fa{font-size:13.5px;margin-top:12px;display:none;color:#39423a;padding-top:10px;border-top:1px dashed #cfd8c9}
 #flashCard.open .fa{display:block}
 .rate{display:flex;gap:9px;margin-top:12px}
-.rate button{flex:1;border:none;border-radius:11px;padding:11px 4px;font-size:13.5px;font-weight:700;cursor:pointer;min-height:46px;color:#fff;box-shadow:0 2px 6px rgba(15,23,42,.12)}
+.rate button{flex:1;border:none;border-radius:11px;padding:11px 4px;font-size:13px;font-weight:700;cursor:pointer;min-height:46px;color:#fff}
 .rate button:active{transform:scale(.97)}
-.r1{background:linear-gradient(135deg,#ef4444,#dc2626)}.r2{background:linear-gradient(135deg,#f59e0b,#d97706)}.r3{background:linear-gradient(135deg,#22c55e,#16a34a)}
+.r1{background:#c94f3d}.r2{background:#d9972f}.r3{background:#3a7d5a}
 table.rt{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-top:8px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-table.rt th,table.rt td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top}
+table.rt th,table.rt td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
 table.rt tr:last-child td{border-bottom:none}
-table.rt th{background:#f4f7fb;font-weight:700;font-size:12px}
-table.rt tr.srow td{background:#fff8f8}
+table.rt th{background:#f4f1e7;font-weight:700;font-size:12px}
+table.rt tr.srow td{background:#fdf6ec}
 .lvl{font-size:11px;font-weight:800;border-radius:6px;padding:2px 8px;color:#fff;letter-spacing:.5px}
-.mrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:10px;transition:background .15s}
-.mrow:hover{background:#f6f9ff}
+.sb-row{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12.5px}
+.sb-row .nm{width:130px;flex:none;font-weight:600}
+.sb-row .tr{flex:1;background:#e9e4d6;border-radius:99px;height:16px;overflow:hidden}
+.sb-row .fl{height:100%;border-radius:99px}
+.sb-row .sc{width:44px;flex:none;font-weight:700;color:var(--muted);text-align:right}
+.mrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:10px}
+.mrow:hover{background:#f6f3e8}
 .mrow:last-child{border-bottom:none}
 .mrow .mn{font-weight:800;font-size:14px}
 .mrow .ms{font-size:12px;color:var(--muted)}
-.acc{margin-top:8px;display:none}
-.acc.open{display:block}
-.chip{display:inline-block;background:#eef4ff;border:1px solid #d7e3fb;border-radius:999px;padding:2px 10px;font-size:12px;margin:3px 4px 0 0;color:#274a8f;font-weight:600}
-.qa{background:#f7f9fc;border:1px solid var(--line);border-radius:10px;padding:10px 11px;font-size:13px;margin-top:7px;cursor:pointer}
-.qa .a{display:none;margin-top:7px;color:#334155;padding-top:7px;border-top:1px dashed var(--line)}
+.chip{display:inline-block;background:#f0ede0;border:1px solid #e2ddcc;border-radius:999px;padding:2px 10px;font-size:12px;margin:3px 4px 0 0;color:#4c5644;font-weight:600}
+.qa{background:#faf7ef;border:1px solid var(--line);border-radius:10px;padding:10px 11px;font-size:13px;margin-top:7px;cursor:pointer}
+.qa .a{display:none;margin-top:7px;color:#39423a;padding-top:7px;border-top:1px dashed var(--line)}
 .qa.open .a{display:block}
 .qa .q{font-weight:700}
-.fcard{border:1px solid var(--line);border-left:4px solid #d97706;border-radius:12px;padding:11px 13px;margin-top:9px;font-size:13px;cursor:pointer;background:#fff;box-shadow:var(--shadow)}
-.fcard pre{font-family:ui-monospace,Consolas,monospace;white-space:pre-wrap;font-size:12.5px;font-weight:700;color:#0f172a;margin:4px 0;background:#f8fafc;border-radius:8px;padding:8px 10px}
-.fcard .fn{display:none;color:#475569;margin-top:7px;border-top:1px dashed var(--line);padding-top:7px}
+.fcard{border:1px solid var(--line);border-left:4px solid var(--brand2);border-radius:12px;padding:11px 13px;margin-top:9px;font-size:13px;cursor:pointer;background:#fff}
+.fcard pre{font-family:ui-monospace,Consolas,monospace;white-space:pre-wrap;font-size:12.5px;font-weight:700;color:#1f2933;margin:4px 0;background:#faf7ef;border-radius:8px;padding:8px 10px}
+.fcard .fn{display:none;color:#5a6350;margin-top:7px;border-top:1px dashed var(--line);padding-top:7px}
 .fcard.open .fn{display:block}
 .tl{position:relative;margin-top:14px;padding-left:20px}
-.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,#cbd9ee,#e5eaf1)}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#d9d3bf}
 .tl .ph{position:relative;margin-top:14px}
-.tl .ph::before{content:"";position:absolute;left:-21px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--pc,#2b5fd9);box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--pc,#2b5fd9)}
-.wk{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-top:9px;background:#fff;cursor:pointer;transition:border .15s}
-.wk:hover{border-color:#b9cbe8}
-.wk.cur{border:2px solid var(--brand);background:#f4f8ff}
+.tl .ph::before{content:"";position:absolute;left:-21px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--pc,var(--brand));box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--pc,var(--brand))}
+.wk{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-top:9px;background:#fff;cursor:pointer}
+.wk.cur{border:2px solid var(--brand);background:#f2f7f0}
 .wk .wn{font-weight:800;font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .wk .wf{font-size:13px;margin-top:4px}
 .wk .wo{font-size:12px;color:var(--muted)}
@@ -92,52 +116,86 @@ table.rt tr.srow td{background:#fff8f8}
 .ol{font-size:13px;margin-top:6px}
 .ol li{margin-left:18px;margin-top:6px}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
-.stat{background:#f7f9fc;border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+.stat{background:#faf7ef;border:1px solid var(--line);border-radius:12px;padding:11px 12px}
 .stat .k{font-size:11.5px;color:var(--muted);font-weight:600}
-.stat .v{font-size:14.5px;font-weight:800;color:#0f172a;margin-top:2px}
+.stat .v{font-size:14.5px;font-weight:800;color:#1f2933;margin-top:2px;font-family:Georgia,serif}
 .stat .n{font-size:11.5px;color:var(--muted);margin-top:3px}
-.tipbar{background:linear-gradient(135deg,#eef9f4,#e8f6f2);border:1px solid #cdeadd;border-radius:12px;padding:11px 13px;font-size:13px;margin-top:9px}
-.tipbar b{color:#0c7a4d}
-#wxbar{display:none;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12.5px;border-radius:10px;padding:9px 12px;margin-top:10px}
-textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);border-radius:10px;padding:8px;font-family:monospace;background:#f8fafc}
-#toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);background:#0f172a;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 6px 20px rgba(15,23,42,.3)}
+.tipbar{background:#fdf6ec;border:1px solid #f0dfc0;border-radius:12px;padding:11px 13px;font-size:13px;margin-top:9px}
+.tipbar b{color:#9a6a18}
+#wxbar{display:none;background:#fdf6ec;border:1px solid #f0dfc0;color:#8a5a12;font-size:12.5px;border-radius:10px;padding:9px 12px;margin-top:10px}
+textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);border-radius:10px;padding:8px;font-family:monospace;background:#faf7ef}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:#1e4d40;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 6px 20px rgba(30,77,64,.3)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .mindmap{margin-top:10px;overflow-x:auto;border-radius:12px}
 .mindmap svg{display:block;min-width:640px}
-@media(min-width:640px){.hero h1{font-size:25px}.stat-grid{grid-template-columns:1fr 1fr 1fr}}
-@media print{nav.tabs,#toast{display:none}}
+/* 悬浮底部Tab */
+nav.tabs{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;background:#fff;border:1px solid var(--line);border-radius:20px;display:flex;padding:6px;box-shadow:0 8px 30px rgba(30,77,64,.16);max-width:420px;margin:0 auto}
+nav.tabs button{flex:1;min-width:64px;border:none;background:none;padding:7px 12px 6px;border-radius:14px;font-size:11.5px;color:var(--muted);font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav.tabs button svg{width:21px;height:21px}
+nav.tabs button.on{background:var(--brand);color:#fff}
+/* 改日期弹层 */
+#modal{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(20,30,24,.45);z-index:60;display:none;align-items:center;justify-content:center;padding:20px}
+#modal.show{display:flex}
+.mdl{background:var(--card);border-radius:18px;padding:20px;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.mdl h3{font-family:Georgia,"Songti SC",serif;font-size:17px;font-weight:700}
+.mdl .f{font-size:13px;font-weight:700;margin-top:14px}
+.mdl input{width:100%;margin-top:6px;padding:11px 12px;font-size:16px;border:1.5px solid var(--line);border-radius:10px;background:#faf7ef;color:var(--ink)}
+.mdl .btns{display:flex;gap:9px;margin-top:18px}
+.mdl .btns button{flex:1;border:none;border-radius:11px;padding:12px;font-size:14px;font-weight:800;cursor:pointer;min-height:44px}
+.mdl .ok{background:var(--brand);color:#fff}
+.mdl .no{background:#f0ede0;color:var(--ink)}
+@media(min-width:640px){.stat-grid{grid-template-columns:1fr 1fr 1fr}}
+@media print{nav.tabs,#toast,#modal{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
+<div class="topbar">
+  <div class="logo">项</div>
+  <div class="tt"><h1>高项占分比备考台</h1><div class="st">时间很贵，只花在关键考点</div></div>
+  <div class="iconbtn" id="btnDateTop" title="改日期"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+</div>
+
 <header class="hero">
-  <h1><i></i>高项占分比备考台</h1>
-  <div class="cd"><span class="num" id="cdday">--</span><span class="lbl">天距考试</span><span class="dt">2027-05-22 预计 · 机考<br>数据会说话，别平均用力</span></div>
-  <div class="chips">
-    <span class="chip2">三科各 45 分合格</span>
-    <span class="chip2">通过率 10%-15%</span>
-    <span class="chip2">60% 卡在案例/论文</span>
-    <span class="chip2">单科成绩不保留</span>
+  <span class="badge">2027 上半年 · 高项</span>
+  <button class="editdate" data-act="editDate">改日期</button>
+  <h2>把时间花在<br>真正会考的地方</h2>
+  <div class="lead">十大管理 × 绩效域 × 案例计算 × 论文素材</div>
+  <div class="cdbox"><span class="n" id="cdday">--</span><span class="u">天距考试</span><span class="wk" id="cdmeta">--</span></div>
+  <div class="pillrow">
+    <span class="pill">3科·75/45</span>
+    <span class="pill">综合+案例240min</span>
+    <span class="pill">论文120min</span>
+    <span class="pill" id="wkpill">第--/30周</span>
   </div>
-  <div id="wxbar"></div>
+  <div class="btns">
+    <button class="hbtn solid" data-goto="plan">打开今日计划</button>
+    <button class="hbtn ghost" data-goto="recite">抽背 10 张</button>
+  </div>
+  <div class="howto" id="wxbar"></div>
 </header>
 
 <section class="tab on" id="tab-today">
   <div class="card">
-    <h2>备考准备度 <small>任务+卡片的完成度，不是押题率</small></h2>
-    <div class="ringwrap" style="margin-top:8px">
-      <svg width="110" height="110" viewBox="0 0 110 110">
-        <circle cx="55" cy="55" r="46" fill="none" stroke="#e5eaf1" stroke-width="11"/>
+    <h2>今天只做 3 件事 <small>忙的时候保住最低完成线</small></h2>
+    <div class="sub">最低完成线：1张导图 + 10张卡 + 1道案例小问，不要断档。</div>
+    <div id="threeList"></div>
+  </div>
+  <div class="card">
+    <h2>你的准备度 <small>任务+卡片的完成度</small></h2>
+    <div class="ringwrap">
+      <svg width="104" height="104" viewBox="0 0 110 110">
+        <circle cx="55" cy="55" r="46" fill="none" stroke="#e7e1d2" stroke-width="11"/>
         <circle id="ringArc" cx="55" cy="55" r="46" fill="none" stroke="url(#rg)" stroke-width="11" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289" transform="rotate(-90 55 55)"/>
-        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b5fd9"/><stop offset="1" stop-color="#16a34a"/></linearGradient></defs>
+        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4d40"/><stop offset="1" stop-color="#3a7d5a"/></linearGradient></defs>
         <text class="ringcenter" x="55" y="58" text-anchor="middle" id="readyPct">0</text>
-        <text class="ringlbl" x="55" y="74" text-anchor="middle">READY %</text>
+        <text class="ringlbl" x="55" y="73" text-anchor="middle">READY %</text>
       </svg>
       <div class="rmeta">
         <div class="row"><span>阶段任务</span><b id="mTask">0%</b></div>
         <div class="row"><span>卡片掌握</span><b id="mCard">0%</b></div>
         <div class="row"><span>今日3件事</span><b id="mThree">0/3</b></div>
-        <div class="sub" style="margin-top:6px">建议考前4周达到 75% 以上，不必追求 100%</div>
+        <div class="sub" style="margin-top:6px">建议考前4周达到75%以上</div>
       </div>
     </div>
     <div class="streak">
@@ -146,14 +204,9 @@ textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);b
       <div class="stk"><b id="stkStreak">0</b><div>连续打卡/天</div></div>
     </div>
   </div>
-  <div class="card">
-    <h2>今天只做 3 件事 <small>忙的时候保住最低完成线</small></h2>
-    <div class="sub">最低完成线：1张导图 + 10张卡 + 1道案例小问。加班/出差就只做这三件，不要断档。</div>
-    <div id="threeList"></div>
-  </div>
-  <div class="card">
+  <div class="card" id="card-recite">
     <h2>循环抽背 <small id="cardProg"></small></h2>
-    <div class="sub">轻点卡片看答案，按记忆情况评分：不会→明天，模糊→3天，掌握→7天。每天10张。</div>
+    <div class="sub">轻点卡片看答案，按记忆评分：不会→明天，模糊→3天，掌握→7天。</div>
     <div id="flashCard"><div class="fq" id="fcTag"></div><div class="ft" id="fcQ"></div><div class="fa" id="fcA"></div></div>
     <div class="rate" id="rateBox" style="display:none">
       <button class="r1" data-rate="1">不会 · 明天</button>
@@ -162,7 +215,7 @@ textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);b
     </div>
   </div>
   <div class="card">
-    <h2>每天90分钟怎么切 <small>周末用2-3小时做整卷/论文</small></h2>
+    <h2>每天90分钟怎么切 <small>周末2-3小时做整卷/论文</small></h2>
     <div class="d90" id="d90"></div>
   </div>
   <div class="card">
@@ -173,23 +226,28 @@ textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);b
 
 <section class="tab" id="tab-score">
   <div class="card">
-    <h2>先看分值，再决定时间 <small>2023.11-2025.5各批次区间估算</small></h2>
+    <h2>先看分值，再决定时间 <small>2023.11-2025.5区间估算</small></h2>
     <table class="rt" id="scoreTable"></table>
-    <div class="sub" style="margin-top:8px">这不是精确分数，而是优先级地图：按 S/A/B 级投入，不按教材页数平均用力。三科同一场次全过≥45才算通过。</div>
+    <div class="sub" style="margin-top:8px">这是优先级地图，不是精确分数：按 S/A/B 级投入，不按教材页数平均用力。</div>
   </div>
   <div class="card">
     <h2>时间怎么分</h2>
-    <div class="scorebar" id="timeBar"></div>
+    <div id="timeBar"></div>
   </div>
-  <div class="card">
-    <h2>49个过程脑图 <small>点击领域展开：过程链/必背输出/高频工具/自测</small></h2>
+  <div class="card" id="card-mindmap">
+    <h2>49个过程脑图 <small>点击展开领域详情</small></h2>
     <div class="mindmap" id="mindmap"></div>
-    <div class="sub" style="margin-top:6px">整范进成质，资沟风采干 · 过程数 7·6·6·4·3·6·3·7·3·4 合计49 · 启动组只有2个：制定项目章程、识别干系人</div>
+    <div class="sub" style="margin-top:6px">整范进成质，资沟风采干 · 7·6·6·4·3·6·3·7·3·4 合计49</div>
   </div>
   <div class="card" id="areaDetail"></div>
   <div class="card">
-    <h2>高频公式 <small>案例计算约25分，必须拿</small></h2>
+    <h2>高频公式 <small>案例计算约25分</small></h2>
     <div id="fmlList"></div>
+  </div>
+  <div class="card" id="card-comic">
+    <h2>情景漫画记忆区 <small>画面钩子记流程与易混点</small></h2>
+    <div class="sub">点漫画看大图；用"画面钩子"记流程和易混点，比死记硬背记得牢。</div>
+    <div id="comicList"></div>
   </div>
 </section>
 
@@ -200,7 +258,7 @@ textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);b
   </div>
   <div id="planList" class="tl"></div>
   <div class="card">
-    <h2>数据怎么说 <small>按通过率数据校准投入</small></h2>
+    <h2>数据怎么说 <small>按通过率校准投入</small></h2>
     <div class="stat-grid" id="statGrid"></div>
     <div id="passTips"></div>
   </div>
@@ -216,7 +274,7 @@ textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);b
 </section>
 
 <section class="tab" id="tab-mine">
-  <div class="card">
+  <div class="card" id="card-case">
     <h2>考试信息卡</h2>
     <div id="examInfo"></div>
   </div>
@@ -225,31 +283,31 @@ textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);b
     <div class="ol" id="caseOrder"></div>
     <h2 style="margin-top:12px;font-size:14px">找错题4步模板</h2>
     <div class="ol" id="findErr4"></div>
-    <h2 style="margin-top:12px;font-size:14px">高频场景（7个） <small>看到症状先想哪个过程缺了</small></h2>
+    <h2 style="margin-top:12px;font-size:14px">高频场景（7个）</h2>
     <div id="caseScenes"></div>
   </div>
   <div class="card">
     <h2>论文75分：一个真实项目吃透多篇</h2>
     <div class="ol" id="paperStruct"></div>
     <div class="sub" style="margin-top:6px" id="essayTime"></div>
-    <h2 style="margin-top:12px;font-size:14px">9个主题提纲 <small>S=高优先，不要只准备十大管理</small></h2>
+    <h2 style="margin-top:12px;font-size:14px">9个主题提纲</h2>
     <div id="essayThemes"></div>
-    <h2 style="margin-top:12px;font-size:14px">2027热点素材（各背3句）</h2>
+    <h2 style="margin-top:12px;font-size:14px">2027热点素材</h2>
     <div id="hotList"></div>
     <div class="sub" style="margin-top:8px" id="essaySignal"></div>
   </div>
   <div class="card">
     <h2>数据备份</h2>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-      <button class="btn bp" id="btnExp">导出JSON备份</button>
-      <button class="btn bg" id="btnImp">导入恢复</button>
-      <button class="btn bg" id="btnClr">清空数据</button>
+      <button class="hbtn solid" id="btnExp" style="flex:none;padding:10px 16px">导出JSON备份</button>
+      <button class="hbtn ghost" id="btnImp" style="flex:none;padding:10px 16px;color:var(--brand);border-color:var(--brand)">导入恢复</button>
+      <button class="hbtn ghost" id="btnClr" style="flex:none;padding:10px 16px;color:var(--bad);border-color:var(--bad)">清空数据</button>
     </div>
     <textarea class="io" id="ioBox" placeholder="导出JSON会出现在这里；导入时粘贴后点「导入恢复」"></textarea>
   </div>
   <div class="card">
     <h2>微信使用提示</h2>
-    <div class="sub">微信里点开：右上角「···」→ 浮窗/收藏，随时点开背卡。打卡与评分只存在当前浏览器；换浏览器/设备请用「导出JSON备份」迁移。长期使用建议在浏览器打开并添加到主屏幕。</div>
+    <div class="sub">微信里点开：右上角「···」→ 浮窗/收藏，随时点开背卡。打卡与评分只存在当前浏览器；换设备请用「导出JSON备份」迁移。</div>
   </div>
 </section>
 </div>
@@ -260,67 +318,67 @@ textarea.io{width:100%;height:90px;font-size:13px;border:1px solid var(--line);b
   <button data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>计划</button>
   <button data-tab="mine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>我的</button>
 </nav>
+
+<div id="modal">
+  <div class="mdl">
+    <h3>修改备考时间</h3>
+    <div class="sub">改日期后，倒计时与 30 周计划会自动重排对齐</div>
+    <div class="f">考试日期</div>
+    <input type="date" id="dateExam">
+    <div class="f">计划开始日期（默认=考试日-29周）</div>
+    <input type="date" id="dateStart">
+    <div class="btns">
+      <button class="no" id="btnDateCancel">取消</button>
+      <button class="ok" id="btnDateSave">保存并重排</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast">已保存</div>
 
 <script>
-var D={"exam":{"name":"信息系统项目管理师","short":"高项","year":"2027","defaultExamDate":"2027-05-22","defaultPlanStart":"2026-10-26","pass":45,"full":75,"note":"2027年考试日期为预计值，以中国计算机技术职业资格网及各省软考办通知为准。"},"scoreRows":[{"part":"十大管理（8-17章）","zh":"36-38分","case":"55-65分","essay":"论文主战场","level":"S","advice":"49个过程+ITTO+易混点，综合/案例/论文三科通吃"},{"part":"绩效域/变更（18-19章）","zh":"4-5分","case":"10-15分","essay":"2025-26高频","level":"S","advice":"8个绩效域+配置/变更流程，2027论文必须准备"},{"part":"IT基础（1-5章）","zh":"14-17分","case":"0-5分","essay":"低","level":"A","advice":"只背高频概念、新技术、安全、数据，不逐页啃"},{"part":"高级/组织/法规（20-24章）","zh":"9-10分","case":"0-5分","essay":"低","level":"A/B","advice":"项目集/组合、CMMI、科学基础、法规高频点"},{"part":"立项（6-7章）","zh":"2-3分","case":"0-5分","zh2":"","essay":"低","level":"B","advice":"可研、立项流程、项目评估，掌握概念即可"},{"part":"专业英语","zh":"约5分","case":"-","essay":"-","level":"B","advice":"每天10分钟，背项目管理英文术语，不单独花大块时间"}],"phases":[{"id":"p1","name":"启动","weeks":[1,2],"color":"#0d5c5c","desc":"先看清战场：规则、分值、49过程框架、项目卡。","output":"考试地图 / 目标分 / 项目卡"},{"id":"p2","name":"基础精学","weeks":[3,13],"color":"#256b8a","desc":"按分值顺序学：十大管理→绩效域→IT基础→高级/法规。","output":"10张导图 / 49过程 / 错题本"},{"id":"p3","name":"案例突破","weeks":[14,17],"color":"#d97706","desc":"计算题必须满分，找错/措施形成模板。","output":"20道计算 / 6个案例模板"},{"id":"p4","name":"论文成型","weeks":[18,23],"color":"#7a6a9a","desc":"一个真实项目，一鱼多吃，准备8个提纲+4篇全文。","output":"项目卡 / 8提纲 / 4篇全文"},{"id":"p5","name":"全真模考","weeks":[24,27],"color":"#b45309","desc":"按考试时间连考，训练体力和时间分配。","output":"3次全真模考 / 错题闭环"},{"id":"p6","name":"回扣冲刺","weeks":[28,30],"color":"#166534","desc":"只看错题、公式、49过程、论文骨架，不做新题。","output":"四张清单 / 考场清单"}],"weekFocus":[{"n":1,"phase":"p1","focus":"考试地图：规则、分值、目标分、摸底","output":"一页考试地图 + 1套摸底"},{"n":2,"phase":"p1","focus":"49个过程框架 + 项目卡初稿","output":"10领域/49过程默写 + 项目卡"},{"n":3,"phase":"p2","focus":"整合 + 范围：章程、变更、WBS、确认范围","output":"2张导图 + 30题 + 1道案例"},{"n":4,"phase":"p2","focus":"进度 + 成本：CPM、三点、EVM基础","output":"2张导图 + 2道计算"},{"n":5,"phase":"p2","focus":"质量 + 资源：管理质量vs控制质量、RACI、冲突","output":"2张导图 + 易混对照"},{"n":6,"phase":"p2","focus":"沟通 + 干系人：渠道、权力利益方格、参与度","output":"2张导图 + 20张卡"},{"n":7,"phase":"p2","focus":"风险 + 采购：策略、合同、储备","output":"2张导图 + 合同对比表"},{"n":8,"phase":"p2","focus":"十大管理串联 + 综合真题1套","output":"49过程闭卷 + 错题归因"},{"n":9,"phase":"p2","focus":"绩效域8个 + 变更/配置","output":"8绩效域一页纸 + 变更流程"},{"n":10,"phase":"p2","focus":"IT基础1-3：信息化、新技术、治理","output":"高频概念30条"},{"n":11,"phase":"p2","focus":"IT基础4-5：信息系统管理、系统工程","output":"高频概念30条 + 20题"},{"n":12,"phase":"p2","focus":"高级管理20-21 + 组织/法规22-24","output":"CMMI/项目集/法规高频点"},{"n":13,"phase":"p2","focus":"综合真题2套 + 错题 + 英语5分","output":"错题本第一轮闭环"},{"n":14,"phase":"p3","focus":"案例计算：EVM/CPM 专项","output":"10道计算 + 公式闭卷"},{"n":15,"phase":"p3","focus":"案例计算：PERT/EMV/决策树","output":"10道计算 + 错因清单"},{"n":16,"phase":"p3","focus":"案例找错/措施：6大场景","output":"6个答题模板"},{"n":17,"phase":"p3","focus":"案例整卷2套 + 时间分配","output":"2套案例 + 90分钟节奏"},{"n":18,"phase":"p4","focus":"项目卡定稿 + 质量/风险提纲","output":"1张项目卡 + 2个提纲"},{"n":19,"phase":"p4","focus":"范围/进度/成本提纲","output":"3个提纲 + 1篇全文"},{"n":20,"phase":"p4","focus":"干系人/交付绩效域提纲","output":"2个提纲 + 1篇全文"},{"n":21,"phase":"p4","focus":"不确定性/AI数据安全提纲","output":"2个提纲 + 热点素材"},{"n":22,"phase":"p4","focus":"论文全文2篇 + 批改","output":"2篇全文 + 自评表"},{"n":23,"phase":"p4","focus":"论文限时2篇 + 案例保温","output":"2篇120分钟 + 2道案例"},{"n":24,"phase":"p5","focus":"综合整卷2套 + 错题三轮","output":"错题本二轮闭环"},{"n":25,"phase":"p5","focus":"全真模考1（三科同日）","output":"分数/时间/失分类型"},{"n":26,"phase":"p5","focus":"全真模考2 + 弱项专项","output":"弱项清单 + 专项20题"},{"n":27,"phase":"p5","focus":"全真模考3 + 论文默写","output":"3篇论文骨架默写"},{"n":28,"phase":"p6","focus":"错题/公式/49过程/论文骨架 四扫","output":"四张清单"},{"n":29,"phase":"p6","focus":"轻量回顾 + 考场清单 + 作息","output":"考场清单 + 作息表"},{"n":30,"phase":"p6","focus":"考前周：只看错题/公式/项目卡","output":"不碰新题，保持手感"}],"timeAlloc":[{"name":"十大管理 + 绩效域 + 变更","pct":50,"color":"#0d5c5c","note":"三科核心，优先学"},{"name":"案例计算 + 案例套路","pct":20,"color":"#d97706","note":"25分计算题必须拿"},{"name":"论文素材 + 限时写作","pct":15,"color":"#7a6a9a","note":"项目卡+8个提纲"},{"name":"IT基础 + 高级/法规","pct":15,"color":"#3b6d8f","note":"碎片时间扫高频"}],"areas":[{"id":"integration","no":"08","name":"整合管理","count":7,"color":"#0d5c5c","oneLine":"项目经理的“总控台”：授权、计划、变更、收尾","hint":"章-计-导-知-控-变-终","chain":["制定项目章程","制订项目管理计划","指导与管理项目工作","管理项目知识","监控项目工作","实施整体变更控制","结束项目或阶段"],"outputs":["项目章程、假设日志","项目管理计划（含范围/进度/成本三大基准）","可交付成果、工作绩效数据、问题日志","经验教训登记册","工作绩效报告","批准的变更请求、变更日志","最终报告、移交、组织过程资产更新"],"tools":["专家判断、数据收集、会议","项目管理信息系统","变更控制工具","数据分析、决策"],"qa":[{"q":"项目章程由谁签发？它授权什么？","a":"由发起人签发。它正式批准项目存在，授权项目经理动用组织资源，并把项目与组织战略连接起来。"},{"q":"整体变更控制的完整流程是什么？","a":"提出变更请求 → 记录变更日志 → 评估影响 → CCB审批 → 批准后更新计划并实施、拒绝则记录并通知 → 跟踪验证 → 归档。"},{"q":"工作绩效数据、信息、报告有什么区别？","a":"数据是原始记录；信息是数据与基准对比分析后的结果；报告是汇总后向干系人沟通的格式。数据→信息→报告。"},{"q":"结束项目或阶段必须做哪些事？","a":"验收可交付成果、移交、存档、释放资源、更新组织过程资产；项目提前终止也要执行收尾。"}],"essay":"可写：章程授权、CCB变更台账、收尾移交与经验教训。"},{"id":"scope","no":"09","name":"范围管理","count":6,"color":"#256b8a","oneLine":"做且只做该做的：需求、WBS、验收、防蔓延","hint":"规-收-定-WBS-确认-控","chain":["规划范围管理","收集需求","定义范围","创建WBS","确认范围","控制范围"],"outputs":["范围管理计划、需求管理计划","需求文件、需求跟踪矩阵","项目范围说明书","范围基准（说明书+WBS+WBS字典）","验收的可交付成果","工作绩效信息、变更请求"],"tools":["访谈、焦点小组、引导式研讨会","原型法、观察、标杆对照","分解（WBS）","检查、数据分析"],"qa":[{"q":"产品范围和项目范围有什么区别？","a":"产品范围是产品或服务的特性与功能；项目范围是为交付产品所需完成的工作。产品范围用“是否满足需求”衡量，项目范围用“是否完成计划工作”衡量。"},{"q":"确认范围和质量控制有什么区别？","a":"确认范围是干系人正式验收可交付成果，关注“验收”；控制质量是内部检查成果是否正确、满足质量要求。一般先控制质量，再确认范围。"},{"q":"范围基准由哪三部分组成？","a":"项目范围说明书、WBS、WBS字典。三者共同构成范围基准，变更需走整体变更控制。"},{"q":"范围蔓延和镀金有什么区别？","a":"范围蔓延是客户不断加需求、未走变更；镀金是团队主动多做、未被要求。两者都增加成本/风险，都应避免。"}],"essay":"可写：需求跟踪矩阵、WBS 100%原则、验收会、范围变更。"},{"id":"schedule","no":"10","name":"进度管理","count":6,"color":"#b45309","oneLine":"最长路径决定最短工期：CPM、压缩、资源优化","hint":"规-定-序-时-计划-控","chain":["规划进度管理","定义活动","排列活动顺序","估算活动持续时间","制订进度计划","控制进度"],"outputs":["进度管理计划","活动清单、活动属性、里程碑清单","项目进度网络图","持续时间估算、估算依据","进度基准、项目进度计划、进度数据、项目日历","工作绩效信息、进度预测"],"tools":["紧前关系绘图法PDM、箭线图法ADM","提前量、滞后量","三点估算","关键路径法、资源优化、进度压缩"],"qa":[{"q":"关键路径怎么找？它决定什么？","a":"网络图中最长的路径就是关键路径，决定项目最短工期；关键路径上活动总时差通常为0，延误关键路径就会延误工期。"},{"q":"总时差和自由时差怎么算？","a":"总时差 TF=LS-ES=LF-EF；自由时差 FF=min(紧后活动ES)-本活动EF。总时差是本活动不影响总工期的机动时间。"},{"q":"资源平衡和资源平滑有什么区别？","a":"资源平衡可能改变关键路径、延长工期；资源平滑利用浮动时间，不改变关键路径和工期。"},{"q":"赶工和快速跟进怎么选？","a":"赶工加资源/加班，通常增加成本但不改范围；快速跟进把活动并行，通常增加风险与返工。优先赶工关键路径活动。"}],"essay":"可写：CPM识别关键路径、周例会纠偏、资源冲突处理。"},{"id":"cost","no":"11","name":"成本管理","count":4,"color":"#9a3412","oneLine":"挣值公式必须全拿：CV/SV/CPI/SPI/EAC","hint":"规-估-预-控","chain":["规划成本管理","估算成本","制定预算","控制成本"],"outputs":["成本管理计划","成本估算、估算依据","成本基准、项目资金需求","工作绩效信息、成本预测","变更请求"],"tools":["类比、参数、自下而上、三点估算","储备分析","成本汇总、资金限制平衡","挣值管理、完工尚需绩效指数"],"qa":[{"q":"成本基准和项目预算是什么关系？","a":"成本基准=项目总成本估算+应急储备（不含管理储备）；项目预算=成本基准+管理储备。"},{"q":"应急储备和管理储备有什么区别？","a":"应急储备应对“已知-未知”，在成本基准内，项目经理可直接动用；管理储备应对“未知-未知”，在成本基准外，需管理层批准。"},{"q":"EAC的三种算法怎么写？","a":"典型偏差：EAC=BAC/CPI；非典型偏差：EAC=AC+(BAC-EV)；混合：EAC=AC+(BAC-EV)/(CPI×SPI)。"},{"q":"沉没成本和机会成本怎么理解？","a":"沉没成本是已经发生、无法收回的成本，决策时应忽略；机会成本是选择某方案而放弃的其他方案中价值最高者。"}],"essay":"可写：成本基准、月度EVM报告、成本超支纠偏、变更控制。"},{"id":"quality","no":"12","name":"质量管理","count":3,"color":"#166534","oneLine":"过程与成果分开看：管理质量 vs 控制质量","hint":"规-管-控","chain":["规划质量管理","管理质量","控制质量"],"outputs":["质量管理计划、质量测量指标","质量报告、测试与评估文件","质量控制测量结果","核实的可交付成果","变更请求"],"tools":["质量成本COQ","老七工具、新七工具","审计、检查","测试/产品评估、问题解决"],"qa":[{"q":"管理质量和控制质量有什么区别？","a":"管理质量属执行过程组，关注“过程”，把质量政策转化为质量活动；控制质量属监控过程组，关注“成果”，检查结果是否满足质量要求。"},{"q":"质量和等级是一回事吗？","a":"不是。质量是满足要求的程度；等级是功能多少的级别。低等级不等于低质量，高等级也不等于高质量。"},{"q":"控制图怎么判断失控？","a":"常见规则：数据点超出控制上下限，或连续7点呈同一趋势/在中心线同一侧。控制界限≠规格界限，规格由客户/标准决定。"},{"q":"老七工具和新七工具分别有哪些？","a":"老七：因果图、流程图、核查表、帕累托图、直方图、控制图、散点图；新七：亲和图、PDPC、关联图、树形图、优先矩阵、活动网络图、矩阵图。"}],"essay":"可写：质量指标、测试缺陷闭环、数据质量维度、国标指标。"},{"id":"resource","no":"13","name":"资源管理","count":6,"color":"#6d28d9","oneLine":"人+物：RACI、塔克曼、冲突五法","hint":"规-估-获-建-管-控","chain":["规划资源管理","估算活动资源","获取资源","建设团队","管理团队","控制资源"],"outputs":["资源管理计划、团队章程","资源需求、资源分解结构RBS","物质资源分配单、项目团队派工单、资源日历","团队绩效评价","问题日志、变更请求"],"tools":["责任分配矩阵RACI","预分派、谈判、招募、虚拟团队","塔克曼阶梯、激励理论","冲突管理、集中办公、培训"],"qa":[{"q":"RACI中A和R分别是什么？","a":"R是执行者（Responsible），A是责任人（Accountable），每项工作只能有一个A；C是咨询者，I是知情者。"},{"q":"塔克曼团队发展五阶段是什么？","a":"形成期 → 震荡期 → 规范期 → 成熟期 → 解散期。项目经理要在震荡期主动处理冲突、建立规则。"},{"q":"冲突解决的优选顺序是什么？","a":"合作/解决问题（双赢）→ 妥协/调解 → 缓和/包容 → 强迫/命令 → 撤退/回避。考试通常优先选合作。"},{"q":"控制资源和管理团队有什么区别？","a":"控制资源关注物理资源（设备、材料、设施）按计划分配和使用；管理团队关注人，跟踪绩效、反馈、解决问题。"}],"essay":"可写：RACI、团队章程、冲突案例、虚拟团队管理。"},{"id":"communication","no":"14","name":"沟通管理","count":3,"color":"#0e7490","oneLine":"信息被理解才算沟通：渠道、方法、计划","hint":"规-管-督","chain":["规划沟通管理","管理沟通","监督沟通"],"outputs":["沟通管理计划","项目沟通记录","工作绩效信息、变更请求"],"tools":["沟通需求分析、沟通技术/模型/方法","沟通技能、项目报告","会议、人际关系与团队技能"],"qa":[{"q":"沟通渠道数怎么算？","a":"n(n-1)/2。5个人时有10条渠道。增加1个人，渠道增加n条，沟通复杂度快速上升。"},{"q":"交互式、推式、拉式沟通怎么区分？","a":"交互式：会议/电话，效率高、成本高；推式：邮件/报告，单向发送；拉式：知识库/内网，适合大量信息、受众自取。"},{"q":"沟通管理的核心目标是什么？","a":"确保信息被正确理解，而不仅是“发出去了”。要管理编码、媒介、解码、噪声和反馈。"},{"q":"沟通管理计划应包含什么？","a":"干系人沟通需求、信息格式、频率、责任人、渠道、升级流程、保密要求等。"}],"essay":"可写：沟通矩阵、例会机制、干系人沟通、冲突升级。"},{"id":"risk","no":"15","name":"风险管理","count":7,"color":"#c2410c","oneLine":"先分级再应对：威胁五策、机会五策、储备","hint":"规-识-定-量-应-施-督","chain":["规划风险管理","识别风险","实施定性风险分析","实施定量风险分析","规划风险应对","实施风险应对","监督风险"],"outputs":["风险管理计划","风险登记册、风险报告","定性/定量分析更新","变更请求","工作绩效信息"],"tools":["SWOT、德尔菲、访谈、核对单","概率影响矩阵、紧迫性评估","蒙特卡洛、敏感性分析、决策树EMV","威胁/机会应对策略、风险审计、储备分析"],"qa":[{"q":"威胁和机会的应对策略分别有哪些？","a":"威胁：上报、规避、转移、减轻、接受；机会：上报、开拓、分享、提高、接受。"},{"q":"风险再评估和风险审计有什么区别？","a":"风险再评估看“风险本身有没有变”，识别新风险、关闭过时风险；风险审计看“风险管理过程做得好不好”。"},{"q":"定性分析和定量分析分别做什么？","a":"定性：评估概率和影响，排优先级（概率影响矩阵）；定量：对整体目标影响做数值分析（蒙特卡洛、决策树、敏感性）。"},{"q":"转移风险等于消除风险吗？","a":"不等于。转移只是把风险的财务后果转移给第三方（保险、外包、担保），风险本身仍存在，通常还要配合减轻措施。"}],"essay":"可写：风险登记册、风险责任人、应对策略、AI项目新型风险。"},{"id":"procurement","no":"16","name":"采购管理","count":3,"color":"#7c5c2e","oneLine":"合同类型决定风险归属：总价、成本补偿、工料","hint":"规-实-控","chain":["规划采购管理","实施采购","控制采购"],"outputs":["采购管理计划、采购策略、SOW、招标文件、供方选择标准","选定的卖方、协议","采购关闭、工作绩效信息、变更请求"],"tools":["自制或外购分析","供方选择分析","投标人会议、广告","索赔管理、检查、审计"],"qa":[{"q":"三类合同的风险怎么归属？","a":"总价合同卖方风险大；成本补偿合同买方风险大；工料合同T&M双方风险居中。范围明确优先总价，范围不清可考虑成本补偿。"},{"q":"招标投标法的高频时间点有哪些？","a":"招标公告至投标截止不少于20日；中标通知书发出后30日内签订合同；评标委员会5人以上单数，技术经济专家不少于2/3。"},{"q":"控制采购包括哪些工作？","a":"合同变更控制、采购绩效审查、检查与审计、索赔管理、记录管理、采购关闭。"},{"q":"采购争议的解决顺序是什么？","a":"谈判 → 替代争议解决ADR（调解/仲裁）→ 诉讼。优先协商，协商不成再升级。"}],"essay":"可写：自制外购、合同类型选择、供应商绩效、索赔处理。"},{"id":"stakeholder","no":"17","name":"干系人管理","count":4,"color":"#9d174d","oneLine":"权力/利益定策略，参与度矩阵定动作","hint":"识-规-管-督","chain":["识别干系人","规划干系人参与","管理干系人参与","监督干系人参与"],"outputs":["干系人登记册","干系人参与计划","变更请求、问题日志","工作绩效信息"],"tools":["权力/利益方格、权力/影响方格、影响/作用方格","凸显模型（权力+紧迫性+合法性）","参与度评估矩阵C-U-N-S-L","沟通技能、人际关系与团队技能"],"qa":[{"q":"权力/利益方格四象限怎么管？","a":"高权高利重点管理；高权低利令其满意；低权高利随时告知；低权低利监督。"},{"q":"干系人参与度评估矩阵的五个状态是什么？","a":"不了解（C）、抵制（U）、中立（N）、支持（S）、领导（L），即C-U-N-S-L。"},{"q":"识别干系人只在项目启动时做吗？","a":"不是。识别干系人贯穿项目全过程，要定期识别新干系人、更新登记册和参与计划。"},{"q":"管理干系人参与和监督干系人参与有什么区别？","a":"管理干系人参与是执行过程组，沟通协作、处理问题、促进合理参与；监督干系人参与是监控过程组，监督关系、修订策略。"}],"essay":"可写：干系人登记册、参与度矩阵、冲突协调、满意度调查。"}],"formulas":[{"id":"evm-basic","name":"挣值四基础值 + 偏差/指数","tag":"成本","formula":"PV=计划值  EV=挣值  AC=实际成本  BAC=完工预算\nCV=EV-AC  SV=EV-PV\nCPI=EV/AC  SPI=EV/PV","note":"CV>0 成本节约，CV<0 超支；SV>0 进度提前，SV<0 落后；CPI/SPI>1 好。EV永远在分子。","ex":"例：EV=80，AC=100，PV=90 → CV=-20，SV=-10，CPI=0.8，SPI=0.889。"},{"id":"evm-forecast","name":"完工估算与完工尚需","tag":"成本","formula":"典型：EAC=BAC/CPI\n非典型：EAC=AC+(BAC-EV)\n混合：EAC=AC+(BAC-EV)/(CPI×SPI)\nETC=EAC-AC  VAC=BAC-EAC\nTCPI=(BAC-EV)/(BAC-AC) 或 (BAC-EV)/(EAC-AC)","note":"先判断“偏差是典型的还是非典型的”。典型=按当前绩效继续；非典型=剩余工作按原预算。","ex":"例：BAC=100，EV=40，AC=50，CPI=0.8 → 典型EAC=125，ETC=75，VAC=-25。"},{"id":"pert","name":"三点估算（PERT）","tag":"进度","formula":"贝塔分布：E=(O+4M+P)/6\n三角分布：E=(O+M+P)/3\n标准差：σ=(P-O)/6","note":"默认考贝塔分布；O最乐观、M最可能、P最悲观。区间估算用 E±σ、E±2σ、E±3σ。","ex":"例：O=4，M=6，P=14 → E=(4+24+14)/6=7，σ=(14-4)/6=1.67。"},{"id":"cpm","name":"关键路径与时差","tag":"进度","formula":"TF=LS-ES=LF-EF\nFF=min(紧后活动ES)-本活动EF\n关键路径=最长路径，总时差通常为0","note":"正推取最大（ES/EF），逆推取最小（LS/LF）。关键路径可能不止一条；总时差最小的工作是关键工作。","ex":"例：A(3)→B(4)→D(2)，A→C(5)→D(2)。最长路径A-C-D=10，是关键路径。"},{"id":"emv","name":"决策树 / 期望货币价值","tag":"风险","formula":"EMV = 概率 × 影响（收益为正、损失为负）\n决策：选EMV最大的方案（成本类选最小）","note":"决策树从右往左算；每个分支先算EMV，再汇总。注意题目问“预期收益”还是“预期成本”。","ex":"例：方案A：60%赚100万，40%亏20万 → EMV=60-8=52万；方案B：稳定赚45万 → 选A。"},{"id":"channel","name":"沟通渠道数","tag":"沟通","formula":"渠道数 = n(n-1)/2","note":"n是干系人/团队成员数量。新增1人，渠道增加n条。","ex":"例：n=8 → 8×7/2=28条；n=9 → 36条，新增8条。"},{"id":"budget","name":"成本基准与项目预算","tag":"成本","formula":"成本基准 = 总成本估算 + 应急储备\n项目预算 = 成本基准 + 管理储备","note":"应急储备在基准内，PM可动；管理储备在基准外，需管理层批准。","ex":"例：估算100万，应急10万，管理储备8万 → 基准110万，预算118万。"},{"id":"contract","name":"合同类型与风险","tag":"采购","formula":"总价合同：卖方风险大\n成本补偿合同：买方风险大\n工料合同T&M：双方居中","note":"范围明确→总价；范围不清/长期研发→成本补偿；短期、工作量易计量→工料。","ex":"例：需求频繁变化、无法准确估量 → 成本补偿或工料，不宜固定总价。"},{"id":"float-check","name":"挣值+进度联合判断","tag":"综合","formula":"CPI<1 且 SPI<1：成本超支且进度落后\nCPI>1 且 SPI<1：成本节约但进度落后\nCPI<1 且 SPI>1：成本超支但进度提前","note":"案例题先报“三值”，再报“两偏差”，再报“两指数”，最后给结论和措施。","ex":"例：CPI=0.9，SPI=0.8 → 成本超支10%，进度落后20%，需赶工/控成本/查关键路径。"}],"caseScenes":[{"name":"进度延误","symptom":"关键路径活动延误、里程碑未达成、资源冲突。","keys":"找关键路径→分析延误原因→赶工/快速跟进/调整资源→更新进度基准→走变更。答题关键词：关键路径、总时差、资源平衡、进度压缩、变更控制。"},{"name":"成本超支","symptom":"CPI<1、AC>EV、成本基准被突破。","keys":"算CV/CPI/EAC→分析超支原因→控制成本/减少范围/优化资源→必要时动用管理储备→变更。关键词：挣值、成本基准、应急储备、管理储备、TCPI。"},{"name":"质量缺陷","symptom":"测试缺陷率高、验收不通过、返工。","keys":"区分管理质量/控制质量→查质量测量指标→因果图找根因→纠正措施→重新测试→更新质量报告。关键词：质量成本、缺陷补救、质量审计、控制图。"},{"name":"风险应对不当","symptom":"只列风险不分析、无责任人、无储备、风险发生才救火。","keys":"识别→定性/定量→规划应对→实施→监督；威胁/机会策略；风险登记册；应急储备。关键词：概率影响矩阵、风险责任人、风险审计、储备分析。"},{"name":"干系人冲突","symptom":"需求不一致、部门推诿、关键干系人不支持。","keys":"识别干系人→权力/利益方格→参与度矩阵→沟通计划→冲突五法→问题日志。关键词：重点管理、令其满意、随时告知、合作/解决问题。"},{"name":"变更失控/范围蔓延","symptom":"需求随意加、先做后补、基准频繁变。","keys":"所有变更走整体变更控制：申请→记录→评估→CCB→实施→验证→归档；范围基准变更必须批准。关键词：变更日志、CCB、范围蔓延、镀金。"},{"name":"采购争议","symptom":"合同条款不清、验收标准争议、索赔。","keys":"查合同/SOW/验收标准→采购绩效审查→谈判→ADR→诉讼；控制采购与采购关闭。关键词：合同类型、索赔管理、采购审计、采购关闭。"}],"essayThemes":[{"id":"quality","title":"质量管理","level":"S","tag":"2026真题","subs":["质量规划、管理质量、控制质量如何落地？","数据质量/项目质量的评价维度与指标？","结合国标或行业标准，如何度量质量？"],"keys":"质量测量指标、质量成本、老/新七工具、测试与缺陷闭环、数据质量6维度、GB/T 36344。","detail":"写“缺陷密度下降、验收一次通过率提升”的量化结果。","pitfall":"不要把管理质量写成控制质量；不要只背工具，要写项目中的质量数据。"},{"id":"risk","title":"风险管理","level":"S","tag":"2026真题","subs":["7个风险管理过程如何执行？","威胁/机会应对策略如何选择？","AI/数据项目的新型风险如何治理？"],"keys":"风险登记册、风险责任人、概率影响矩阵、EMV、储备分析、风险审计。","detail":"写一个真实风险从识别到关闭的闭环，含概率/影响/责任人/储备。","pitfall":"转移≠消除；应急储备≠管理储备；不要把风险写成问题。"},{"id":"scope","title":"范围管理","level":"A","tag":"十大管理","subs":["需求收集与范围定义怎么做？","WBS如何分解与验收？","如何防止范围蔓延/镀金？"],"keys":"需求跟踪矩阵、范围说明书、WBS 100%原则、确认范围、变更控制。","detail":"写需求变更数量、验收通过率、WBS工作包数量。","pitfall":"确认范围≠控制质量；范围基准三件套要写全。"},{"id":"schedule","title":"进度管理","level":"A","tag":"十大管理","subs":["如何制定进度计划与识别关键路径？","进度延误如何纠偏？","资源冲突/赶工/快速跟进如何取舍？"],"keys":"CPM、总时差/自由时差、资源平衡、进度压缩、进度基准变更。","detail":"写关键路径长度、里程碑达成率、赶工增加的成本。","pitfall":"资源平衡可能延长工期；快速跟进增加风险。"},{"id":"cost","title":"成本管理","level":"A","tag":"十大管理","subs":["成本估算/预算如何编制？","EVM如何用于成本控制？","成本超支如何纠偏？"],"keys":"成本基准、应急/管理储备、EVM、EAC/ETC/VAC/TCPI。","detail":"写BAC、CPI、EAC、成本节约/超支的量化数据。","pitfall":"成本基准不含管理储备；EAC公式要先判断典型/非典型。"},{"id":"stakeholder","title":"干系人管理","level":"A","tag":"十大管理","subs":["如何识别和分析干系人？","如何制定参与计划并管理参与？","冲突如何升级与解决？"],"keys":"干系人登记册、权力/利益方格、参与度矩阵、沟通计划、冲突五法。","detail":"写关键干系人数量、满意度、问题关闭周期。","pitfall":"识别干系人贯穿全过程；管理/监督不要混淆。"},{"id":"delivery","title":"交付绩效域","level":"S","tag":"2025真题","subs":["交付绩效域重点关注什么？","与哪些绩效域协同？协同目标是什么？","各过程组如何设置交付度量指标？"],"keys":"价值交付、可交付物、质量、验收、五大过程组协同、度量指标。","detail":"写交付周期、验收率、业务价值实现（如审批时限压缩）。","pitfall":"不要写成“范围管理”；绩效域不是过程组。"},{"id":"uncertainty","title":"不确定性绩效域","level":"A","tag":"绩效域","subs":["风险、复杂性、模糊性、波动性如何识别？","如何与风险管理/度量绩效域协同？","如何建立韧性？"],"keys":"不确定性四来源、风险应对、储备、度量、适应型领导。","detail":"写一个高不确定性场景及应对（如政策变化、技术选型）。","pitfall":"不要只写风险登记册；要覆盖复杂性/模糊/波动。"},{"id":"ai","title":"AI/数据/安全融合","level":"S","tag":"2026趋势","subs":["AI在项目中的应用场景与功能特征？","AI/数据项目有哪些新型风险？","如何把AI用于风险管理并保证安全合规？"],"keys":"AI场景规划、数据质量、模型风险、幻觉/偏见、数据安全法/个保法、AI治理。","detail":"写AI辅助需求分析/风险识别/测试的具体效果，以及人工复核机制。","pitfall":"不要空谈AI；要写“用了什么、怎么治理、产生什么价值”。"}],"cards":[{"q":"信息的质量属性有哪些？","a":"精确性、完整性、可靠性、及时性、经济性、可验证性、安全性。","tag":"IT"},{"q":"信息系统生命周期一般包括哪几个阶段？","a":"立项、开发、运维、消亡；开发阶段可细分为规划、分析、设计、实施、运行维护。","tag":"IT"},{"q":"新型基础设施包括哪三类？","a":"信息基础设施、融合基础设施、创新基础设施。","tag":"IT"},{"q":"工业互联网的三大体系是什么？","a":"网络体系、平台体系、安全体系。","tag":"IT"},{"q":"数字经济“四化”指什么？","a":"数字产业化、产业数字化、数字化治理、数据价值化。","tag":"IT"},{"q":"操作系统的主要管理功能有哪些？","a":"进程管理、存储管理、文件管理、设备管理、作业管理。","tag":"IT"},{"q":"OSI七层模型从下到上是什么？","a":"物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。","tag":"IT"},{"q":"RAID 0/1/5/6/10 的核心特点？","a":"RAID0条带无冗余；RAID1镜像；RAID5分布式奇偶校验、允许坏1块；RAID6双校验、允许坏2块；RAID10先镜像再条带。","tag":"IT"},{"q":"数据库事务的ACID是什么？","a":"原子性Atomicity、一致性Consistency、隔离性Isolation、持久性Durability。","tag":"IT"},{"q":"信息安全的CIA三要素是什么？","a":"保密性Confidentiality、完整性Integrity、可用性Availability。","tag":"IT"},{"q":"云计算IaaS/PaaS/SaaS分别提供什么？","a":"IaaS基础设施（服务器/存储/网络）；PaaS平台（开发运行环境/中间件）；SaaS软件（直接使用应用）。","tag":"IT"},{"q":"大数据的4V/5V特征是什么？","a":"Volume大量、Velocity高速、Variety多样、Value价值；5V再加Veracity真实性。","tag":"IT"},{"q":"区块链的核心特征和类型？","a":"去中心化、不可篡改、可追溯、共识机制、智能合约；分为公有链、联盟链、私有链。","tag":"IT"},{"q":"人工智能的主要技术方向有哪些？","a":"机器学习、深度学习、自然语言处理、计算机视觉、知识图谱、语音识别、生成式AI/大模型。","tag":"IT"},{"q":"IT治理和IT管理的区别？","a":"治理是决策权与责任安排（谁决策、如何监督）；管理是执行治理决策（计划、组织、控制）。治理关注“做正确的事”，管理关注“把事做正确”。","tag":"IT"},{"q":"数据质量的6个常见维度是什么？","a":"准确性、完整性、一致性、及时性、可靠性、唯一性（不同标准表述略有差异，2026论文可按GB/T 36344展开）。","tag":"IT"},{"q":"CMMI的5个成熟度等级是什么？","a":"初始级、已管理级、已定义级、量化管理级、优化级。","tag":"IT"},{"q":"ITIL 4的核心是什么？","a":"服务价值系统SVS，包括指导原则、治理、服务价值链、实践、持续改进；强调价值共创。","tag":"IT"},{"q":"高项论文的通用结构是什么？","a":"摘要（约250-350字）+ 项目背景（约400字）+ 3个子问题论述（各约500-600字）+ 问题与对策/效果（约300字）+ 总结（约200字）。以当年字数要求为准。","tag":"论文"},{"q":"论文摘要必须写哪三件事？","a":"项目背景与规模、我采用了什么管理方法、取得了什么量化成果。摘要不要写成目录。","tag":"论文"},{"q":"论文项目背景必须包含哪些量化信息？","a":"项目周期、投资额、团队规模、建设内容、我的角色、交付成果、量化效果（如效率提升/成本节约/验收率）。","tag":"论文"},{"q":"论文“一鱼多吃”是什么意思？","a":"用同一个真实项目背景，套不同管理主题；每个主题换管理过程、工具、问题和数据，而不是背多篇范文。","tag":"论文"},{"q":"2025-2026论文命题趋势是什么？","a":"从纯十大管理，转向绩效域（2025交付等）和热点融合（2026质量+数据、风险+AI+安全）。2027要准备十大管理+8绩效域+AI/数据/安全。","tag":"论文"},{"q":"论文最容易被扣分的点是什么？","a":"项目虚假/空泛、不切题、只背理论无实践、没有量化数据、结构不全、字数不足、模板痕迹重。","tag":"论文"},{"q":"高项三科满分和合格线是多少？","a":"每科满分75分，合格线45分；三科必须在同一次考试全部达到45分，单科成绩不保留。","tag":"考场"},{"q":"高项机考的时间和科目怎么安排？","a":"综合知识与案例分析连考，总时长240分钟；综合知识最长150分钟、最短120分钟；论文120分钟，不得提前交卷。以准考证为准。","tag":"考场"},{"q":"综合知识有多少题？案例几道题？","a":"综合知识75道单选，每题1分；案例分析3道主观大题，满分75分；论文1篇，满分75分。","tag":"考场"},{"q":"高项一年考几次？","a":"2024年起调整为一年一考，通常在上半年5月；下半年不设高项考场。","tag":"考场"},{"q":"案例计算题一般占多少分？","a":"案例分析共75分，通常有1道计算题约25分，高频为挣值、关键路径、三点估算、决策树；计算题必须拿高分。","tag":"考场"},{"q":"项目章程由谁签发？它授权什么？","a":"由发起人签发。它正式批准项目存在，授权项目经理动用组织资源，并把项目与组织战略连接起来。","tag":"整合管理"},{"q":"整体变更控制的完整流程是什么？","a":"提出变更请求 → 记录变更日志 → 评估影响 → CCB审批 → 批准后更新计划并实施、拒绝则记录并通知 → 跟踪验证 → 归档。","tag":"整合管理"},{"q":"工作绩效数据、信息、报告有什么区别？","a":"数据是原始记录；信息是数据与基准对比分析后的结果；报告是汇总后向干系人沟通的格式。数据→信息→报告。","tag":"整合管理"},{"q":"结束项目或阶段必须做哪些事？","a":"验收可交付成果、移交、存档、释放资源、更新组织过程资产；项目提前终止也要执行收尾。","tag":"整合管理"},{"q":"产品范围和项目范围有什么区别？","a":"产品范围是产品或服务的特性与功能；项目范围是为交付产品所需完成的工作。产品范围用“是否满足需求”衡量，项目范围用“是否完成计划工作”衡量。","tag":"范围管理"},{"q":"确认范围和质量控制有什么区别？","a":"确认范围是干系人正式验收可交付成果，关注“验收”；控制质量是内部检查成果是否正确、满足质量要求。一般先控制质量，再确认范围。","tag":"范围管理"},{"q":"范围基准由哪三部分组成？","a":"项目范围说明书、WBS、WBS字典。三者共同构成范围基准，变更需走整体变更控制。","tag":"范围管理"},{"q":"范围蔓延和镀金有什么区别？","a":"范围蔓延是客户不断加需求、未走变更；镀金是团队主动多做、未被要求。两者都增加成本/风险，都应避免。","tag":"范围管理"},{"q":"关键路径怎么找？它决定什么？","a":"网络图中最长的路径就是关键路径，决定项目最短工期；关键路径上活动总时差通常为0，延误关键路径就会延误工期。","tag":"进度管理"},{"q":"总时差和自由时差怎么算？","a":"总时差 TF=LS-ES=LF-EF；自由时差 FF=min(紧后活动ES)-本活动EF。总时差是本活动不影响总工期的机动时间。","tag":"进度管理"},{"q":"资源平衡和资源平滑有什么区别？","a":"资源平衡可能改变关键路径、延长工期；资源平滑利用浮动时间，不改变关键路径和工期。","tag":"进度管理"},{"q":"赶工和快速跟进怎么选？","a":"赶工加资源/加班，通常增加成本但不改范围；快速跟进把活动并行，通常增加风险与返工。优先赶工关键路径活动。","tag":"进度管理"},{"q":"成本基准和项目预算是什么关系？","a":"成本基准=项目总成本估算+应急储备（不含管理储备）；项目预算=成本基准+管理储备。","tag":"成本管理"},{"q":"应急储备和管理储备有什么区别？","a":"应急储备应对“已知-未知”，在成本基准内，项目经理可直接动用；管理储备应对“未知-未知”，在成本基准外，需管理层批准。","tag":"成本管理"},{"q":"EAC的三种算法怎么写？","a":"典型偏差：EAC=BAC/CPI；非典型偏差：EAC=AC+(BAC-EV)；混合：EAC=AC+(BAC-EV)/(CPI×SPI)。","tag":"成本管理"},{"q":"沉没成本和机会成本怎么理解？","a":"沉没成本是已经发生、无法收回的成本，决策时应忽略；机会成本是选择某方案而放弃的其他方案中价值最高者。","tag":"成本管理"},{"q":"管理质量和控制质量有什么区别？","a":"管理质量属执行过程组，关注“过程”，把质量政策转化为质量活动；控制质量属监控过程组，关注“成果”，检查结果是否满足质量要求。","tag":"质量管理"},{"q":"质量和等级是一回事吗？","a":"不是。质量是满足要求的程度；等级是功能多少的级别。低等级不等于低质量，高等级也不等于高质量。","tag":"质量管理"},{"q":"控制图怎么判断失控？","a":"常见规则：数据点超出控制上下限，或连续7点呈同一趋势/在中心线同一侧。控制界限≠规格界限，规格由客户/标准决定。","tag":"质量管理"},{"q":"老七工具和新七工具分别有哪些？","a":"老七：因果图、流程图、核查表、帕累托图、直方图、控制图、散点图；新七：亲和图、PDPC、关联图、树形图、优先矩阵、活动网络图、矩阵图。","tag":"质量管理"},{"q":"RACI中A和R分别是什么？","a":"R是执行者（Responsible），A是责任人（Accountable），每项工作只能有一个A；C是咨询者，I是知情者。","tag":"资源管理"},{"q":"塔克曼团队发展五阶段是什么？","a":"形成期 → 震荡期 → 规范期 → 成熟期 → 解散期。项目经理要在震荡期主动处理冲突、建立规则。","tag":"资源管理"},{"q":"冲突解决的优选顺序是什么？","a":"合作/解决问题（双赢）→ 妥协/调解 → 缓和/包容 → 强迫/命令 → 撤退/回避。考试通常优先选合作。","tag":"资源管理"},{"q":"控制资源和管理团队有什么区别？","a":"控制资源关注物理资源（设备、材料、设施）按计划分配和使用；管理团队关注人，跟踪绩效、反馈、解决问题。","tag":"资源管理"},{"q":"沟通渠道数怎么算？","a":"n(n-1)/2。5个人时有10条渠道。增加1个人，渠道增加n条，沟通复杂度快速上升。","tag":"沟通管理"},{"q":"交互式、推式、拉式沟通怎么区分？","a":"交互式：会议/电话，效率高、成本高；推式：邮件/报告，单向发送；拉式：知识库/内网，适合大量信息、受众自取。","tag":"沟通管理"},{"q":"沟通管理的核心目标是什么？","a":"确保信息被正确理解，而不仅是“发出去了”。要管理编码、媒介、解码、噪声和反馈。","tag":"沟通管理"},{"q":"沟通管理计划应包含什么？","a":"干系人沟通需求、信息格式、频率、责任人、渠道、升级流程、保密要求等。","tag":"沟通管理"},{"q":"威胁和机会的应对策略分别有哪些？","a":"威胁：上报、规避、转移、减轻、接受；机会：上报、开拓、分享、提高、接受。","tag":"风险管理"},{"q":"风险再评估和风险审计有什么区别？","a":"风险再评估看“风险本身有没有变”，识别新风险、关闭过时风险；风险审计看“风险管理过程做得好不好”。","tag":"风险管理"},{"q":"定性分析和定量分析分别做什么？","a":"定性：评估概率和影响，排优先级（概率影响矩阵）；定量：对整体目标影响做数值分析（蒙特卡洛、决策树、敏感性）。","tag":"风险管理"},{"q":"转移风险等于消除风险吗？","a":"不等于。转移只是把风险的财务后果转移给第三方（保险、外包、担保），风险本身仍存在，通常还要配合减轻措施。","tag":"风险管理"},{"q":"三类合同的风险怎么归属？","a":"总价合同卖方风险大；成本补偿合同买方风险大；工料合同T&M双方风险居中。范围明确优先总价，范围不清可考虑成本补偿。","tag":"采购管理"},{"q":"招标投标法的高频时间点有哪些？","a":"招标公告至投标截止不少于20日；中标通知书发出后30日内签订合同；评标委员会5人以上单数，技术经济专家不少于2/3。","tag":"采购管理"},{"q":"控制采购包括哪些工作？","a":"合同变更控制、采购绩效审查、检查与审计、索赔管理、记录管理、采购关闭。","tag":"采购管理"},{"q":"采购争议的解决顺序是什么？","a":"谈判 → 替代争议解决ADR（调解/仲裁）→ 诉讼。优先协商，协商不成再升级。","tag":"采购管理"},{"q":"权力/利益方格四象限怎么管？","a":"高权高利重点管理；高权低利令其满意；低权高利随时告知；低权低利监督。","tag":"干系人管理"},{"q":"干系人参与度评估矩阵的五个状态是什么？","a":"不了解（C）、抵制（U）、中立（N）、支持（S）、领导（L），即C-U-N-S-L。","tag":"干系人管理"},{"q":"识别干系人只在项目启动时做吗？","a":"不是。识别干系人贯穿项目全过程，要定期识别新干系人、更新登记册和参与计划。","tag":"干系人管理"},{"q":"管理干系人参与和监督干系人参与有什么区别？","a":"管理干系人参与是执行过程组，沟通协作、处理问题、促进合理参与；监督干系人参与是监控过程组，监督关系、修订策略。","tag":"干系人管理"}],"hot":[{"k":"AI + 项目管理","v":"场景：需求分析、风险识别、测试用例生成、进度预测；治理：人工复核、数据脱敏、模型评估、可解释性。"},{"k":"数据质量与数据治理","v":"6维：准确、完整、一致、及时、可靠、唯一；指标：准确率、缺失率、一致率、及时率；依据GB/T 36344。"},{"k":"安全与合规","v":"数据分类分级、最小必要、告知同意、访问控制、脱敏加密；关联数据安全法、个人信息保护法。"}],"threeThings":["看1张领域导图（过程链+易混点）","抽背10张卡（隔天复习优先）","做1道案例小问（计算或找错）"],"day90":[["20'","背诵卡"],["40'","专项精学"],["20'","真题/错题"],["10'","复盘"]],"week8":["W1-2：十大管理49过程+10张导图，先保综合45","W3-4：EVM/CPM/PERT/EMV计算+6个案例模板，案例保45","W5-6：1个项目卡+质量/风险/交付/不确定性4个提纲+2篇全文","W7-8：3次全真模考+错题回炉；不再开新教材"],"caseOrder":["先做计算题(25分)：写公式→代入→结果→结论，步骤分比结果更重要","再做找错题：先定性'违背了哪个过程'，再抄案例原文证据，最后给正确做法","最后做措施题：按'计划-执行-检查-改进'或'人-机-料-法-环'列6-8条","留5分钟：检查单位、正负号、是否答非所问"],"findErr4":["定性：'该项目在××管理中存在以下问题…'","证据：'案例中……，说明没有做××过程/没有输出××'","后果：'导致范围蔓延/成本超支/进度延误/质量缺陷'","正确做法：'应……，并更新……，走整体变更控制'"],"paperStruct":["摘要 250-350字：项目背景+我做了什么+量化结果","项目背景 350-450字：周期、投资、团队、建设内容、我的角色、成果","3个子问题 各500-600字：理论一句+项目做法+问题/对策+效果","问题与对策 300字：写1个真实冲突/风险/变更，体现判断","总结 150-200字：结果+不足+下一步，不喊口号"],"essayTime":"120分钟：5分钟审题列提纲，95分钟写，15分钟检查，5分钟备用","examSlots":["上午场 8:30-12:30：综合知识+案例分析连考（综合最长150分钟，案例固定90分钟，节余时间可给案例）","下午场 14:30-16:30：论文（不得提前交卷）"],"signals":["2025.5第一批：论文考'交付绩效域'，要求结合五大过程组写协同与度量——绩效域进入论文","2026两批：分别考'质量管理+数据资源''风险管理+AI+安全'——从纯知识领域转向热点融合","备考策略：十大管理打底 → 8个绩效域补新 → AI/数据/安全做素材，不押单题"],"passStats":[["整体通过率","仅 10%-15%","三科联考+单科成绩不保留是主因，非知识难度"],["落榜原因","60%+ 卡在案例/论文","2025年数据：综合容易过线，案例与论文是两大卡点"],["难度排序","论文 > 案例 > 综合","模板化论文得分率不足30%，必须写真实项目细节"],["投入底线","至少 200 小时有效学习","400h+（约7个月）一次拿证率 20%-25%；<200h 概率不足 5%"],["高频集中度","综合70%分值集中在高频考点","十大管理+IT新技术+法规占综合超70%，拒绝平均用力"],["每日基准","每天30道综合题保持手感","配合错题本标注易错点，考前一周集中复盘"]],"passTips":["时间分配向论文倾斜：参考版30周已给论文6周，保持；论文期每周至少1篇限时全文+机考打字练习","案例是'提分性价比之王'：计算25分必须满分，主观题踩点给分、用标准术语分点作答","综合靠刷题反射：每天30题+错题本，不必啃完800页教材，聚焦高频70%"]};
-var KEY="wb_gaoxiang_kaofen_v2";
-var state={checks:{},cards:{}};
+var D={"exam":{"name":"信息系统项目管理师","short":"高项","year":"2027","defaultExamDate":"2027-05-22","defaultPlanStart":"2026-10-26","pass":45,"full":75,"note":"2027年考试日期为预计值，以中国计算机技术职业资格网及各省软考办通知为准。"},"scoreRows":[{"part":"十大管理（8-17章）","zh":"36-38分","case":"55-65分","essay":"论文主战场","level":"S","advice":"49个过程+ITTO+易混点，综合/案例/论文三科通吃"},{"part":"绩效域/变更（18-19章）","zh":"4-5分","case":"10-15分","essay":"2025-26高频","level":"S","advice":"8个绩效域+配置/变更流程，2027论文必须准备"},{"part":"IT基础（1-5章）","zh":"14-17分","case":"0-5分","essay":"低","level":"A","advice":"只背高频概念、新技术、安全、数据，不逐页啃"},{"part":"高级/组织/法规（20-24章）","zh":"9-10分","case":"0-5分","essay":"低","level":"A/B","advice":"项目集/组合、CMMI、科学基础、法规高频点"},{"part":"立项（6-7章）","zh":"2-3分","case":"0-5分","zh2":"","essay":"低","level":"B","advice":"可研、立项流程、项目评估，掌握概念即可"},{"part":"专业英语","zh":"约5分","case":"-","essay":"-","level":"B","advice":"每天10分钟，背项目管理英文术语，不单独花大块时间"}],"phases":[{"id":"p1","name":"启动","weeks":[1,2],"color":"#0d5c5c","desc":"先看清战场：规则、分值、49过程框架、项目卡。","output":"考试地图 / 目标分 / 项目卡"},{"id":"p2","name":"基础精学","weeks":[3,13],"color":"#256b8a","desc":"按分值顺序学：十大管理→绩效域→IT基础→高级/法规。","output":"10张导图 / 49过程 / 错题本"},{"id":"p3","name":"案例突破","weeks":[14,17],"color":"#d97706","desc":"计算题必须满分，找错/措施形成模板。","output":"20道计算 / 6个案例模板"},{"id":"p4","name":"论文成型","weeks":[18,23],"color":"#7a6a9a","desc":"一个真实项目，一鱼多吃，准备8个提纲+4篇全文。","output":"项目卡 / 8提纲 / 4篇全文"},{"id":"p5","name":"全真模考","weeks":[24,27],"color":"#b45309","desc":"按考试时间连考，训练体力和时间分配。","output":"3次全真模考 / 错题闭环"},{"id":"p6","name":"回扣冲刺","weeks":[28,30],"color":"#166534","desc":"只看错题、公式、49过程、论文骨架，不做新题。","output":"四张清单 / 考场清单"}],"weekFocus":[{"n":1,"phase":"p1","focus":"考试地图：规则、分值、目标分、摸底","output":"一页考试地图 + 1套摸底"},{"n":2,"phase":"p1","focus":"49个过程框架 + 项目卡初稿","output":"10领域/49过程默写 + 项目卡"},{"n":3,"phase":"p2","focus":"整合 + 范围：章程、变更、WBS、确认范围","output":"2张导图 + 30题 + 1道案例"},{"n":4,"phase":"p2","focus":"进度 + 成本：CPM、三点、EVM基础","output":"2张导图 + 2道计算"},{"n":5,"phase":"p2","focus":"质量 + 资源：管理质量vs控制质量、RACI、冲突","output":"2张导图 + 易混对照"},{"n":6,"phase":"p2","focus":"沟通 + 干系人：渠道、权力利益方格、参与度","output":"2张导图 + 20张卡"},{"n":7,"phase":"p2","focus":"风险 + 采购：策略、合同、储备","output":"2张导图 + 合同对比表"},{"n":8,"phase":"p2","focus":"十大管理串联 + 综合真题1套","output":"49过程闭卷 + 错题归因"},{"n":9,"phase":"p2","focus":"绩效域8个 + 变更/配置","output":"8绩效域一页纸 + 变更流程"},{"n":10,"phase":"p2","focus":"IT基础1-3：信息化、新技术、治理","output":"高频概念30条"},{"n":11,"phase":"p2","focus":"IT基础4-5：信息系统管理、系统工程","output":"高频概念30条 + 20题"},{"n":12,"phase":"p2","focus":"高级管理20-21 + 组织/法规22-24","output":"CMMI/项目集/法规高频点"},{"n":13,"phase":"p2","focus":"综合真题2套 + 错题 + 英语5分","output":"错题本第一轮闭环"},{"n":14,"phase":"p3","focus":"案例计算：EVM/CPM 专项","output":"10道计算 + 公式闭卷"},{"n":15,"phase":"p3","focus":"案例计算：PERT/EMV/决策树","output":"10道计算 + 错因清单"},{"n":16,"phase":"p3","focus":"案例找错/措施：6大场景","output":"6个答题模板"},{"n":17,"phase":"p3","focus":"案例整卷2套 + 时间分配","output":"2套案例 + 90分钟节奏"},{"n":18,"phase":"p4","focus":"项目卡定稿 + 质量/风险提纲","output":"1张项目卡 + 2个提纲"},{"n":19,"phase":"p4","focus":"范围/进度/成本提纲","output":"3个提纲 + 1篇全文"},{"n":20,"phase":"p4","focus":"干系人/交付绩效域提纲","output":"2个提纲 + 1篇全文"},{"n":21,"phase":"p4","focus":"不确定性/AI数据安全提纲","output":"2个提纲 + 热点素材"},{"n":22,"phase":"p4","focus":"论文全文2篇 + 批改","output":"2篇全文 + 自评表"},{"n":23,"phase":"p4","focus":"论文限时2篇 + 案例保温","output":"2篇120分钟 + 2道案例"},{"n":24,"phase":"p5","focus":"综合整卷2套 + 错题三轮","output":"错题本二轮闭环"},{"n":25,"phase":"p5","focus":"全真模考1（三科同日）","output":"分数/时间/失分类型"},{"n":26,"phase":"p5","focus":"全真模考2 + 弱项专项","output":"弱项清单 + 专项20题"},{"n":27,"phase":"p5","focus":"全真模考3 + 论文默写","output":"3篇论文骨架默写"},{"n":28,"phase":"p6","focus":"错题/公式/49过程/论文骨架 四扫","output":"四张清单"},{"n":29,"phase":"p6","focus":"轻量回顾 + 考场清单 + 作息","output":"考场清单 + 作息表"},{"n":30,"phase":"p6","focus":"考前周：只看错题/公式/项目卡","output":"不碰新题，保持手感"}],"timeAlloc":[{"name":"十大管理 + 绩效域 + 变更","pct":50,"color":"#0d5c5c","note":"三科核心，优先学"},{"name":"案例计算 + 案例套路","pct":20,"color":"#d97706","note":"25分计算题必须拿"},{"name":"论文素材 + 限时写作","pct":15,"color":"#7a6a9a","note":"项目卡+8个提纲"},{"name":"IT基础 + 高级/法规","pct":15,"color":"#3b6d8f","note":"碎片时间扫高频"}],"areas":[{"id":"integration","no":"08","name":"整合管理","count":7,"color":"#0d5c5c","oneLine":"项目经理的“总控台”：授权、计划、变更、收尾","hint":"章-计-导-知-控-变-终","chain":["制定项目章程","制订项目管理计划","指导与管理项目工作","管理项目知识","监控项目工作","实施整体变更控制","结束项目或阶段"],"outputs":["项目章程、假设日志","项目管理计划（含范围/进度/成本三大基准）","可交付成果、工作绩效数据、问题日志","经验教训登记册","工作绩效报告","批准的变更请求、变更日志","最终报告、移交、组织过程资产更新"],"tools":["专家判断、数据收集、会议","项目管理信息系统","变更控制工具","数据分析、决策"],"qa":[{"q":"项目章程由谁签发？它授权什么？","a":"由发起人签发。它正式批准项目存在，授权项目经理动用组织资源，并把项目与组织战略连接起来。"},{"q":"整体变更控制的完整流程是什么？","a":"提出变更请求 → 记录变更日志 → 评估影响 → CCB审批 → 批准后更新计划并实施、拒绝则记录并通知 → 跟踪验证 → 归档。"},{"q":"工作绩效数据、信息、报告有什么区别？","a":"数据是原始记录；信息是数据与基准对比分析后的结果；报告是汇总后向干系人沟通的格式。数据→信息→报告。"},{"q":"结束项目或阶段必须做哪些事？","a":"验收可交付成果、移交、存档、释放资源、更新组织过程资产；项目提前终止也要执行收尾。"}],"essay":"可写：章程授权、CCB变更台账、收尾移交与经验教训。"},{"id":"scope","no":"09","name":"范围管理","count":6,"color":"#256b8a","oneLine":"做且只做该做的：需求、WBS、验收、防蔓延","hint":"规-收-定-WBS-确认-控","chain":["规划范围管理","收集需求","定义范围","创建WBS","确认范围","控制范围"],"outputs":["范围管理计划、需求管理计划","需求文件、需求跟踪矩阵","项目范围说明书","范围基准（说明书+WBS+WBS字典）","验收的可交付成果","工作绩效信息、变更请求"],"tools":["访谈、焦点小组、引导式研讨会","原型法、观察、标杆对照","分解（WBS）","检查、数据分析"],"qa":[{"q":"产品范围和项目范围有什么区别？","a":"产品范围是产品或服务的特性与功能；项目范围是为交付产品所需完成的工作。产品范围用“是否满足需求”衡量，项目范围用“是否完成计划工作”衡量。"},{"q":"确认范围和质量控制有什么区别？","a":"确认范围是干系人正式验收可交付成果，关注“验收”；控制质量是内部检查成果是否正确、满足质量要求。一般先控制质量，再确认范围。"},{"q":"范围基准由哪三部分组成？","a":"项目范围说明书、WBS、WBS字典。三者共同构成范围基准，变更需走整体变更控制。"},{"q":"范围蔓延和镀金有什么区别？","a":"范围蔓延是客户不断加需求、未走变更；镀金是团队主动多做、未被要求。两者都增加成本/风险，都应避免。"}],"essay":"可写：需求跟踪矩阵、WBS 100%原则、验收会、范围变更。"},{"id":"schedule","no":"10","name":"进度管理","count":6,"color":"#b45309","oneLine":"最长路径决定最短工期：CPM、压缩、资源优化","hint":"规-定-序-时-计划-控","chain":["规划进度管理","定义活动","排列活动顺序","估算活动持续时间","制订进度计划","控制进度"],"outputs":["进度管理计划","活动清单、活动属性、里程碑清单","项目进度网络图","持续时间估算、估算依据","进度基准、项目进度计划、进度数据、项目日历","工作绩效信息、进度预测"],"tools":["紧前关系绘图法PDM、箭线图法ADM","提前量、滞后量","三点估算","关键路径法、资源优化、进度压缩"],"qa":[{"q":"关键路径怎么找？它决定什么？","a":"网络图中最长的路径就是关键路径，决定项目最短工期；关键路径上活动总时差通常为0，延误关键路径就会延误工期。"},{"q":"总时差和自由时差怎么算？","a":"总时差 TF=LS-ES=LF-EF；自由时差 FF=min(紧后活动ES)-本活动EF。总时差是本活动不影响总工期的机动时间。"},{"q":"资源平衡和资源平滑有什么区别？","a":"资源平衡可能改变关键路径、延长工期；资源平滑利用浮动时间，不改变关键路径和工期。"},{"q":"赶工和快速跟进怎么选？","a":"赶工加资源/加班，通常增加成本但不改范围；快速跟进把活动并行，通常增加风险与返工。优先赶工关键路径活动。"}],"essay":"可写：CPM识别关键路径、周例会纠偏、资源冲突处理。"},{"id":"cost","no":"11","name":"成本管理","count":4,"color":"#9a3412","oneLine":"挣值公式必须全拿：CV/SV/CPI/SPI/EAC","hint":"规-估-预-控","chain":["规划成本管理","估算成本","制定预算","控制成本"],"outputs":["成本管理计划","成本估算、估算依据","成本基准、项目资金需求","工作绩效信息、成本预测","变更请求"],"tools":["类比、参数、自下而上、三点估算","储备分析","成本汇总、资金限制平衡","挣值管理、完工尚需绩效指数"],"qa":[{"q":"成本基准和项目预算是什么关系？","a":"成本基准=项目总成本估算+应急储备（不含管理储备）；项目预算=成本基准+管理储备。"},{"q":"应急储备和管理储备有什么区别？","a":"应急储备应对“已知-未知”，在成本基准内，项目经理可直接动用；管理储备应对“未知-未知”，在成本基准外，需管理层批准。"},{"q":"EAC的三种算法怎么写？","a":"典型偏差：EAC=BAC/CPI；非典型偏差：EAC=AC+(BAC-EV)；混合：EAC=AC+(BAC-EV)/(CPI×SPI)。"},{"q":"沉没成本和机会成本怎么理解？","a":"沉没成本是已经发生、无法收回的成本，决策时应忽略；机会成本是选择某方案而放弃的其他方案中价值最高者。"}],"essay":"可写：成本基准、月度EVM报告、成本超支纠偏、变更控制。"},{"id":"quality","no":"12","name":"质量管理","count":3,"color":"#166534","oneLine":"过程与成果分开看：管理质量 vs 控制质量","hint":"规-管-控","chain":["规划质量管理","管理质量","控制质量"],"outputs":["质量管理计划、质量测量指标","质量报告、测试与评估文件","质量控制测量结果","核实的可交付成果","变更请求"],"tools":["质量成本COQ","老七工具、新七工具","审计、检查","测试/产品评估、问题解决"],"qa":[{"q":"管理质量和控制质量有什么区别？","a":"管理质量属执行过程组，关注“过程”，把质量政策转化为质量活动；控制质量属监控过程组，关注“成果”，检查结果是否满足质量要求。"},{"q":"质量和等级是一回事吗？","a":"不是。质量是满足要求的程度；等级是功能多少的级别。低等级不等于低质量，高等级也不等于高质量。"},{"q":"控制图怎么判断失控？","a":"常见规则：数据点超出控制上下限，或连续7点呈同一趋势/在中心线同一侧。控制界限≠规格界限，规格由客户/标准决定。"},{"q":"老七工具和新七工具分别有哪些？","a":"老七：因果图、流程图、核查表、帕累托图、直方图、控制图、散点图；新七：亲和图、PDPC、关联图、树形图、优先矩阵、活动网络图、矩阵图。"}],"essay":"可写：质量指标、测试缺陷闭环、数据质量维度、国标指标。"},{"id":"resource","no":"13","name":"资源管理","count":6,"color":"#6d28d9","oneLine":"人+物：RACI、塔克曼、冲突五法","hint":"规-估-获-建-管-控","chain":["规划资源管理","估算活动资源","获取资源","建设团队","管理团队","控制资源"],"outputs":["资源管理计划、团队章程","资源需求、资源分解结构RBS","物质资源分配单、项目团队派工单、资源日历","团队绩效评价","问题日志、变更请求"],"tools":["责任分配矩阵RACI","预分派、谈判、招募、虚拟团队","塔克曼阶梯、激励理论","冲突管理、集中办公、培训"],"qa":[{"q":"RACI中A和R分别是什么？","a":"R是执行者（Responsible），A是责任人（Accountable），每项工作只能有一个A；C是咨询者，I是知情者。"},{"q":"塔克曼团队发展五阶段是什么？","a":"形成期 → 震荡期 → 规范期 → 成熟期 → 解散期。项目经理要在震荡期主动处理冲突、建立规则。"},{"q":"冲突解决的优选顺序是什么？","a":"合作/解决问题（双赢）→ 妥协/调解 → 缓和/包容 → 强迫/命令 → 撤退/回避。考试通常优先选合作。"},{"q":"控制资源和管理团队有什么区别？","a":"控制资源关注物理资源（设备、材料、设施）按计划分配和使用；管理团队关注人，跟踪绩效、反馈、解决问题。"}],"essay":"可写：RACI、团队章程、冲突案例、虚拟团队管理。"},{"id":"communication","no":"14","name":"沟通管理","count":3,"color":"#0e7490","oneLine":"信息被理解才算沟通：渠道、方法、计划","hint":"规-管-督","chain":["规划沟通管理","管理沟通","监督沟通"],"outputs":["沟通管理计划","项目沟通记录","工作绩效信息、变更请求"],"tools":["沟通需求分析、沟通技术/模型/方法","沟通技能、项目报告","会议、人际关系与团队技能"],"qa":[{"q":"沟通渠道数怎么算？","a":"n(n-1)/2。5个人时有10条渠道。增加1个人，渠道增加n条，沟通复杂度快速上升。"},{"q":"交互式、推式、拉式沟通怎么区分？","a":"交互式：会议/电话，效率高、成本高；推式：邮件/报告，单向发送；拉式：知识库/内网，适合大量信息、受众自取。"},{"q":"沟通管理的核心目标是什么？","a":"确保信息被正确理解，而不仅是“发出去了”。要管理编码、媒介、解码、噪声和反馈。"},{"q":"沟通管理计划应包含什么？","a":"干系人沟通需求、信息格式、频率、责任人、渠道、升级流程、保密要求等。"}],"essay":"可写：沟通矩阵、例会机制、干系人沟通、冲突升级。"},{"id":"risk","no":"15","name":"风险管理","count":7,"color":"#c2410c","oneLine":"先分级再应对：威胁五策、机会五策、储备","hint":"规-识-定-量-应-施-督","chain":["规划风险管理","识别风险","实施定性风险分析","实施定量风险分析","规划风险应对","实施风险应对","监督风险"],"outputs":["风险管理计划","风险登记册、风险报告","定性/定量分析更新","变更请求","工作绩效信息"],"tools":["SWOT、德尔菲、访谈、核对单","概率影响矩阵、紧迫性评估","蒙特卡洛、敏感性分析、决策树EMV","威胁/机会应对策略、风险审计、储备分析"],"qa":[{"q":"威胁和机会的应对策略分别有哪些？","a":"威胁：上报、规避、转移、减轻、接受；机会：上报、开拓、分享、提高、接受。"},{"q":"风险再评估和风险审计有什么区别？","a":"风险再评估看“风险本身有没有变”，识别新风险、关闭过时风险；风险审计看“风险管理过程做得好不好”。"},{"q":"定性分析和定量分析分别做什么？","a":"定性：评估概率和影响，排优先级（概率影响矩阵）；定量：对整体目标影响做数值分析（蒙特卡洛、决策树、敏感性）。"},{"q":"转移风险等于消除风险吗？","a":"不等于。转移只是把风险的财务后果转移给第三方（保险、外包、担保），风险本身仍存在，通常还要配合减轻措施。"}],"essay":"可写：风险登记册、风险责任人、应对策略、AI项目新型风险。"},{"id":"procurement","no":"16","name":"采购管理","count":3,"color":"#7c5c2e","oneLine":"合同类型决定风险归属：总价、成本补偿、工料","hint":"规-实-控","chain":["规划采购管理","实施采购","控制采购"],"outputs":["采购管理计划、采购策略、SOW、招标文件、供方选择标准","选定的卖方、协议","采购关闭、工作绩效信息、变更请求"],"tools":["自制或外购分析","供方选择分析","投标人会议、广告","索赔管理、检查、审计"],"qa":[{"q":"三类合同的风险怎么归属？","a":"总价合同卖方风险大；成本补偿合同买方风险大；工料合同T&M双方风险居中。范围明确优先总价，范围不清可考虑成本补偿。"},{"q":"招标投标法的高频时间点有哪些？","a":"招标公告至投标截止不少于20日；中标通知书发出后30日内签订合同；评标委员会5人以上单数，技术经济专家不少于2/3。"},{"q":"控制采购包括哪些工作？","a":"合同变更控制、采购绩效审查、检查与审计、索赔管理、记录管理、采购关闭。"},{"q":"采购争议的解决顺序是什么？","a":"谈判 → 替代争议解决ADR（调解/仲裁）→ 诉讼。优先协商，协商不成再升级。"}],"essay":"可写：自制外购、合同类型选择、供应商绩效、索赔处理。"},{"id":"stakeholder","no":"17","name":"干系人管理","count":4,"color":"#9d174d","oneLine":"权力/利益定策略，参与度矩阵定动作","hint":"识-规-管-督","chain":["识别干系人","规划干系人参与","管理干系人参与","监督干系人参与"],"outputs":["干系人登记册","干系人参与计划","变更请求、问题日志","工作绩效信息"],"tools":["权力/利益方格、权力/影响方格、影响/作用方格","凸显模型（权力+紧迫性+合法性）","参与度评估矩阵C-U-N-S-L","沟通技能、人际关系与团队技能"],"qa":[{"q":"权力/利益方格四象限怎么管？","a":"高权高利重点管理；高权低利令其满意；低权高利随时告知；低权低利监督。"},{"q":"干系人参与度评估矩阵的五个状态是什么？","a":"不了解（C）、抵制（U）、中立（N）、支持（S）、领导（L），即C-U-N-S-L。"},{"q":"识别干系人只在项目启动时做吗？","a":"不是。识别干系人贯穿项目全过程，要定期识别新干系人、更新登记册和参与计划。"},{"q":"管理干系人参与和监督干系人参与有什么区别？","a":"管理干系人参与是执行过程组，沟通协作、处理问题、促进合理参与；监督干系人参与是监控过程组，监督关系、修订策略。"}],"essay":"可写：干系人登记册、参与度矩阵、冲突协调、满意度调查。"}],"formulas":[{"id":"evm-basic","name":"挣值四基础值 + 偏差/指数","tag":"成本","formula":"PV=计划值  EV=挣值  AC=实际成本  BAC=完工预算\nCV=EV-AC  SV=EV-PV\nCPI=EV/AC  SPI=EV/PV","note":"CV>0 成本节约，CV<0 超支；SV>0 进度提前，SV<0 落后；CPI/SPI>1 好。EV永远在分子。","ex":"例：EV=80，AC=100，PV=90 → CV=-20，SV=-10，CPI=0.8，SPI=0.889。"},{"id":"evm-forecast","name":"完工估算与完工尚需","tag":"成本","formula":"典型：EAC=BAC/CPI\n非典型：EAC=AC+(BAC-EV)\n混合：EAC=AC+(BAC-EV)/(CPI×SPI)\nETC=EAC-AC  VAC=BAC-EAC\nTCPI=(BAC-EV)/(BAC-AC) 或 (BAC-EV)/(EAC-AC)","note":"先判断“偏差是典型的还是非典型的”。典型=按当前绩效继续；非典型=剩余工作按原预算。","ex":"例：BAC=100，EV=40，AC=50，CPI=0.8 → 典型EAC=125，ETC=75，VAC=-25。"},{"id":"pert","name":"三点估算（PERT）","tag":"进度","formula":"贝塔分布：E=(O+4M+P)/6\n三角分布：E=(O+M+P)/3\n标准差：σ=(P-O)/6","note":"默认考贝塔分布；O最乐观、M最可能、P最悲观。区间估算用 E±σ、E±2σ、E±3σ。","ex":"例：O=4，M=6，P=14 → E=(4+24+14)/6=7，σ=(14-4)/6=1.67。"},{"id":"cpm","name":"关键路径与时差","tag":"进度","formula":"TF=LS-ES=LF-EF\nFF=min(紧后活动ES)-本活动EF\n关键路径=最长路径，总时差通常为0","note":"正推取最大（ES/EF），逆推取最小（LS/LF）。关键路径可能不止一条；总时差最小的工作是关键工作。","ex":"例：A(3)→B(4)→D(2)，A→C(5)→D(2)。最长路径A-C-D=10，是关键路径。"},{"id":"emv","name":"决策树 / 期望货币价值","tag":"风险","formula":"EMV = 概率 × 影响（收益为正、损失为负）\n决策：选EMV最大的方案（成本类选最小）","note":"决策树从右往左算；每个分支先算EMV，再汇总。注意题目问“预期收益”还是“预期成本”。","ex":"例：方案A：60%赚100万，40%亏20万 → EMV=60-8=52万；方案B：稳定赚45万 → 选A。"},{"id":"channel","name":"沟通渠道数","tag":"沟通","formula":"渠道数 = n(n-1)/2","note":"n是干系人/团队成员数量。新增1人，渠道增加n条。","ex":"例：n=8 → 8×7/2=28条；n=9 → 36条，新增8条。"},{"id":"budget","name":"成本基准与项目预算","tag":"成本","formula":"成本基准 = 总成本估算 + 应急储备\n项目预算 = 成本基准 + 管理储备","note":"应急储备在基准内，PM可动；管理储备在基准外，需管理层批准。","ex":"例：估算100万，应急10万，管理储备8万 → 基准110万，预算118万。"},{"id":"contract","name":"合同类型与风险","tag":"采购","formula":"总价合同：卖方风险大\n成本补偿合同：买方风险大\n工料合同T&M：双方居中","note":"范围明确→总价；范围不清/长期研发→成本补偿；短期、工作量易计量→工料。","ex":"例：需求频繁变化、无法准确估量 → 成本补偿或工料，不宜固定总价。"},{"id":"float-check","name":"挣值+进度联合判断","tag":"综合","formula":"CPI<1 且 SPI<1：成本超支且进度落后\nCPI>1 且 SPI<1：成本节约但进度落后\nCPI<1 且 SPI>1：成本超支但进度提前","note":"案例题先报“三值”，再报“两偏差”，再报“两指数”，最后给结论和措施。","ex":"例：CPI=0.9，SPI=0.8 → 成本超支10%，进度落后20%，需赶工/控成本/查关键路径。"}],"caseScenes":[{"name":"进度延误","symptom":"关键路径活动延误、里程碑未达成、资源冲突。","keys":"找关键路径→分析延误原因→赶工/快速跟进/调整资源→更新进度基准→走变更。答题关键词：关键路径、总时差、资源平衡、进度压缩、变更控制。"},{"name":"成本超支","symptom":"CPI<1、AC>EV、成本基准被突破。","keys":"算CV/CPI/EAC→分析超支原因→控制成本/减少范围/优化资源→必要时动用管理储备→变更。关键词：挣值、成本基准、应急储备、管理储备、TCPI。"},{"name":"质量缺陷","symptom":"测试缺陷率高、验收不通过、返工。","keys":"区分管理质量/控制质量→查质量测量指标→因果图找根因→纠正措施→重新测试→更新质量报告。关键词：质量成本、缺陷补救、质量审计、控制图。"},{"name":"风险应对不当","symptom":"只列风险不分析、无责任人、无储备、风险发生才救火。","keys":"识别→定性/定量→规划应对→实施→监督；威胁/机会策略；风险登记册；应急储备。关键词：概率影响矩阵、风险责任人、风险审计、储备分析。"},{"name":"干系人冲突","symptom":"需求不一致、部门推诿、关键干系人不支持。","keys":"识别干系人→权力/利益方格→参与度矩阵→沟通计划→冲突五法→问题日志。关键词：重点管理、令其满意、随时告知、合作/解决问题。"},{"name":"变更失控/范围蔓延","symptom":"需求随意加、先做后补、基准频繁变。","keys":"所有变更走整体变更控制：申请→记录→评估→CCB→实施→验证→归档；范围基准变更必须批准。关键词：变更日志、CCB、范围蔓延、镀金。"},{"name":"采购争议","symptom":"合同条款不清、验收标准争议、索赔。","keys":"查合同/SOW/验收标准→采购绩效审查→谈判→ADR→诉讼；控制采购与采购关闭。关键词：合同类型、索赔管理、采购审计、采购关闭。"}],"essayThemes":[{"id":"quality","title":"质量管理","level":"S","tag":"2026真题","subs":["质量规划、管理质量、控制质量如何落地？","数据质量/项目质量的评价维度与指标？","结合国标或行业标准，如何度量质量？"],"keys":"质量测量指标、质量成本、老/新七工具、测试与缺陷闭环、数据质量6维度、GB/T 36344。","detail":"写“缺陷密度下降、验收一次通过率提升”的量化结果。","pitfall":"不要把管理质量写成控制质量；不要只背工具，要写项目中的质量数据。"},{"id":"risk","title":"风险管理","level":"S","tag":"2026真题","subs":["7个风险管理过程如何执行？","威胁/机会应对策略如何选择？","AI/数据项目的新型风险如何治理？"],"keys":"风险登记册、风险责任人、概率影响矩阵、EMV、储备分析、风险审计。","detail":"写一个真实风险从识别到关闭的闭环，含概率/影响/责任人/储备。","pitfall":"转移≠消除；应急储备≠管理储备；不要把风险写成问题。"},{"id":"scope","title":"范围管理","level":"A","tag":"十大管理","subs":["需求收集与范围定义怎么做？","WBS如何分解与验收？","如何防止范围蔓延/镀金？"],"keys":"需求跟踪矩阵、范围说明书、WBS 100%原则、确认范围、变更控制。","detail":"写需求变更数量、验收通过率、WBS工作包数量。","pitfall":"确认范围≠控制质量；范围基准三件套要写全。"},{"id":"schedule","title":"进度管理","level":"A","tag":"十大管理","subs":["如何制定进度计划与识别关键路径？","进度延误如何纠偏？","资源冲突/赶工/快速跟进如何取舍？"],"keys":"CPM、总时差/自由时差、资源平衡、进度压缩、进度基准变更。","detail":"写关键路径长度、里程碑达成率、赶工增加的成本。","pitfall":"资源平衡可能延长工期；快速跟进增加风险。"},{"id":"cost","title":"成本管理","level":"A","tag":"十大管理","subs":["成本估算/预算如何编制？","EVM如何用于成本控制？","成本超支如何纠偏？"],"keys":"成本基准、应急/管理储备、EVM、EAC/ETC/VAC/TCPI。","detail":"写BAC、CPI、EAC、成本节约/超支的量化数据。","pitfall":"成本基准不含管理储备；EAC公式要先判断典型/非典型。"},{"id":"stakeholder","title":"干系人管理","level":"A","tag":"十大管理","subs":["如何识别和分析干系人？","如何制定参与计划并管理参与？","冲突如何升级与解决？"],"keys":"干系人登记册、权力/利益方格、参与度矩阵、沟通计划、冲突五法。","detail":"写关键干系人数量、满意度、问题关闭周期。","pitfall":"识别干系人贯穿全过程；管理/监督不要混淆。"},{"id":"delivery","title":"交付绩效域","level":"S","tag":"2025真题","subs":["交付绩效域重点关注什么？","与哪些绩效域协同？协同目标是什么？","各过程组如何设置交付度量指标？"],"keys":"价值交付、可交付物、质量、验收、五大过程组协同、度量指标。","detail":"写交付周期、验收率、业务价值实现（如审批时限压缩）。","pitfall":"不要写成“范围管理”；绩效域不是过程组。"},{"id":"uncertainty","title":"不确定性绩效域","level":"A","tag":"绩效域","subs":["风险、复杂性、模糊性、波动性如何识别？","如何与风险管理/度量绩效域协同？","如何建立韧性？"],"keys":"不确定性四来源、风险应对、储备、度量、适应型领导。","detail":"写一个高不确定性场景及应对（如政策变化、技术选型）。","pitfall":"不要只写风险登记册；要覆盖复杂性/模糊/波动。"},{"id":"ai","title":"AI/数据/安全融合","level":"S","tag":"2026趋势","subs":["AI在项目中的应用场景与功能特征？","AI/数据项目有哪些新型风险？","如何把AI用于风险管理并保证安全合规？"],"keys":"AI场景规划、数据质量、模型风险、幻觉/偏见、数据安全法/个保法、AI治理。","detail":"写AI辅助需求分析/风险识别/测试的具体效果，以及人工复核机制。","pitfall":"不要空谈AI；要写“用了什么、怎么治理、产生什么价值”。"}],"cards":[{"q":"信息的质量属性有哪些？","a":"精确性、完整性、可靠性、及时性、经济性、可验证性、安全性。","tag":"IT"},{"q":"信息系统生命周期一般包括哪几个阶段？","a":"立项、开发、运维、消亡；开发阶段可细分为规划、分析、设计、实施、运行维护。","tag":"IT"},{"q":"新型基础设施包括哪三类？","a":"信息基础设施、融合基础设施、创新基础设施。","tag":"IT"},{"q":"工业互联网的三大体系是什么？","a":"网络体系、平台体系、安全体系。","tag":"IT"},{"q":"数字经济“四化”指什么？","a":"数字产业化、产业数字化、数字化治理、数据价值化。","tag":"IT"},{"q":"操作系统的主要管理功能有哪些？","a":"进程管理、存储管理、文件管理、设备管理、作业管理。","tag":"IT"},{"q":"OSI七层模型从下到上是什么？","a":"物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。","tag":"IT"},{"q":"RAID 0/1/5/6/10 的核心特点？","a":"RAID0条带无冗余；RAID1镜像；RAID5分布式奇偶校验、允许坏1块；RAID6双校验、允许坏2块；RAID10先镜像再条带。","tag":"IT"},{"q":"数据库事务的ACID是什么？","a":"原子性Atomicity、一致性Consistency、隔离性Isolation、持久性Durability。","tag":"IT"},{"q":"信息安全的CIA三要素是什么？","a":"保密性Confidentiality、完整性Integrity、可用性Availability。","tag":"IT"},{"q":"云计算IaaS/PaaS/SaaS分别提供什么？","a":"IaaS基础设施（服务器/存储/网络）；PaaS平台（开发运行环境/中间件）；SaaS软件（直接使用应用）。","tag":"IT"},{"q":"大数据的4V/5V特征是什么？","a":"Volume大量、Velocity高速、Variety多样、Value价值；5V再加Veracity真实性。","tag":"IT"},{"q":"区块链的核心特征和类型？","a":"去中心化、不可篡改、可追溯、共识机制、智能合约；分为公有链、联盟链、私有链。","tag":"IT"},{"q":"人工智能的主要技术方向有哪些？","a":"机器学习、深度学习、自然语言处理、计算机视觉、知识图谱、语音识别、生成式AI/大模型。","tag":"IT"},{"q":"IT治理和IT管理的区别？","a":"治理是决策权与责任安排（谁决策、如何监督）；管理是执行治理决策（计划、组织、控制）。治理关注“做正确的事”，管理关注“把事做正确”。","tag":"IT"},{"q":"数据质量的6个常见维度是什么？","a":"准确性、完整性、一致性、及时性、可靠性、唯一性（不同标准表述略有差异，2026论文可按GB/T 36344展开）。","tag":"IT"},{"q":"CMMI的5个成熟度等级是什么？","a":"初始级、已管理级、已定义级、量化管理级、优化级。","tag":"IT"},{"q":"ITIL 4的核心是什么？","a":"服务价值系统SVS，包括指导原则、治理、服务价值链、实践、持续改进；强调价值共创。","tag":"IT"},{"q":"高项论文的通用结构是什么？","a":"摘要（约250-350字）+ 项目背景（约400字）+ 3个子问题论述（各约500-600字）+ 问题与对策/效果（约300字）+ 总结（约200字）。以当年字数要求为准。","tag":"论文"},{"q":"论文摘要必须写哪三件事？","a":"项目背景与规模、我采用了什么管理方法、取得了什么量化成果。摘要不要写成目录。","tag":"论文"},{"q":"论文项目背景必须包含哪些量化信息？","a":"项目周期、投资额、团队规模、建设内容、我的角色、交付成果、量化效果（如效率提升/成本节约/验收率）。","tag":"论文"},{"q":"论文“一鱼多吃”是什么意思？","a":"用同一个真实项目背景，套不同管理主题；每个主题换管理过程、工具、问题和数据，而不是背多篇范文。","tag":"论文"},{"q":"2025-2026论文命题趋势是什么？","a":"从纯十大管理，转向绩效域（2025交付等）和热点融合（2026质量+数据、风险+AI+安全）。2027要准备十大管理+8绩效域+AI/数据/安全。","tag":"论文"},{"q":"论文最容易被扣分的点是什么？","a":"项目虚假/空泛、不切题、只背理论无实践、没有量化数据、结构不全、字数不足、模板痕迹重。","tag":"论文"},{"q":"高项三科满分和合格线是多少？","a":"每科满分75分，合格线45分；三科必须在同一次考试全部达到45分，单科成绩不保留。","tag":"考场"},{"q":"高项机考的时间和科目怎么安排？","a":"综合知识与案例分析连考，总时长240分钟；综合知识最长150分钟、最短120分钟；论文120分钟，不得提前交卷。以准考证为准。","tag":"考场"},{"q":"综合知识有多少题？案例几道题？","a":"综合知识75道单选，每题1分；案例分析3道主观大题，满分75分；论文1篇，满分75分。","tag":"考场"},{"q":"高项一年考几次？","a":"2024年起调整为一年一考，通常在上半年5月；下半年不设高项考场。","tag":"考场"},{"q":"案例计算题一般占多少分？","a":"案例分析共75分，通常有1道计算题约25分，高频为挣值、关键路径、三点估算、决策树；计算题必须拿高分。","tag":"考场"},{"q":"项目章程由谁签发？它授权什么？","a":"由发起人签发。它正式批准项目存在，授权项目经理动用组织资源，并把项目与组织战略连接起来。","tag":"整合管理"},{"q":"整体变更控制的完整流程是什么？","a":"提出变更请求 → 记录变更日志 → 评估影响 → CCB审批 → 批准后更新计划并实施、拒绝则记录并通知 → 跟踪验证 → 归档。","tag":"整合管理"},{"q":"工作绩效数据、信息、报告有什么区别？","a":"数据是原始记录；信息是数据与基准对比分析后的结果；报告是汇总后向干系人沟通的格式。数据→信息→报告。","tag":"整合管理"},{"q":"结束项目或阶段必须做哪些事？","a":"验收可交付成果、移交、存档、释放资源、更新组织过程资产；项目提前终止也要执行收尾。","tag":"整合管理"},{"q":"产品范围和项目范围有什么区别？","a":"产品范围是产品或服务的特性与功能；项目范围是为交付产品所需完成的工作。产品范围用“是否满足需求”衡量，项目范围用“是否完成计划工作”衡量。","tag":"范围管理"},{"q":"确认范围和质量控制有什么区别？","a":"确认范围是干系人正式验收可交付成果，关注“验收”；控制质量是内部检查成果是否正确、满足质量要求。一般先控制质量，再确认范围。","tag":"范围管理"},{"q":"范围基准由哪三部分组成？","a":"项目范围说明书、WBS、WBS字典。三者共同构成范围基准，变更需走整体变更控制。","tag":"范围管理"},{"q":"范围蔓延和镀金有什么区别？","a":"范围蔓延是客户不断加需求、未走变更；镀金是团队主动多做、未被要求。两者都增加成本/风险，都应避免。","tag":"范围管理"},{"q":"关键路径怎么找？它决定什么？","a":"网络图中最长的路径就是关键路径，决定项目最短工期；关键路径上活动总时差通常为0，延误关键路径就会延误工期。","tag":"进度管理"},{"q":"总时差和自由时差怎么算？","a":"总时差 TF=LS-ES=LF-EF；自由时差 FF=min(紧后活动ES)-本活动EF。总时差是本活动不影响总工期的机动时间。","tag":"进度管理"},{"q":"资源平衡和资源平滑有什么区别？","a":"资源平衡可能改变关键路径、延长工期；资源平滑利用浮动时间，不改变关键路径和工期。","tag":"进度管理"},{"q":"赶工和快速跟进怎么选？","a":"赶工加资源/加班，通常增加成本但不改范围；快速跟进把活动并行，通常增加风险与返工。优先赶工关键路径活动。","tag":"进度管理"},{"q":"成本基准和项目预算是什么关系？","a":"成本基准=项目总成本估算+应急储备（不含管理储备）；项目预算=成本基准+管理储备。","tag":"成本管理"},{"q":"应急储备和管理储备有什么区别？","a":"应急储备应对“已知-未知”，在成本基准内，项目经理可直接动用；管理储备应对“未知-未知”，在成本基准外，需管理层批准。","tag":"成本管理"},{"q":"EAC的三种算法怎么写？","a":"典型偏差：EAC=BAC/CPI；非典型偏差：EAC=AC+(BAC-EV)；混合：EAC=AC+(BAC-EV)/(CPI×SPI)。","tag":"成本管理"},{"q":"沉没成本和机会成本怎么理解？","a":"沉没成本是已经发生、无法收回的成本，决策时应忽略；机会成本是选择某方案而放弃的其他方案中价值最高者。","tag":"成本管理"},{"q":"管理质量和控制质量有什么区别？","a":"管理质量属执行过程组，关注“过程”，把质量政策转化为质量活动；控制质量属监控过程组，关注“成果”，检查结果是否满足质量要求。","tag":"质量管理"},{"q":"质量和等级是一回事吗？","a":"不是。质量是满足要求的程度；等级是功能多少的级别。低等级不等于低质量，高等级也不等于高质量。","tag":"质量管理"},{"q":"控制图怎么判断失控？","a":"常见规则：数据点超出控制上下限，或连续7点呈同一趋势/在中心线同一侧。控制界限≠规格界限，规格由客户/标准决定。","tag":"质量管理"},{"q":"老七工具和新七工具分别有哪些？","a":"老七：因果图、流程图、核查表、帕累托图、直方图、控制图、散点图；新七：亲和图、PDPC、关联图、树形图、优先矩阵、活动网络图、矩阵图。","tag":"质量管理"},{"q":"RACI中A和R分别是什么？","a":"R是执行者（Responsible），A是责任人（Accountable），每项工作只能有一个A；C是咨询者，I是知情者。","tag":"资源管理"},{"q":"塔克曼团队发展五阶段是什么？","a":"形成期 → 震荡期 → 规范期 → 成熟期 → 解散期。项目经理要在震荡期主动处理冲突、建立规则。","tag":"资源管理"},{"q":"冲突解决的优选顺序是什么？","a":"合作/解决问题（双赢）→ 妥协/调解 → 缓和/包容 → 强迫/命令 → 撤退/回避。考试通常优先选合作。","tag":"资源管理"},{"q":"控制资源和管理团队有什么区别？","a":"控制资源关注物理资源（设备、材料、设施）按计划分配和使用；管理团队关注人，跟踪绩效、反馈、解决问题。","tag":"资源管理"},{"q":"沟通渠道数怎么算？","a":"n(n-1)/2。5个人时有10条渠道。增加1个人，渠道增加n条，沟通复杂度快速上升。","tag":"沟通管理"},{"q":"交互式、推式、拉式沟通怎么区分？","a":"交互式：会议/电话，效率高、成本高；推式：邮件/报告，单向发送；拉式：知识库/内网，适合大量信息、受众自取。","tag":"沟通管理"},{"q":"沟通管理的核心目标是什么？","a":"确保信息被正确理解，而不仅是“发出去了”。要管理编码、媒介、解码、噪声和反馈。","tag":"沟通管理"},{"q":"沟通管理计划应包含什么？","a":"干系人沟通需求、信息格式、频率、责任人、渠道、升级流程、保密要求等。","tag":"沟通管理"},{"q":"威胁和机会的应对策略分别有哪些？","a":"威胁：上报、规避、转移、减轻、接受；机会：上报、开拓、分享、提高、接受。","tag":"风险管理"},{"q":"风险再评估和风险审计有什么区别？","a":"风险再评估看“风险本身有没有变”，识别新风险、关闭过时风险；风险审计看“风险管理过程做得好不好”。","tag":"风险管理"},{"q":"定性分析和定量分析分别做什么？","a":"定性：评估概率和影响，排优先级（概率影响矩阵）；定量：对整体目标影响做数值分析（蒙特卡洛、决策树、敏感性）。","tag":"风险管理"},{"q":"转移风险等于消除风险吗？","a":"不等于。转移只是把风险的财务后果转移给第三方（保险、外包、担保），风险本身仍存在，通常还要配合减轻措施。","tag":"风险管理"},{"q":"三类合同的风险怎么归属？","a":"总价合同卖方风险大；成本补偿合同买方风险大；工料合同T&M双方风险居中。范围明确优先总价，范围不清可考虑成本补偿。","tag":"采购管理"},{"q":"招标投标法的高频时间点有哪些？","a":"招标公告至投标截止不少于20日；中标通知书发出后30日内签订合同；评标委员会5人以上单数，技术经济专家不少于2/3。","tag":"采购管理"},{"q":"控制采购包括哪些工作？","a":"合同变更控制、采购绩效审查、检查与审计、索赔管理、记录管理、采购关闭。","tag":"采购管理"},{"q":"采购争议的解决顺序是什么？","a":"谈判 → 替代争议解决ADR（调解/仲裁）→ 诉讼。优先协商，协商不成再升级。","tag":"采购管理"},{"q":"权力/利益方格四象限怎么管？","a":"高权高利重点管理；高权低利令其满意；低权高利随时告知；低权低利监督。","tag":"干系人管理"},{"q":"干系人参与度评估矩阵的五个状态是什么？","a":"不了解（C）、抵制（U）、中立（N）、支持（S）、领导（L），即C-U-N-S-L。","tag":"干系人管理"},{"q":"识别干系人只在项目启动时做吗？","a":"不是。识别干系人贯穿项目全过程，要定期识别新干系人、更新登记册和参与计划。","tag":"干系人管理"},{"q":"管理干系人参与和监督干系人参与有什么区别？","a":"管理干系人参与是执行过程组，沟通协作、处理问题、促进合理参与；监督干系人参与是监控过程组，监督关系、修订策略。","tag":"干系人管理"},{"q":"某项目BAC=100万，EV=40万，AC=50万，CPI=0.8，若按当前成本绩效继续（典型偏差），完工估算EAC为？","a":"B（125万）。典型偏差 EAC=BAC/CPI=100/0.8=125万。","tag":"真题·挣值"},{"q":"项目网络图中，决定项目最短工期的路径是？","a":"关键路径。它是网络图中最长的路径，其总时差通常为0。","tag":"真题·进度"},{"q":"变更控制委员会(CCB)的主要职责是？","a":"审查、评价、批准、推迟或否决变更并记录（不是去实施变更）。","tag":"真题·整合"},{"q":"客户在项目中不断提出新需求导致范围失控，称为？","a":"范围蔓延（镀金则是团队主动多做）。两者都不可取。","tag":"真题·范围"},{"q":"下列属于执行过程组的是？","a":"管理质量（质量保证）属执行过程组；控制质量属监控过程组。","tag":"真题·质量"},{"q":"威胁应对策略中，不包含下列哪项？","a":"分享。分享属于机会应对策略（机会：上报/开拓/分享/提高/接受）。","tag":"真题·风险"},{"q":"下列合同类型中，卖方承担风险最大的是？","a":"总价合同（固定总价等）；成本补偿合同买方风险大；工料合同居中。","tag":"真题·采购"},{"q":"一个5人的项目团队，沟通渠道共有多少条？","a":"10条。公式 n(n-1)/2 = 5×4/2 = 10。","tag":"真题·沟通"},{"q":"权力/利益方格中，高权力高利益的干系人应如何管理？","a":"重点管理；高权力低利益令其满意；低权力高利益随时告知；低权力低利益监督。","tag":"真题·干系人"},{"q":"某活动最乐观8天、最可能12天、最悲观16天，按β分布估算工期为？","a":"12天。E=(O+4M+P)/6=(8+48+16)/6=12。","tag":"真题·三点估算"}],"hot":[{"k":"AI + 项目管理","v":"场景：需求分析、风险识别、测试用例生成、进度预测；治理：人工复核、数据脱敏、模型评估、可解释性。"},{"k":"数据质量与数据治理","v":"6维：准确、完整、一致、及时、可靠、唯一；指标：准确率、缺失率、一致率、及时率；依据GB/T 36344。"},{"k":"安全与合规","v":"数据分类分级、最小必要、告知同意、访问控制、脱敏加密；关联数据安全法、个人信息保护法。"}],"threeThings":["看1张领域导图（过程链+易混点）","抽背10张卡（隔天复习优先）","做1道案例小问（计算或找错）"],"day90":[["20'","背诵卡"],["40'","专项精学"],["20'","真题/错题"],["10'","复盘"]],"week8":["W1-2：十大管理49过程+10张导图，先保综合45","W3-4：EVM/CPM/PERT/EMV计算+6个案例模板，案例保45","W5-6：1个项目卡+质量/风险/交付/不确定性4个提纲+2篇全文","W7-8：3次全真模考+错题回炉；不再开新教材"],"caseOrder":["先做计算题(25分)：写公式→代入→结果→结论，步骤分比结果更重要","再做找错题：先定性'违背了哪个过程'，再抄案例原文证据，最后给正确做法","最后做措施题：按'计划-执行-检查-改进'或'人-机-料-法-环'列6-8条","留5分钟：检查单位、正负号、是否答非所问"],"findErr4":["定性：'该项目在××管理中存在以下问题…'","证据：'案例中……，说明没有做××过程/没有输出××'","后果：'导致范围蔓延/成本超支/进度延误/质量缺陷'","正确做法：'应……，并更新……，走整体变更控制'"],"paperStruct":["摘要 250-350字：项目背景+我做了什么+量化结果","项目背景 350-450字：周期、投资、团队、建设内容、我的角色、成果","3个子问题 各500-600字：理论一句+项目做法+问题/对策+效果","问题与对策 300字：写1个真实冲突/风险/变更，体现判断","总结 150-200字：结果+不足+下一步，不喊口号"],"essayTime":"120分钟：5分钟审题列提纲，95分钟写，15分钟检查，5分钟备用","examSlots":["上午场 8:30-12:30：综合知识+案例分析连考（综合最长150分钟，案例固定90分钟，节余时间可给案例）","下午场 14:30-16:30：论文（不得提前交卷）"],"signals":["2025.5第一批：论文考'交付绩效域'，要求结合五大过程组写协同与度量——绩效域进入论文","2026两批：分别考'质量管理+数据资源''风险管理+AI+安全'——从纯知识领域转向热点融合","备考策略：十大管理打底 → 8个绩效域补新 → AI/数据/安全做素材，不押单题"],"passStats":[["整体通过率","仅 10%-15%","三科联考+单科成绩不保留是主因，非知识难度"],["落榜原因","60%+ 卡在案例/论文","2025年数据：综合容易过线，案例与论文是两大卡点"],["难度排序","论文 > 案例 > 综合","模板化论文得分率不足30%，必须写真实项目细节"],["投入底线","至少 200 小时有效学习","400h+（约7个月）一次拿证率 20%-25%；<200h 概率不足 5%"],["高频集中度","综合70%分值集中在高频考点","十大管理+IT新技术+法规占综合超70%，拒绝平均用力"],["每日基准","每天30道综合题保持手感","配合错题本标注易错点，考前一周集中复盘"]],"passTips":["时间分配向论文倾斜：参考版30周已给论文6周，保持；论文期每周至少1篇限时全文+机考打字练习","案例是'提分性价比之王'：计算25分必须满分，主观题踩点给分、用标准术语分点作答","综合靠刷题反射：每天30题+错题本，不必啃完800页教材，聚焦高频70%"],"comics":[{"id":"change","title":"变更控制：先上车后补票？不行","caption":"申请 → 记录 → 评估 → CCB → 实施 → 验证。没批准的变更不做，做了再补就是失控。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"变更控制情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">变更控制 · 情景漫画</text>\n      <rect x=\"24\" y=\"54\" width=\"180\" height=\"210\" rx=\"14\" fill=\"#ffffff\" stroke=\"#e6dfd3\"/>\n      <circle cx=\"86\" cy=\"118\" r=\"26\" fill=\"#f2c9a0\" stroke=\"#1c2526\" stroke-width=\"2\"/>\n      <path d=\"M60 118 Q86 82 112 118\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"3\"/>\n      <circle cx=\"78\" cy=\"118\" r=\"2.5\" fill=\"#1c2526\"/><circle cx=\"94\" cy=\"118\" r=\"2.5\" fill=\"#1c2526\"/>\n      <path d=\"M78 128 Q86 134 94 128\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      <rect x=\"62\" y=\"146\" width=\"48\" height=\"58\" rx=\"16\" fill=\"#0d5c5c\"/>\n      <path d=\"M62 158 L42 184 M110 158 L130 184\" stroke=\"#1c2526\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n      <rect x=\"46\" y=\"204\" width=\"22\" height=\"48\" rx=\"9\" fill=\"#256b8a\"/><rect x=\"104\" y=\"204\" width=\"22\" height=\"48\" rx=\"9\" fill=\"#256b8a\"/>\n      <path d=\"M125 90 h46 a8 8 0 0 1 8 8 v36 a8 8 0 0 1 -8 8 h-46\" fill=\"#fff\" stroke=\"#1c2526\" stroke-width=\"2\"/>\n      <text x=\"134\" y=\"112\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#1c2526\">先记录！</text>\n      <text x=\"134\" y=\"128\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#6b7775\">再评估</text>\n      <text x=\"42\" y=\"278\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#6b7775\">项目经理</text>\n      <g font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" text-anchor=\"middle\">\n        <rect x=\"230\" y=\"98\" width=\"70\" height=\"40\" rx=\"10\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/><text x=\"265\" y=\"123\" fill=\"#0d5c5c\">申请</text>\n        <rect x=\"318\" y=\"98\" width=\"70\" height=\"40\" rx=\"10\" fill=\"#fff3dd\" stroke=\"#d97706\"/><text x=\"353\" y=\"123\" fill=\"#8a4b06\">评估</text>\n        <rect x=\"406\" y=\"98\" width=\"70\" height=\"40\" rx=\"10\" fill=\"#fde8e6\" stroke=\"#b42318\"/><text x=\"441\" y=\"123\" fill=\"#b42318\">CCB</text>\n        <rect x=\"494\" y=\"98\" width=\"70\" height=\"40\" rx=\"10\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/><text x=\"529\" y=\"123\" fill=\"#0d5c5c\">实施</text>\n        <rect x=\"582\" y=\"98\" width=\"42\" height=\"40\" rx=\"10\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/><text x=\"603\" y=\"123\" fill=\"#0d5c5c\">验证</text>\n      </g>\n      <g stroke=\"#1c2526\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\">\n        <path d=\"M300 118 h14\"/><path d=\"M388 118 h14\"/><path d=\"M476 118 h14\"/><path d=\"M564 118 h14\"/>\n      </g>\n      <g fill=\"#1c2526\"><path d=\"M314 113 l10 5 -10 5z\"/><path d=\"M402 113 l10 5 -10 5z\"/><path d=\"M490 113 l10 5 -10 5z\"/><path d=\"M578 113 l10 5 -10 5z\"/></g>\n      <path d=\"M442 98 V70\" stroke=\"#b42318\" stroke-width=\"3\"/><circle cx=\"442\" cy=\"62\" r=\"12\" fill=\"#b42318\"/><text x=\"442\" y=\"67\" text-anchor=\"middle\" font-family=\"Arial\" font-size=\"12\" fill=\"#fff\">!</text>\n      <text x=\"230\" y=\"178\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"13\" fill=\"#1c2526\" font-weight=\"700\">批准前：不做；拒绝：记录并通知</text>\n      <text x=\"230\" y=\"202\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#6b7775\">变更日志要写清：谁提、为什么、影响、结论、验证人。</text>\n      <text x=\"230\" y=\"228\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#b42318\">最容易错：先做了再补变更，或绕过CCB。</text>\n    </svg>"},{"id":"evm","title":"挣值：EV 永远站分子","caption":"PV 是计划，EV 是干出来的预算价值，AC 是实际花的钱。CPI=EV/AC，SPI=EV/PV。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"挣值管理情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">挣值管理 · 情景漫画</text>\n      <g font-family=\"Microsoft YaHei,sans-serif\" text-anchor=\"middle\">\n        <rect x=\"42\" y=\"94\" width=\"126\" height=\"120\" rx=\"14\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\" stroke-width=\"2\"/>\n        <rect x=\"58\" y=\"64\" width=\"94\" height=\"34\" rx=\"10\" fill=\"#0d5c5c\"/><text x=\"105\" y=\"86\" font-size=\"13\" fill=\"#fff\">PV 计划值</text>\n        <text x=\"105\" y=\"152\" font-size=\"26\" font-weight=\"700\" fill=\"#0d5c5c\">100</text><text x=\"105\" y=\"180\" font-size=\"11\" fill=\"#6b7775\">计划完成</text>\n\n        <rect x=\"198\" y=\"94\" width=\"126\" height=\"120\" rx=\"14\" fill=\"#fff3dd\" stroke=\"#d97706\" stroke-width=\"2\"/>\n        <rect x=\"214\" y=\"64\" width=\"94\" height=\"34\" rx=\"10\" fill=\"#d97706\"/><text x=\"261\" y=\"86\" font-size=\"13\" fill=\"#fff\">EV 挣值</text>\n        <text x=\"261\" y=\"152\" font-size=\"26\" font-weight=\"700\" fill=\"#98520a\">80</text><text x=\"261\" y=\"180\" font-size=\"11\" fill=\"#6b7775\">实际完成值</text>\n\n        <rect x=\"354\" y=\"94\" width=\"126\" height=\"120\" rx=\"14\" fill=\"#fde8e6\" stroke=\"#b42318\" stroke-width=\"2\"/>\n        <rect x=\"370\" y=\"64\" width=\"94\" height=\"34\" rx=\"10\" fill=\"#b42318\"/><text x=\"417\" y=\"86\" font-size=\"13\" fill=\"#fff\">AC 实际成本</text>\n        <text x=\"417\" y=\"152\" font-size=\"26\" font-weight=\"700\" fill=\"#b42318\">100</text><text x=\"417\" y=\"180\" font-size=\"11\" fill=\"#6b7775\">实际花的钱</text>\n      </g>\n      <rect x=\"504\" y=\"64\" width=\"112\" height=\"150\" rx=\"14\" fill=\"#fff\" stroke=\"#e6dfd3\"/>\n      <text x=\"560\" y=\"90\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#6b7775\">一眼判断</text>\n      <text x=\"560\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial\" font-size=\"18\" font-weight=\"700\" fill=\"#b42318\">CPI=0.8</text>\n      <text x=\"560\" y=\"142\" text-anchor=\"middle\" font-family=\"Arial\" font-size=\"18\" font-weight=\"700\" fill=\"#b42318\">SPI=0.89</text>\n      <text x=\"560\" y=\"170\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#b42318\">超支 + 落后</text>\n      <text x=\"560\" y=\"194\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"10\" fill=\"#6b7775\">EV在分子</text>\n      <text x=\"36\" y=\"256\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"14\" fill=\"#1c2526\" font-weight=\"700\">记忆钩子：EV 是“干出来的预算价值”，不是“花掉的钱”。</text>\n      <text x=\"36\" y=\"280\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#6b7775\">CV=EV-AC；SV=EV-PV；CPI=EV/AC；SPI=EV/PV。大于1/大于0 才是好。</text>\n    </svg>"},{"id":"cpm","title":"关键路径：最长的那条路","caption":"关键路径是网络图里最长的路径，决定最短工期；总时差通常为0。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"关键路径情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">关键路径 · 情景漫画</text>\n      <path d=\"M70 190 H190 V100 H310 V190 H470 V100 H580\" fill=\"none\" stroke=\"#d8cfc0\" stroke-width=\"12\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n      <path d=\"M70 190 H190 V100 H310 V190 H470\" fill=\"none\" stroke=\"#d97706\" stroke-width=\"12\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n      <g font-family=\"Arial,Microsoft YaHei,sans-serif\" text-anchor=\"middle\">\n        <rect x=\"45\" y=\"160\" width=\"52\" height=\"52\" rx=\"12\" fill=\"#0d5c5c\"/><text x=\"71\" y=\"182\" font-size=\"13\" fill=\"#fff\">A</text><text x=\"71\" y=\"200\" font-size=\"11\" fill=\"#f9e8ca\">3天</text>\n        <rect x=\"164\" y=\"74\" width=\"52\" height=\"52\" rx=\"12\" fill=\"#d97706\"/><text x=\"190\" y=\"96\" font-size=\"13\" fill=\"#fff\">C</text><text x=\"190\" y=\"114\" font-size=\"11\" fill=\"#fff\">5天</text>\n        <rect x=\"284\" y=\"160\" width=\"52\" height=\"52\" rx=\"12\" fill=\"#256b8a\"/><text x=\"310\" y=\"182\" font-size=\"13\" fill=\"#fff\">B</text><text x=\"310\" y=\"200\" font-size=\"11\" fill=\"#e8f2ee\">4天</text>\n        <rect x=\"444\" y=\"160\" width=\"52\" height=\"52\" rx=\"12\" fill=\"#0d5c5c\"/><text x=\"470\" y=\"182\" font-size=\"13\" fill=\"#fff\">D</text><text x=\"470\" y=\"200\" font-size=\"11\" fill=\"#f9e8ca\">2天</text>\n        <rect x=\"554\" y=\"74\" width=\"52\" height=\"52\" rx=\"12\" fill=\"#166534\"/><text x=\"580\" y=\"96\" font-size=\"13\" fill=\"#fff\">终</text><text x=\"580\" y=\"114\" font-size=\"11\" fill=\"#e8f2ee\">0</text>\n      </g>\n      <text x=\"70\" y=\"244\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"13\" fill=\"#1c2526\" font-weight=\"700\">A→C→D = 3+5+2 = 10 天（最长）→ 关键路径</text>\n      <text x=\"70\" y=\"268\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#6b7775\">A→B→D = 3+4+2 = 9 天；B 有 1 天总时差，可以“晃”一下。</text>\n      <text x=\"450\" y=\"244\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#b42318\">关键路径可能不止一条</text>\n    </svg>"},{"id":"risk","title":"风险应对：四扇门，别只会“接受”","caption":"规避是绕开，转移是买保险/外包，减轻是降概率或影响，接受是留储备。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"风险应对情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">风险应对 · 情景漫画</text>\n      <circle cx=\"92\" cy=\"160\" r=\"48\" fill=\"#b42318\"/>\n      <circle cx=\"76\" cy=\"148\" r=\"9\" fill=\"#fff\"/><circle cx=\"108\" cy=\"148\" r=\"9\" fill=\"#fff\"/>\n      <circle cx=\"76\" cy=\"148\" r=\"4\" fill=\"#1c2526\"/><circle cx=\"108\" cy=\"148\" r=\"4\" fill=\"#1c2526\"/>\n      <path d=\"M72 180 Q92 194 112 180\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n      <path d=\"M60 118 l-10 -16 M92 108 l0 -20 M124 118 l10 -16\" stroke=\"#b42318\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n      <text x=\"92\" y=\"235\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#b42318\" font-weight=\"700\">风险来了</text>\n      <g font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" text-anchor=\"middle\">\n        <rect x=\"190\" y=\"70\" width=\"94\" height=\"56\" rx=\"12\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/><text x=\"237\" y=\"94\" fill=\"#0d5c5c\" font-weight=\"700\">规避</text><text x=\"237\" y=\"112\" fill=\"#6b7775\">绕开/改计划</text>\n        <rect x=\"300\" y=\"70\" width=\"94\" height=\"56\" rx=\"12\" fill=\"#fff3dd\" stroke=\"#d97706\"/><text x=\"347\" y=\"94\" fill=\"#8a4b06\" font-weight=\"700\">转移</text><text x=\"347\" y=\"112\" fill=\"#6b7775\">保险/外包</text>\n        <rect x=\"410\" y=\"70\" width=\"94\" height=\"56\" rx=\"12\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/><text x=\"457\" y=\"94\" fill=\"#0d5c5c\" font-weight=\"700\">减轻</text><text x=\"457\" y=\"112\" fill=\"#6b7775\">降概率/影响</text>\n        <rect x=\"520\" y=\"70\" width=\"94\" height=\"56\" rx=\"12\" fill=\"#fde8e6\" stroke=\"#b42318\"/><text x=\"567\" y=\"94\" fill=\"#b42318\" font-weight=\"700\">接受</text><text x=\"567\" y=\"112\" fill=\"#6b7775\">留储备</text>\n      </g>\n      <path d=\"M165 170 Q240 220 330 190\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"2\" stroke-dasharray=\"5 5\"/>\n      <path d=\"M330 190 Q430 225 540 185\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"2\" stroke-dasharray=\"5 5\"/>\n      <text x=\"206\" y=\"236\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#1c2526\" font-weight=\"700\">首选顺序不是固定的：看风险性质、可控性、成本。</text>\n      <text x=\"206\" y=\"260\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#b42318\">转移≠消除；接受≠不管，要留应急储备。</text>\n      <text x=\"206\" y=\"282\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#6b7775\">机会：开拓、分享、提高、接受；威胁：规避、转移、减轻、接受（都可上报）。</text>\n    </svg>"},{"id":"raci","title":"RACI：每项工作只有一个 A","caption":"R执行、A负责、C咨询、I知情。A 可以授权做事，但不能把最终责任“分摊”给两个人。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"RACI责任分配情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">RACI · 情景漫画</text>\n      <g font-family=\"Microsoft YaHei,sans-serif\" text-anchor=\"middle\">\n        <g><circle cx=\"105\" cy=\"112\" r=\"26\" fill=\"#f2c9a0\" stroke=\"#1c2526\" stroke-width=\"2\"/><circle cx=\"97\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><circle cx=\"113\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><path d=\"M97 120 Q105 126 113 120\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"2\"/><rect x=\"83\" y=\"142\" width=\"44\" height=\"64\" rx=\"14\" fill=\"#0d5c5c\"/><rect x=\"66\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#256b8a\"/><rect x=\"124\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#256b8a\"/><rect x=\"75\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"113\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"70\" y=\"84\" width=\"70\" height=\"22\" rx=\"11\" fill=\"#d97706\"/><text x=\"105\" y=\"100\" font-size=\"12\" fill=\"#fff\" font-weight=\"700\">A 负责</text><path d=\"M105 74 l-8 -14 h16z\" fill=\"#d97706\"/></g>\n        <g><circle cx=\"245\" cy=\"112\" r=\"26\" fill=\"#f2c9a0\" stroke=\"#1c2526\" stroke-width=\"2\"/><circle cx=\"237\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><circle cx=\"253\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><path d=\"M237 120 Q245 126 253 120\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"2\"/><rect x=\"223\" y=\"142\" width=\"44\" height=\"64\" rx=\"14\" fill=\"#256b8a\"/><rect x=\"206\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#6d28d9\"/><rect x=\"264\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#6d28d9\"/><rect x=\"215\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"253\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"210\" y=\"84\" width=\"70\" height=\"22\" rx=\"11\" fill=\"#256b8a\"/><text x=\"245\" y=\"100\" font-size=\"12\" fill=\"#fff\" font-weight=\"700\">R 执行</text></g>\n        <g><circle cx=\"385\" cy=\"112\" r=\"26\" fill=\"#f2c9a0\" stroke=\"#1c2526\" stroke-width=\"2\"/><circle cx=\"377\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><circle cx=\"393\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><path d=\"M377 120 Q385 126 393 120\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"2\"/><rect x=\"363\" y=\"142\" width=\"44\" height=\"64\" rx=\"14\" fill=\"#6d28d9\"/><rect x=\"346\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#256b8a\"/><rect x=\"404\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#256b8a\"/><rect x=\"355\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"393\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"350\" y=\"84\" width=\"70\" height=\"22\" rx=\"11\" fill=\"#6d28d9\"/><text x=\"385\" y=\"100\" font-size=\"12\" fill=\"#fff\" font-weight=\"700\">C 咨询</text></g>\n        <g><circle cx=\"525\" cy=\"112\" r=\"26\" fill=\"#f2c9a0\" stroke=\"#1c2526\" stroke-width=\"2\"/><circle cx=\"517\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><circle cx=\"533\" cy=\"108\" r=\"2.5\" fill=\"#1c2526\"/><path d=\"M517 120 Q525 126 533 120\" fill=\"none\" stroke=\"#1c2526\" stroke-width=\"2\"/><rect x=\"503\" y=\"142\" width=\"44\" height=\"64\" rx=\"14\" fill=\"#6b7775\"/><rect x=\"486\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#256b8a\"/><rect x=\"544\" y=\"156\" width=\"20\" height=\"40\" rx=\"9\" fill=\"#256b8a\"/><rect x=\"495\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"533\" y=\"206\" width=\"22\" height=\"42\" rx=\"8\" fill=\"#1c2526\"/><rect x=\"490\" y=\"84\" width=\"70\" height=\"22\" rx=\"11\" fill=\"#6b7775\"/><text x=\"525\" y=\"100\" font-size=\"12\" fill=\"#fff\" font-weight=\"700\">I 知情</text></g>\n      </g>\n      <text x=\"26\" y=\"278\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"13\" fill=\"#1c2526\" font-weight=\"700\">一个工作包只能有一个 A；A 可以不是干活最多的人，但必须是最后拍板的人。</text>\n    </svg>"},{"id":"stakeholder","title":"干系人：四种人，四种对待方式","caption":"高权高利重点管理；高权低利令其满意；低权高利随时告知；低权低利监督。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"干系人权力利益方格情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">干系人方格 · 情景漫画</text>\n      <g font-family=\"Microsoft YaHei,sans-serif\">\n        <rect x=\"150\" y=\"60\" width=\"220\" height=\"100\" rx=\"12\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/>\n        <rect x=\"382\" y=\"60\" width=\"220\" height=\"100\" rx=\"12\" fill=\"#fff3dd\" stroke=\"#d97706\"/>\n        <rect x=\"150\" y=\"172\" width=\"220\" height=\"100\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#256b8a\"/>\n        <rect x=\"382\" y=\"172\" width=\"220\" height=\"100\" rx=\"12\" fill=\"#f1f0eb\" stroke=\"#8a918f\"/>\n        <text x=\"260\" y=\"92\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#0d5c5c\">重点管理</text>\n        <text x=\"260\" y=\"114\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6b7775\">高权力 + 高利益</text>\n        <text x=\"260\" y=\"138\" text-anchor=\"middle\" font-size=\"11\" fill=\"#0d5c5c\">定期沟通、深度参与</text>\n        <text x=\"492\" y=\"92\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#8a4b06\">令其满意</text>\n        <text x=\"492\" y=\"114\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6b7775\">高权力 + 低利益</text>\n        <text x=\"492\" y=\"138\" text-anchor=\"middle\" font-size=\"11\" fill=\"#8a4b06\">少打扰、关键时汇报</text>\n        <text x=\"260\" y=\"204\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#256b8a\">随时告知</text>\n        <text x=\"260\" y=\"226\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6b7775\">低权力 + 高利益</text>\n        <text x=\"260\" y=\"250\" text-anchor=\"middle\" font-size=\"11\" fill=\"#256b8a\">及时同步、收集反馈</text>\n        <text x=\"492\" y=\"204\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#6b7775\">监督</text>\n        <text x=\"492\" y=\"226\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6b7775\">低权力 + 低利益</text>\n        <text x=\"492\" y=\"250\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6b7775\">最低成本、定期扫一眼</text>\n        <text x=\"78\" y=\"170\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6b7775\" transform=\"rotate(-90 78 170)\">权力 →</text>\n        <text x=\"360\" y=\"292\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6b7775\">利益 →</text>\n      </g>\n      <text x=\"26\" y=\"292\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"10\" fill=\"#9a8a70\">口诀：高权高利重点管，高权低利哄满意，低权高利勤告知，低权低利常监督。</text>\n    </svg>"},{"id":"quality","title":"质量双检：过程 vs 成果","caption":"管理质量属执行、看过程；控制质量属监控、看成果。确认范围才是干系人正式验收。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"管理质量与控制质量情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">质量双检 · 情景漫画</text>\n      <rect x=\"26\" y=\"58\" width=\"278\" height=\"204\" rx=\"14\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/>\n      <text x=\"165\" y=\"86\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#0d5c5c\">管理质量 · 看过程</text>\n      <text x=\"165\" y=\"106\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#6b7775\">执行过程组</text>\n      <g transform=\"translate(60,130)\">\n        <circle cx=\"30\" cy=\"30\" r=\"20\" fill=\"#0d5c5c\"/><circle cx=\"30\" cy=\"30\" r=\"7\" fill=\"#fff\"/>\n        <circle cx=\"82\" cy=\"30\" r=\"20\" fill=\"#137a6d\"/><circle cx=\"82\" cy=\"30\" r=\"7\" fill=\"#fff\"/>\n        <circle cx=\"134\" cy=\"30\" r=\"20\" fill=\"#0d5c5c\"/><circle cx=\"134\" cy=\"30\" r=\"7\" fill=\"#fff\"/>\n        <path d=\"M50 30 h12 M102 30 h12\" stroke=\"#1c2526\" stroke-width=\"3\"/>\n        <text x=\"82\" y=\"80\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#1c2526\">流程、审计、改进</text>\n      </g>\n      <text x=\"165\" y=\"238\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#0d5c5c\">输出：质量报告、测试与评估文件</text>\n\n      <rect x=\"324\" y=\"58\" width=\"290\" height=\"204\" rx=\"14\" fill=\"#fff3dd\" stroke=\"#d97706\"/>\n      <text x=\"469\" y=\"86\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#8a4b06\">控制质量 · 看成果</text>\n      <text x=\"469\" y=\"106\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#6b7775\">监控过程组</text>\n      <g transform=\"translate(380,128)\">\n        <rect x=\"0\" y=\"20\" width=\"80\" height=\"58\" rx=\"8\" fill=\"#fff\" stroke=\"#1c2526\" stroke-width=\"2\"/>\n        <path d=\"M12 38 h56 M12 52 h38 M12 66 h48\" stroke=\"#8a918f\" stroke-width=\"2\"/>\n        <circle cx=\"112\" cy=\"48\" r=\"26\" fill=\"none\" stroke=\"#b42318\" stroke-width=\"6\"/>\n        <path d=\"M131 67 l24 24\" stroke=\"#b42318\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n        <text x=\"110\" y=\"108\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#b42318\">检查、测试、测量</text>\n      </g>\n      <text x=\"469\" y=\"238\" text-anchor=\"middle\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#8a4b06\">输出：核实的可交付成果</text>\n      <text x=\"26\" y=\"286\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#b42318\" font-weight=\"700\">易混：确认范围 = 干系人正式验收，输出“验收的可交付成果”。</text>\n    </svg>"},{"id":"contract","title":"合同类型：谁更怕风险？","caption":"总价合同卖方风险大；成本补偿合同买方风险大；工料合同双方居中。","svg":"<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"合同类型风险情景漫画\">\n      <rect width=\"640\" height=\"300\" rx=\"18\" fill=\"#fff8e8\"/>\n      <text x=\"26\" y=\"34\" font-family=\"Arial,Microsoft YaHei,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#0d5c5c\">合同类型 · 情景漫画</text>\n      <g font-family=\"Microsoft YaHei,sans-serif\" text-anchor=\"middle\">\n        <rect x=\"36\" y=\"64\" width=\"168\" height=\"164\" rx=\"14\" fill=\"#e8f2ee\" stroke=\"#0d5c5c\"/>\n        <text x=\"120\" y=\"92\" font-size=\"14\" font-weight=\"700\" fill=\"#0d5c5c\">总价合同</text>\n        <text x=\"120\" y=\"114\" font-size=\"11\" fill=\"#6b7775\">FFP / FPIF / FP-EPA</text>\n        <path d=\"M120 132 l58 24 -58 24 -58 -24z\" fill=\"#0d5c5c\"/>\n        <text x=\"120\" y=\"160\" font-size=\"11\" fill=\"#fff\">卖方风险大</text>\n        <text x=\"120\" y=\"204\" font-size=\"10\" fill=\"#6b7775\">范围明确时优先</text>\n\n        <rect x=\"236\" y=\"64\" width=\"168\" height=\"164\" rx=\"14\" fill=\"#fff3dd\" stroke=\"#d97706\"/>\n        <text x=\"320\" y=\"92\" font-size=\"14\" font-weight=\"700\" fill=\"#8a4b06\">成本补偿</text>\n        <text x=\"320\" y=\"114\" font-size=\"11\" fill=\"#6b7775\">CPFF / CPIF / CPAF</text>\n        <circle cx=\"320\" cy=\"156\" r=\"34\" fill=\"#d97706\"/>\n        <text x=\"320\" y=\"161\" font-size=\"11\" fill=\"#fff\">买方风险大</text>\n        <text x=\"320\" y=\"204\" font-size=\"10\" fill=\"#6b7775\">范围不清/研发型</text>\n\n        <rect x=\"436\" y=\"64\" width=\"168\" height=\"164\" rx=\"14\" fill=\"#eef4fb\" stroke=\"#256b8a\"/>\n        <text x=\"520\" y=\"92\" font-size=\"14\" font-weight=\"700\" fill=\"#256b8a\">工料合同</text>\n        <text x=\"520\" y=\"114\" font-size=\"11\" fill=\"#6b7775\">T&M</text>\n        <rect x=\"486\" y=\"132\" width=\"68\" height=\"48\" rx=\"8\" fill=\"#256b8a\"/>\n        <text x=\"520\" y=\"160\" font-size=\"11\" fill=\"#fff\">双方居中</text>\n        <text x=\"520\" y=\"204\" font-size=\"10\" fill=\"#6b7775\">短期/工作量易计量</text>\n      </g>\n      <text x=\"36\" y=\"262\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"12\" fill=\"#1c2526\" font-weight=\"700\">记忆钩子：总价——卖方扛；成本补偿——买方扛；工料——一起扛。</text>\n      <text x=\"36\" y=\"284\" font-family=\"Microsoft YaHei,sans-serif\" font-size=\"11\" fill=\"#b42318\">合同类型选错，后面索赔、变更、验收都会打架。</text>\n    </svg>"}]};
+var KEY="wb_gaoxiang_kaofen_v3";
+var state={checks:{},cards:{},examDate:"",planStart:""};
 function load(){try{var s=localStorage.getItem(KEY);if(s){var o=JSON.parse(s);if(o&&o.checks)state=o;}}catch(e){}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function examDate(){return state.examDate||D.exam.defaultExamDate}
+function planStart(){
+  if(state.planStart)return state.planStart;
+  var e=new Date(examDate()+"T00:00:00");e.setDate(e.getDate()-203);
+  return e.getFullYear()+"-"+String(e.getMonth()+1).padStart(2,"0")+"-"+String(e.getDate()).padStart(2,"0");
+}
 function todayISO(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function dayNum(){var t=new Date(todayISO()+"T00:00:00"),b=new Date("2026-10-26T00:00:00");return Math.max(0,Math.round((t-b)/86400000))}
-function daysLeft(){var t=new Date(todayISO()+"T00:00:00"),e=new Date(D.exam.defaultExamDate+"T00:00:00");return Math.ceil((e-t)/86400000)}
-function weekNum(){return Math.min(30,Math.floor(dayNum()/7)+1)}
+function dayNum(){var t=new Date(todayISO()+"T00:00:00"),b=new Date(planStart()+"T00:00:00");return Math.max(0,Math.round((t-b)/86400000))}
+function daysLeft(){var t=new Date(todayISO()+"T00:00:00"),e=new Date(examDate()+"T00:00:00");return Math.ceil((e-t)/86400000)}
+function weekNum(){return Math.min(30,Math.max(1,Math.floor(dayNum()/7)+1))}
 function weekOf(n){for(var i=0;i<D.weekFocus.length;i++)if(D.weekFocus[i].n===n)return D.weekFocus[i];return D.weekFocus[0]}
 function phaseOf(id){for(var i=0;i<D.phases.length;i++)if(D.phases[i].id===id)return D.phases[i];return D.phases[0]}
-function cardStats(cid){return state.cards[cid]||null}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 var ui={tab:"today",fc:null,fcOpen:false,area:null};
-// ---------- 抽背调度（间隔重复） ----------
 function dueCards(){
   var d=dayNum(),list=[];
   D.cards.forEach(function(c,i){
     var id="c"+i,st=state.cards[id];
     if(!st||st.d===undefined||st.d<=d)list.push({i:i,c:c});
   });
-  list.sort(function(a,b){
-    var sa=state.cards["c"+a.i],sb=state.cards["c"+b.i];
-    var pa=sa?sa.d:0,pb=sb?sb.d:0;
-    return pa-pb;
-  });
+  list.sort(function(a,b){var sa=state.cards["c"+a.i],sb=state.cards["c"+b.i];var pa=sa?sa.d:0,pb=sb?sb.d:0;return pa-pb;});
   return list;
 }
-function nextCard(){
-  var d=dueCards();
-  if(!d.length)return null;
-  var pick=d[dayNum()%Math.min(10,d.length)];
-  return pick;
-}
-// ---------- 渲染层（互不调用） ----------
+function nextCard(){var d=dueCards();if(!d.length)return null;return d[dayNum()%Math.min(10,d.length)]}
+function setRing(pct){var C=289;document.getElementById("ringArc").setAttribute("stroke-dashoffset",String(Math.round(C*(1-pct/100))))}
 function renderHero(){
   document.getElementById("cdday").textContent=daysLeft();
+  var wn=weekNum();
+  document.getElementById("cdmeta").textContent=examDate()+" 机考";
+  document.getElementById("wkpill").textContent="第 "+wn+"/30 周";
   if(/MicroMessenger/i.test(navigator.userAgent)){
     var b=document.getElementById("wxbar");b.style.display="block";
-    b.textContent="微信提示：右上角「···」→浮窗/收藏，随时点开背卡。打卡数据只存在微信浏览器，换设备请导出JSON。";
+    b.textContent="微信提示：右上角「···」→浮窗/收藏，随时点开背卡。";
   }
 }
-function setRing(pct){
-  var C=289;
-  document.getElementById("ringArc").setAttribute("stroke-dashoffset",String(Math.round(C*(1-pct/100))));
-}
 function computeReady(){
-  var totalT=0,doneT=0;
-  D.weekFocus.forEach(function(w,i){
-    var items=[w.focus,w.output];
-    items.forEach(function(t,j){
-      totalT++;
-      if(state.checks["w"+w.n+":0"])doneT++;
-    });
-    return;
-  });
-  // 周任务每行1个勾选项
-  totalT=D.weekFocus.length;
+  var totalT=D.weekFocus.length,doneT=0;
   D.weekFocus.forEach(function(w){if(state.checks["w"+w.n+":0"])doneT++});
   var three=0;
   D.threeThings.forEach(function(t,i){if(state.checks["three:"+todayISO()+":"+i])three++});
@@ -340,36 +398,32 @@ function renderToday(){
   document.getElementById("mThree").textContent=r.three+"/3";
   document.getElementById("stkTask").textContent=r.doneT+"/"+r.totalT;
   document.getElementById("stkCard").textContent=r.mastered+"/"+D.cards.length;
-  var dset={};
-  Object.keys(state.checks).concat(Object.keys(state.cards)).forEach(function(k){dset[k.split(":").slice(-1)[0]]=1});
-  var days=Object.keys(state.checks).map(function(k){return k.split(":")[1]||k}).filter(function(x){return /^\d{4}-/.test(x)});
-  Object.keys(state.cards).forEach(function(k){var st=state.cards[k];if(st&&st.last)days.push(st.last)});
-  var u={};days.forEach(function(x){u[x]=1});days=Object.keys(u).sort();
+  var dset={},days=[];
+  Object.keys(state.checks).forEach(function(k){var p=k.split(":");if(p[0]==="three"&&/^\d{4}-/.test(p[1])){dset[p[1]]=1}});
+  Object.keys(state.cards).forEach(function(k){var st=state.cards[k];if(st&&st.last)dset[st.last]=1});
+  days=Object.keys(dset).sort();
   var streak=0;
   if(days.length){
     var cur=new Date(days[days.length-1]+"T00:00:00"),now=new Date(todayISO()+"T00:00:00");
     if((now-cur)/86400000<=1){
       while(true){
         var iso=cur.getFullYear()+"-"+String(cur.getMonth()+1).padStart(2,"0")+"-"+String(cur.getDate()).padStart(2,"0");
-        if(u[iso]){streak++;cur=new Date(cur.getTime()-86400000);}else break;
+        if(dset[iso]){streak++;cur=new Date(cur.getTime()-86400000);}else break;
       }
     }
   }
   document.getElementById("stkStreak").textContent=streak;
-  // 3件事
   var box=document.getElementById("threeList");box.innerHTML="";
+  var gotos=["score-map","recite","mine-case"];
   D.threeThings.forEach(function(t,i){
     var done=!!state.checks["three:"+todayISO()+":"+i];
     var d=document.createElement("div");d.className="task hot"+(done?" done":"");
-    d.innerHTML='<input type="checkbox" '+(done?"checked":"")+' data-ck="three:'+todayISO()+":"+i+'"><span>'+t+'</span>';
+    d.innerHTML='<input type="checkbox" '+(done?"checked":"")+' data-ck="three:'+todayISO()+":"+i+'"><span class="tt">'+t+'</span><span class="go" data-goto="'+gotos[i]+'">去完成 →</span>';
     box.appendChild(d);
   });
-  // 90分钟
   var d90=document.getElementById("d90");d90.innerHTML="";
   D.day90.forEach(function(x){var e=document.createElement("div");e.innerHTML="<b>"+x[0]+"</b><span>"+x[1]+"</span>";d90.appendChild(e)});
-  // 抽背
   renderFlash();
-  // 本周任务
   var wn=weekNum(),w=weekOf(wn),p=phaseOf(w.phase);
   document.getElementById("wkNowSub").textContent="第"+wn+"周 · "+p.name;
   var box2=document.getElementById("wkNow");box2.innerHTML="";
@@ -377,7 +431,7 @@ function renderToday(){
   items.forEach(function(it,i){
     var done=!!state.checks["w"+wn+":"+i];
     var d=document.createElement("div");d.className="task"+(done?" done":"");
-    d.innerHTML='<input type="checkbox" '+(done?"checked":"")+' data-ck="w'+wn+":"+i+'"><span><b>'+it[0]+'</b>'+it[1]+'</span>';
+    d.innerHTML='<input type="checkbox" '+(done?"checked":"")+' data-ck="w'+wn+":"+i+'"><span class="tt"><b>'+it[0]+'</b>'+it[1]+'</span>';
     box2.appendChild(d);
   });
 }
@@ -399,23 +453,23 @@ function renderScore(){
   var tb=document.getElementById("scoreTable");
   var h='<tr><th>板块</th><th>综合</th><th>案例</th><th>论文</th><th>等级</th></tr>';
   D.scoreRows.forEach(function(r){
-    var lc=r.level.indexOf("S")>=0?"#dc2626":(r.level.indexOf("A")>=0?"#d97706":"#64748b");
+    var lc=r.level.indexOf("S")>=0?"#c94f3d":(r.level.indexOf("A")>=0?"#d9972f":"#8a8f7a");
     h+='<tr'+(r.level.indexOf("S")>=0?' class="srow"':"")+'><td>'+r.part+'<div class="sub" style="font-size:11px">'+r.advice+'</div></td><td>'+r.zh+'</td><td>'+r.case+'</td><td>'+(r.essay||"-")+'</td><td><span class="lvl" style="background:'+lc+'">'+r.level+'</span></td></tr>';
   });
   tb.innerHTML=h;
   var bar=document.getElementById("timeBar");bar.innerHTML="";
-  var max=50;
   D.timeAlloc.forEach(function(t){
     var r=document.createElement("div");r.className="sb-row";
-    r.innerHTML='<div class="nm">'+t.name+'</div><div class="tr"><div class="fl" style="width:'+Math.round(t.pct/max*100)+'%;background:'+t.color+'"></div></div><div class="sc" style="width:44px;font-weight:700;color:var(--muted)">'+t.pct+'%</div>';
+    r.innerHTML='<div class="nm">'+t.name+'</div><div class="tr"><div class="fl" style="width:'+Math.round(t.pct/50*100)+'%;background:'+t.color+'"></div></div><div class="sc">'+t.pct+'%</div>';
     bar.appendChild(r);
   });
   renderMindmap();
   renderAreaDetail();
+  renderComics();
   var fl=document.getElementById("fmlList");fl.innerHTML="";
   D.formulas.forEach(function(f,i){
     var d=document.createElement("div");d.className="fcard";
-    d.innerHTML='<b>['+f.tag+'] '+f.name+'</b><pre>'+esc(f.formula)+'</pre><div class="fn"><div>'+f.note+'</div><div style="margin-top:4px;color:#64748b">'+f.ex+'</div></div>';
+    d.innerHTML='<b>['+f.tag+'] '+f.name+'</b><pre>'+esc(f.formula)+'</pre><div class="fn"><div>'+f.note+'</div><div style="margin-top:4px;color:var(--muted)">'+f.ex+'</div></div>';
     d.setAttribute("data-fml",i);
     fl.appendChild(d);
   });
@@ -423,9 +477,9 @@ function renderScore(){
 function renderMindmap(){
   var ROW=54,GAP=12,PAD=20,total=D.areas.length*(ROW+GAP)-GAP+PAD*2;
   var s='<svg viewBox="0 0 660 '+total+'" width="100%" xmlns="http://www.w3.org/2000/svg" role="img">';
-  s+='<rect width="660" height="'+total+'" rx="12" fill="#f8fafc"/>';
+  s+='<rect width="660" height="'+total+'" rx="12" fill="#faf7ef"/>';
   var ry=total/2,rootY=ry-42;
-  s+='<rect x="14" y="'+rootY+'" width="132" height="84" rx="12" fill="#1e293b"/>';
+  s+='<rect x="14" y="'+rootY+'" width="132" height="84" rx="12" fill="#1e4d40"/>';
   s+='<text x="80" y="'+(rootY+36)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">十大管理</text>';
   s+='<text x="80" y="'+(rootY+60)+'" text-anchor="middle" font-size="11" fill="#fff" fill-opacity=".85">49个过程</text>';
   D.areas.forEach(function(a,i){
@@ -433,26 +487,35 @@ function renderMindmap(){
     s+='<path d="M146 '+ry+' H176 V'+cy+' H206" fill="none" stroke="'+a.color+'" stroke-opacity=".45" stroke-width="1.4"/>';
     s+='<rect x="206" y="'+y+'" width="440" height="'+ROW+'" rx="9" fill="#fff" stroke="'+a.color+'" stroke-width="1.4"/>';
     s+='<rect x="206" y="'+y+'" width="5" height="'+ROW+'" rx="2.5" fill="'+a.color+'"/>';
-    s+='<text x="222" y="'+(y+21)+'" font-size="14" font-weight="700" fill="#1e293b">'+a.no+' '+a.name+' · '+a.count+'个过程</text>';
-    s+='<text x="222" y="'+(y+43)+'" font-size="11" fill="#64748b">'+esc(a.hint)+' — '+esc(a.oneLine)+'</text>';
+    s+='<text x="222" y="'+(y+21)+'" font-size="14" font-weight="700" fill="#1f2933">'+a.no+' '+a.name+' · '+a.count+'个过程</text>';
+    s+='<text x="222" y="'+(y+43)+'" font-size="11" fill="#8a8f7a">'+esc(a.hint)+' — '+esc(a.oneLine)+'</text>';
   });
   s+='</svg>';
   document.getElementById("mindmap").innerHTML=s;
 }
+function renderComics(){
+  var box=document.getElementById("comicList");if(!box)return;box.innerHTML="";
+  D.comics.forEach(function(c,i){
+    var d=document.createElement("div");d.className="fcard";d.style.cursor="pointer";
+    d.innerHTML='<b>'+c.title+'</b><div class="sub">'+esc(c.caption)+'</div><div class="fn" style="padding-top:10px;margin-top:10px">'+c.svg+'</div>';
+    d.setAttribute("data-comic",i);
+    box.appendChild(d);
+  });
+}
 function renderAreaDetail(){
   var box=document.getElementById("areaDetail");
-  if(!ui.area){box.innerHTML='<h2>领域详情</h2><div class="sub">点脑图行或下方列表，展开该领域过程链、必背输出、高频工具与自测问答。</div>';
+  if(!ui.area){box.innerHTML='<h2>领域详情</h2><div class="sub">点脑图行或下方列表，展开过程链、必背输出、高频工具与自测问答。</div>';
     var list=document.createElement("div");
     D.areas.forEach(function(a){
       var d=document.createElement("div");d.className="mrow";
-      d.innerHTML='<div class="mn" style="color:'+a.color+'">'+a.no+' '+a.name+'</div><div class="ms">'+a.count+'个过程 · '+esc(a.hint)+'</div>';
+      d.innerHTML='<div class="mn" style="color:var(--brand)">'+a.no+' '+a.name+'</div><div class="ms">'+a.count+'个过程 · '+esc(a.hint)+'</div>';
       d.setAttribute("data-area",a.id);
       list.appendChild(d);
     });
     box.appendChild(list);return}
   var a=null;D.areas.forEach(function(x){if(x.id===ui.area)a=x});
   if(!a)return;
-  var h='<h2 style="color:'+a.color+'">'+a.no+' '+a.name+' <small>'+a.count+'个过程 · '+esc(a.oneLine)+'</small></h2>';
+  var h='<h2 style="color:var(--brand)">'+a.no+' '+a.name+' <small>'+a.count+'个过程 · '+esc(a.oneLine)+'</small></h2>';
   h+='<div class="chip">口诀：'+esc(a.hint)+'</div>';
   h+='<div style="margin-top:8px;font-size:13px"><b>过程链：</b>'+a.chain.join(" → ")+'</div>';
   h+='<div style="margin-top:8px;font-size:13px"><b>必背输出：</b>'+a.outputs.map(esc).join("；")+'</div>';
@@ -471,7 +534,7 @@ function renderAreaDetail(){
 }
 function renderPlan(){
   var wn=weekNum();
-  document.getElementById("planMeta").textContent="2026-10-26开动 → "+D.exam.defaultExamDate+"开考 · 启动2+基础11+案例4+论文6+模考4+回扣3 = 30周 · 当前第"+wn+"周 · 数据显示论文>案例>综合，时间已按此倒排";
+  document.getElementById("planMeta").textContent=planStart()+" 开动 → "+examDate()+" 开考 · 启动2+基础11+案例4+论文6+模考4+回扣3 = 30周 · 当前第"+wn+"周";
   var box=document.getElementById("planList");box.innerHTML="";
   D.phases.forEach(function(p){
     var wk=D.weekFocus.filter(function(w){return w.phase===p.id});
@@ -500,7 +563,7 @@ function renderPlan(){
   var w8=document.getElementById("week8");w8.innerHTML="";
   D.week8.forEach(function(x){var li=document.createElement("li");li.textContent=x;w8.appendChild(li)});
   var ms=document.getElementById("msList");ms.innerHTML="";
-  var miles=[["2027-03-10","报名窗口（预计3月中旬起分省错峰，无补报名）"],["2027-05-15","准考证打印（考前一周）"],[D.exam.defaultExamDate,"考试日：上午综合+案例连考，下午论文"]];
+  var miles=[["2027-03-10","报名窗口（预计3月中旬起分省错峰，无补报名）"],["2027-05-15","准考证打印（考前一周）"],[examDate(),"考试日：上午综合+案例连考，下午论文"]];
   miles.forEach(function(m){
     var left=Math.ceil((new Date(m[0]+"T00:00:00")-new Date(todayISO()+"T00:00:00"))/86400000);
     var d=document.createElement("div");d.className="ms";
@@ -512,17 +575,17 @@ function renderMine(){
   var info=document.getElementById("examInfo");
   info.innerHTML=
    '<div class="ms"><span class="d">名称</span><span>信息系统项目管理师（软考高级）· '+D.exam.year+'上半年 · 机考</span></div>'+
-   '<div class="ms"><span class="d">时间</span><span>'+D.exam.defaultExamDate+'/23（预计，以官方通知为准）</span></div>'+
+   '<div class="ms"><span class="d">时间</span><span>'+examDate()+'/23（预计，以官方通知为准）</span></div>'+
    D.examSlots.map(function(x){return '<div class="ms"><span class="d">时段</span><span>'+x+'</span></div>'}).join("")+
-   '<div class="ms"><span class="d">规则</span><span>三科各75分、45合格；同一次考试三科全过才取证，单科成绩不保留；综合节余时间可给案例</span></div>'+
-   '<div class="ms"><span class="d">报名</span><span>预计2027年3月中旬起分省错峰，窗口仅10-20天，无补报名</span></div>';
+   '<div class="ms"><span class="d">规则</span><span>三科各75分、45合格；同一次三科全过才取证，单科不保留；综合节余时间可给案例</span></div>'+
+   '<div class="ms"><span class="d">报名</span><span>预计2027年3月中旬起分省错峰，窗口10-20天，无补报名</span></div>';
   var co=document.getElementById("caseOrder");co.innerHTML="";
   D.caseOrder.forEach(function(x){var li=document.createElement("li");li.textContent=x;co.appendChild(li)});
   var fe=document.getElementById("findErr4");fe.innerHTML="";
   D.findErr4.forEach(function(x){var li=document.createElement("li");li.textContent=x;fe.appendChild(li)});
   var cs=document.getElementById("caseScenes");cs.innerHTML="";
   D.caseScenes.forEach(function(x){
-    var d=document.createElement("div");d.className="fcard";d.style.borderLeftColor="#ea580c";
+    var d=document.createElement("div");d.className="fcard";d.style.borderLeftColor="#c94f3d";
     d.innerHTML='<b>'+x.name+'</b><div class="sub">症状：'+esc(x.symptom)+'</div><div class="fn">'+esc(x.keys)+'</div>';
     d.setAttribute("data-fml","-1");
     cs.appendChild(d);
@@ -532,34 +595,27 @@ function renderMine(){
   document.getElementById("essayTime").textContent="时间分配："+D.essayTime;
   var et=document.getElementById("essayThemes");et.innerHTML="";
   D.essayThemes.forEach(function(t){
-    var lc=t.level==="S"?"#dc2626":"#d97706";
+    var lc=t.level==="S"?"#c94f3d":"#d9972f";
     var d=document.createElement("div");d.className="fcard";d.style.borderLeftColor=lc;
     d.innerHTML='<b>'+t.title+'</b> <span class="lvl" style="background:'+lc+'">'+t.level+'</span> <span class="chip">'+t.tag+'</span>'+
       '<div class="sub" style="margin-top:4px">子问题：'+t.subs.map(esc).join(" / ")+'</div>'+
-      '<div class="fn"><div><b>要点：</b>'+esc(t.keys)+'</div><div style="margin-top:4px"><b>量化：</b>'+esc(t.detail)+'</div><div style="margin-top:4px;color:#dc2626"><b>避坑：</b>'+esc(t.pitfall)+'</div></div>';
+      '<div class="fn"><div><b>要点：</b>'+esc(t.keys)+'</div><div style="margin-top:4px"><b>量化：</b>'+esc(t.detail)+'</div><div style="margin-top:4px;color:#c94f3d"><b>避坑：</b>'+esc(t.pitfall)+'</div></div>';
     d.setAttribute("data-fml","-1");
     et.appendChild(d);
   });
   var ht=document.getElementById("hotList");ht.innerHTML="";
   D.hot.forEach(function(x){
-    var d=document.createElement("div");d.className="fcard";d.style.borderLeftColor="#16a34a";
+    var d=document.createElement("div");d.className="fcard";d.style.borderLeftColor="#3a7d5a";
     d.innerHTML='<b>'+x.k+'</b><div class="sub">'+esc(x.v)+'</div>';
     ht.appendChild(d);
   });
-  document.getElementById("essaySignal").textContent="论文真题信号（2025-2026）：";
+  var sig=document.getElementById("essaySignal");sig.innerHTML="<b>论文真题信号（2025-2026）：</b>";
   D.signals.forEach(function(x){
-    var s=document.getElementById("essaySignal");
     var d=document.createElement("div");d.className="sub";d.style.marginTop="4px";d.textContent="· "+x;
-    s.parentNode.insertBefore(d,s.nextSibling);
+    sig.appendChild(d);
   });
 }
-function refreshAll(){
-  renderHero();
-  renderToday();
-  renderScore();
-  renderPlan();
-  renderMine();
-}
+function refreshAll(){renderHero();renderToday();renderScore();renderPlan();renderMine();}
 function switchTab(tab){
   ui.tab=tab;
   var secs=document.querySelectorAll("section.tab");
@@ -568,38 +624,59 @@ function switchTab(tab){
   for(var j=0;j<btns.length;j++)btns[j].classList.toggle("on",btns[j].getAttribute("data-tab")===tab);
   window.scrollTo(0,0);
 }
+function goto(target){
+  if(target==="plan"){switchTab("plan");return}
+  if(target==="recite"){switchTab("today");setTimeout(function(){var el=document.getElementById("card-recite");if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"start"})},60);return}
+  if(target==="score-map"){switchTab("score");setTimeout(function(){var el=document.getElementById("card-mindmap");if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"start"})},60);return}
+  if(target==="mine-case"){switchTab("mine");setTimeout(function(){var el=document.getElementById("card-case");if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"start"})},60);return}
+}
 function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1500)}
 function copyText(txt){
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast("已复制")},function(){fb(txt)})}
   else fb(txt);
 }
 function fb(txt){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("已复制")}catch(e){toast("复制失败")}document.body.removeChild(ta)}
-// ---------- 事件（单向：改数据→refreshAll/render局部） ----------
+function openDateModal(){
+  document.getElementById("dateExam").value=examDate();
+  document.getElementById("dateStart").value=planStart();
+  document.getElementById("modal").classList.add("show");
+}
+function closeDateModal(){document.getElementById("modal").classList.remove("show")}
+function saveDate(){
+  var e=document.getElementById("dateExam").value;
+  var s=document.getElementById("dateStart").value;
+  if(e&&!/^\d{4}-\d{2}-\d{2}$/.test(e)){toast("考试日期格式不对");return}
+  if(s&&!/^\d{4}-\d{2}-\d{2}$/.test(s)){toast("开始日期格式不对");return}
+  if(e)state.examDate=e;else state.examDate="";
+  if(s)state.planStart=s;else state.planStart="";
+  save();closeDateModal();refreshAll();toast("已重排计划");
+}
 document.addEventListener("click",function(ev){
   var t=ev.target;
+  var g=t.closest?t.closest("[data-goto]"):null;
+  if(g){goto(g.getAttribute("data-goto"));return}
+  var ed=t.closest?t.closest("[data-act]"):null;
+  if(ed&&ed.getAttribute("data-act")==="editDate"){openDateModal();return}
   if(t.id==="flashCard"||t.closest&&t.closest("#flashCard")){ui.fcOpen=!ui.fcOpen;renderFlash();return}
   var rb=t.closest?t.closest("[data-rate]"):null;
-  if(rb&&ui.fc){
-    var r=+rb.getAttribute("data-rate");
-    state.cards["c"+ui.fc.i]={d:dayNum()+[0,1,3,7][r],s:r,last:todayISO()};
-    save();ui.fcOpen=false;renderFlash();refreshStatsOnly();toast(r===3?"已掌握":"已安排复习");return
-  }
+  if(rb&&ui.fc){var r=+rb.getAttribute("data-rate");state.cards["c"+ui.fc.i]={d:dayNum()+[0,1,3,7][r],s:r,last:todayISO()};save();ui.fcOpen=false;renderFlash();refreshStatsOnly();toast(r===3?"已掌握":"已安排复习");return}
   var ck=t.closest?t.closest("[data-ck]"):null;
   if(ck){var k=ck.getAttribute("data-ck");if(state.checks[k])delete state.checks[k];else state.checks[k]=1;save();refreshAll();return}
   var fm=t.closest?t.closest("[data-fml]"):null;
   if(fm){fm.classList.toggle("open");return}
+  var cm=t.closest?t.closest("[data-comic]"):null;
+  if(cm){cm.classList.toggle("open");return}
   var qa=t.closest?t.closest("[data-qa]"):null;
   if(qa){qa.classList.toggle("open");return}
   var ar=t.closest?t.closest("[data-area]"):null;
   if(ar){ui.area=ar.getAttribute("data-area");renderAreaDetail();window.scrollTo(0,document.getElementById("areaDetail").offsetTop-60);return}
-  var mm=t.closest?t.closest("[data-mind-area]"):null;
   var tb=t.closest?t.closest("#tabbar button"):null;
   if(tb){switchTab(tb.getAttribute("data-tab"));return}
 });
 function refreshStatsOnly(){
   var r=computeReady();
   document.getElementById("readyPct").textContent=r.pct;
-  document.getElementById("readyBar").style.width=r.pct+"%";
+  setRing(r.pct);
   document.getElementById("stkCard").textContent=r.mastered+"/"+D.cards.length;
 }
 document.addEventListener("change",function(ev){
@@ -609,10 +686,7 @@ document.addEventListener("change",function(ev){
     save();refreshAll();
   }
 });
-document.getElementById("btnExp").addEventListener("click",function(){
-  document.getElementById("ioBox").value=JSON.stringify(state);
-  copyText(JSON.stringify(state));
-});
+document.getElementById("btnExp").addEventListener("click",function(){document.getElementById("ioBox").value=JSON.stringify(state);copyText(JSON.stringify(state));});
 document.getElementById("btnImp").addEventListener("click",function(){
   var v=document.getElementById("ioBox").value.trim();
   if(!v){toast("请先粘贴备份JSON");return}
@@ -621,13 +695,17 @@ document.getElementById("btnImp").addEventListener("click",function(){
 });
 document.getElementById("btnClr").addEventListener("click",function(){
   if(!confirm("确定清空全部打卡与卡片数据？不可恢复，建议先导出备份。"))return;
-  state={checks:{},cards:{}};save();refreshAll();toast("已清空");
+  state={checks:{},cards:{},examDate:"",planStart:""};save();refreshAll();toast("已清空");
 });
+document.getElementById("btnDateSave").addEventListener("click",saveDate);
+document.getElementById("btnDateCancel").addEventListener("click",closeDateModal);
+document.getElementById("btnDateTop").addEventListener("click",openDateModal);
+document.getElementById("modal").addEventListener("click",function(ev){if(ev.target.id==="modal")closeDateModal()});
 document.addEventListener("DOMContentLoaded",function(){
   load();
   var iso=todayISO();
   if(!Object.keys(state.checks).length&&!Object.keys(state.cards).length){
-    if(iso>="2026-10-26"&&iso<="2027-05-22")state.checks["three:"+iso+":0"]=1; // 示例：第1件事已做
+    if(iso>=planStart()&&iso<=examDate())state.checks["three:"+iso+":0"]=1;
   }
   refreshAll();
 });
