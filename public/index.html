@@ -403,6 +403,15 @@ td .tiny{display:block;margin-top:2px}
 .phase-body b{display:block;font-size:13px;line-height:1.35}
 .phase-body span{display:block;font-size:10.5px;color:var(--muted);line-height:1.45;margin-top:1px}
 .phase-body .dates{font-size:9.5px;color:var(--faint);letter-spacing:.2px}
+.phase-score{display:inline-block;margin-top:5px;padding:2px 8px;border-radius:6px;background:#eef4f0;color:#0d5c5c;font-size:10px;font-weight:600;line-height:1.55}
+.alloc-row{margin-top:11px}
+.alloc-row:first-child{margin-top:2px}
+.alloc-top{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;margin-bottom:4px}
+.alloc-top b{color:var(--ink);font-weight:600}
+.alloc-top span{color:var(--muted);font-weight:700;font-family:"DIN Alternate",sans-serif}
+.alloc-bar{height:9px;border-radius:999px;background:#ece6da;overflow:hidden}
+.alloc-bar i{display:block;height:100%;border-radius:999px}
+.alloc-note{font-size:10.5px;color:var(--muted);margin-top:3px;line-height:1.45}
 .week-list{margin-top:12px}
 .week-list > details{background:var(--paper);border:1px solid var(--line);border-radius:13px;margin-bottom:7px;padding:0 12px}
 .week-list > details > summary{cursor:pointer;list-style:none;padding:11px 0;display:flex;align-items:flex-start;gap:9px;position:relative;padding-right:18px}
@@ -837,6 +846,39 @@ td .tiny{display:block;margin-top:2px}
     <!-- ================= 计划 ================= -->
     <section id="page-plan" class="page">
       <div class="section" style="margin-top:14px">
+        <div class="section-head">
+          <div><h2>先看分值，再排计划</h2><p>占分比是计划的依据 · 按 S/A/B 投入，不按教材页数平均用力</p></div>
+        </div>
+        <div class="card">
+          <div class="scorebar">
+            <span class="s1" style="width:49%"></span>
+            <span class="s2" style="width:20%"></span>
+            <span class="s3" style="width:13%"></span>
+            <span class="s4" style="width:6%"></span>
+            <span class="s5" style="width:12%"></span>
+          </div>
+          <div class="legend">
+            <div><i style="background:#0d5c5c"></i><span><b>十大管理 8—17章</b><br />综合 36—38 · 案例 55—65 · S</span></div>
+            <div><i style="background:#d97706"></i><span><b>IT基础 1—5章</b><br />综合 14—17 · A</span></div>
+            <div><i style="background:#3b6d8f"></i><span><b>高级/组织/法规 20—24</b><br />综合 9—10 · A/B</span></div>
+            <div><i style="background:#7a6a9a"></i><span><b>绩效域/变更 18—19</b><br />综合 4—5 · 案例 10—15 · S</span></div>
+            <div><i style="background:#a8a095"></i><span><b>立项 + 英语 + 其他</b><br />综合约 7—12 · B</span></div>
+          </div>
+          <div class="table-wrap" style="margin-top:12px">
+            <table>
+              <thead><tr><th>板块</th><th>综合</th><th>案例</th><th>论文</th><th>等级</th></tr></thead>
+              <tbody id="planScoreTableBody"></tbody>
+            </table>
+          </div>
+          <p class="score-note">复习按 S/A/B 级投入：S 级（十大管理、绩效域）占最多时间，B 级（立项、英语）碎片时间扫一眼即可。下面的 30 周计划，就是按这张分值地图排出来的。</p>
+        </div>
+        <div class="card" style="margin-top:10px">
+          <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;color:var(--brand)"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>复习时间怎么切</div>
+          <div id="planTimeAlloc"></div>
+        </div>
+      </div>
+
+      <div class="section">
         <div class="section-head">
           <div><h2>30 周备考计划</h2><p>按分值分配时间，不按教材页数平均用力</p></div>
           <button class="link" data-modal="dates">改日期</button>
@@ -1526,12 +1568,12 @@ const WEEK_FOCUS = [
 ];
 
 const PHASES = [
-  { id: "p1", name: "启动", weeks: [1, 2], color: "#0d5c5c", desc: "先看清战场：规则、分值、49过程框架、项目卡。", output: "考试地图 / 目标分 / 项目卡" },
-  { id: "p2", name: "基础精学", weeks: [3, 13], color: "#256b8a", desc: "按分值顺序学：十大管理→绩效域→IT基础→高级/法规。", output: "10张导图 / 49过程 / 错题本" },
-  { id: "p3", name: "案例突破", weeks: [14, 17], color: "#d97706", desc: "计算题必须满分，找错/措施形成模板。", output: "20道计算 / 6个案例模板" },
-  { id: "p4", name: "论文成型", weeks: [18, 23], color: "#7a6a9a", desc: "一个真实项目，一鱼多吃，准备8个提纲+4篇全文。", output: "项目卡 / 8提纲 / 4篇全文" },
-  { id: "p5", name: "全真模考", weeks: [24, 27], color: "#b45309", desc: "按考试时间连考，训练体力和时间分配。", output: "3次全真模考 / 错题闭环" },
-  { id: "p6", name: "回扣冲刺", weeks: [28, 30], color: "#166534", desc: "只看错题、公式、49过程、论文骨架，不做新题。", output: "四张清单 / 考场清单" }
+  { id: "p1", name: "启动", weeks: [1, 2], color: "#0d5c5c", desc: "先看清战场：规则、分值、49过程框架、项目卡。", output: "考试地图 / 目标分 / 项目卡", score: "摸底定位 · 无分值侧重" },
+  { id: "p2", name: "基础精学", weeks: [3, 13], color: "#256b8a", desc: "按分值顺序学：十大管理→绩效域→IT基础→高级/法规。", output: "10张导图 / 49过程 / 错题本", score: "十大管理 S·36-38分 + 绩效域 S + IT基础 A·14-17分" },
+  { id: "p3", name: "案例突破", weeks: [14, 17], color: "#d97706", desc: "计算题必须满分，找错/措施形成模板。", output: "20道计算 / 6个案例模板", score: "案例计算 约25分 · 找错措施模板" },
+  { id: "p4", name: "论文成型", weeks: [18, 23], color: "#7a6a9a", desc: "一个真实项目，一鱼多吃，准备8个提纲+4篇全文。", output: "项目卡 / 8提纲 / 4篇全文", score: "论文 75分 · 8提纲4全文" },
+  { id: "p5", name: "全真模考", weeks: [24, 27], color: "#b45309", desc: "按考试时间连考，训练体力和时间分配。", output: "3次全真模考 / 错题闭环", score: "三科全真 · 时间分配" },
+  { id: "p6", name: "回扣冲刺", weeks: [28, 30], color: "#166534", desc: "只看错题、公式、49过程、论文骨架，不做新题。", output: "四张清单 / 考场清单", score: "错题/公式/49过程 · 保分" }
 ];
 
 /* ============================================================
@@ -2269,9 +2311,7 @@ function renderTodayTask(w) {
 }
 
 function renderScoreTable() {
-  const body = document.getElementById("scoreTableBody");
-  if (!body) return;
-  body.innerHTML = SCORE_ROWS.map(r => `
+  const rows = SCORE_ROWS.map(r => `
     <tr>
       <td><b>${esc(r.part)}</b><span class="tiny">${esc(r.advice)}</span></td>
       <td>${esc(r.zh)}</td>
@@ -2280,6 +2320,10 @@ function renderScoreTable() {
       <td><span class="pill ${r.level === "S" ? "pill-s" : r.level === "A" ? "pill-a" : "pill-b"}">${r.level}</span></td>
     </tr>
   `).join("");
+  const b1 = document.getElementById("scoreTableBody");
+  if (b1) b1.innerHTML = rows;
+  const b2 = document.getElementById("planScoreTableBody");
+  if (b2) b2.innerHTML = rows;
 }
 
 function renderFormulaStrip() {
@@ -2550,6 +2594,7 @@ function renderPlan() {
             <b>${esc(p.name)} <span class="tiny">W${p.weeks[0]}—W${p.weeks[1]}</span></b>
             <span class="dates">${fmtRange(r.start, r.end)} · ${esc(p.desc)}</span>
             <span>产出：${esc(p.output)}</span>
+            <span class="phase-score">分值侧重：${esc(p.score)}</span>
           </div>
         </div>
       `;
@@ -2615,6 +2660,17 @@ function renderPlan() {
         </details>
       `;
     }).join("");
+  }
+
+  const ta = document.getElementById("planTimeAlloc");
+  if (ta) {
+    ta.innerHTML = TIME_ALLOC.map(t => `
+      <div class="alloc-row">
+        <div class="alloc-top"><b>${esc(t.name)}</b><span>${t.pct}%</span></div>
+        <div class="alloc-bar"><i style="width:${t.pct}%;background:${t.color}"></i></div>
+        <div class="alloc-note">${esc(t.note)}</div>
+      </div>
+    `).join("");
   }
 }
 
