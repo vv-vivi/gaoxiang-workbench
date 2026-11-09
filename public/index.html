@@ -255,6 +255,22 @@ img{max-width:100%}
 .today-check:checked::after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
 .mini-progress{height:6px;border-radius:999px;background:#eee6d8;overflow:hidden;margin-top:10px}
 .mini-progress i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .4s ease}
+/* ---- 今日记忆点 ---- */
+.tp-box{margin-top:12px;padding:10px 12px;border:1.5px dashed var(--line-strong);border-radius:14px;background:#fbf7ec}
+.tp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.tp-head b{font-size:13px;color:#0d5c5c}
+.point-row{display:flex;align-items:flex-start;gap:8px;padding:7px 2px;border-bottom:1px dashed var(--line)}
+.point-row:last-of-type{border-bottom:none}
+.point-row.hot{background:linear-gradient(90deg,#e8f2ee,transparent);border-radius:8px;padding-left:6px}
+.point-txt{flex:1;font-size:13px;line-height:1.55;color:#1c2526}
+.point-acts{display:flex;gap:5px;flex:none;padding-top:1px}
+.point-btn{border:1px solid #0d5c5c;color:#0d5c5c;background:#fff;border-radius:999px;font-size:11px;padding:3px 10px;cursor:pointer;line-height:1.3}
+.point-btn.map{border-color:#256b8a;color:#256b8a}
+.point-btn:active{transform:scale(.94)}
+.ts-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.ts-label{font-size:13px;font-weight:700;color:#0d5c5c;margin:6px 0 2px}
+.ts-divider{font-size:11px;color:#8a918f;margin:12px 0 2px;padding-top:8px;border-top:1px solid var(--line)}
+#todayStudyCard .pill{font-size:11px;padding:3px 10px;border-radius:999px}
 
 /* ============ 环形进度 ============ */
 .ring-wrap{display:flex;align-items:center;gap:14px}
@@ -854,6 +870,14 @@ td .tiny{display:block;margin-top:2px}
     <!-- ================= 计划 ================= -->
     <section id="page-plan" class="page">
       <div class="section" style="margin-top:14px">
+        <div class="section-head">
+          <div><h2>今日学什么</h2><p>按当日计划给出的记忆点 · 点「去背」直达对应卡片，「导图」直达章节</p></div>
+        </div>
+        <div class="card" id="todayStudyCard">
+          <div id="todayStudyBox"></div>
+        </div>
+      </div>
+      <div class="section">
         <div class="section-head">
           <div><h2>先看分值，再排计划</h2><p>占分比是计划的依据 · 按 S/A/B 投入，不按教材页数平均用力</p></div>
         </div>
@@ -1573,6 +1597,228 @@ const WEEK_FOCUS = [
   { n: 28, phase: "p6", focus: "错题/公式/49过程/论文骨架 四扫", output: "四张清单" },
   { n: 29, phase: "p6", focus: "轻量回顾 + 考场清单 + 作息", output: "考场清单 + 作息表" },
   { n: 30, phase: "p6", focus: "考前周：只看错题/公式/项目卡", output: "不碰新题，保持手感" }
+];
+
+/* ============ 30 周每日记忆点池（今日记忆点数据源）============ */
+/* 每条：t=记忆点内容；tag=背诵卡分类（点击「去背」直达）；map=导图页章节id（点击「导图」直达） */
+const WEEK_POINTS = [
+  { n: 1, points: [
+    { t: "三科及格线都是 45 分（满分 75）；论文 2 小时写完 2000+ 字", tag: "考场" },
+    { t: "上午综合 75 道选择；下午Ⅰ案例 3 大题、Ⅱ论文 1 篇", tag: "考场" },
+    { t: "先做 1 套真题摸底，按分数找薄弱板块，别急着啃书", tag: "考场" },
+    { t: "背 10 大领域名 + 各章过程数 7·6·6·4·3·6·3·7·3·4", map: "integration" },
+    { t: "建项目卡：选真实项目，填背景/规模/角色/成果四要素", tag: "论文" },
+    { t: "目标分写下来：综合 50 / 案例 50 / 论文 48，留余量", tag: "考场" }
+  ]},
+  { n: 2, points: [
+    { t: "领域口诀「整范进成质，资沟风采干」+ 各章过程数", map: "integration" },
+    { t: "过程组分布：启动 2 · 规划 24 · 执行 10 · 监控 12 · 收尾 1", map: "integration" },
+    { t: "规划过程组 24 个：计划是十大管理的公共骨架", map: "integration" },
+    { t: "监控过程组 12 个：几乎每个领域都有「控制XX」过程", map: "integration" },
+    { t: "项目卡四要素背熟：背景、规模、角色、成果", tag: "论文" },
+    { t: "默写 49 过程拍照存档，之后每周对照补漏", map: "integration" }
+  ]},
+  { n: 3, points: [
+    { t: "项目章程由发起人签发：授权 PM 动用组织资源", map: "integration" },
+    { t: "变更七步：申请→记录→评估→CCB→实施→验证→归档", map: "integration" },
+    { t: "数据→信息→报告：原始记录→对比分析→汇总沟通", map: "integration" },
+    { t: "WBS 100% 原则：不重不漏，最底层是工作包", map: "scope" },
+    { t: "确认范围=客户验收成果 vs 控制质量=内部查正确性", map: "scope" },
+    { t: "镀金=自己加戏；范围蔓延=被加戏失控，都要防", map: "scope" },
+    { t: "结束项目/阶段：验收·移交·存档·释放资源·资产更新", map: "integration" }
+  ]},
+  { n: 4, points: [
+    { t: "关键路径=最长路径决定最短工期，总时差通常为 0", map: "schedule" },
+    { t: "三点估算 PERT：(乐观 + 4×最可能 + 悲观) / 6", tag: "公式" },
+    { t: "赶工=加钱换时间；快速跟进=并行换风险", map: "schedule" },
+    { t: "EV 永远站分子：CPI=EV/AC，SPI=EV/PV", tag: "公式" },
+    { t: "成本基准=工作包估算+应急储备；项目预算再加管理储备", map: "cost" },
+    { t: "应急储备 PM 可动（已知风险）；管理储备要管理层批（未知风险）", map: "cost" }
+  ]},
+  { n: 5, points: [
+    { t: "管理质量管过程（审计）vs 控制质量查成果（检查）", map: "quality" },
+    { t: "质量成本：预防成本花得最值，越早发现越便宜", map: "quality" },
+    { t: "RACI：每项工作只能有一个 A（最终负责）", map: "resource" },
+    { t: "塔克曼五阶段：形成→震荡→规范→成熟→解散", map: "resource" },
+    { t: "冲突五法：合作/解决问题是首选，撤退≠解决", map: "resource" },
+    { t: "资源平衡可动工期 vs 资源平滑不动关键路径", map: "resource" }
+  ]},
+  { n: 6, points: [
+    { t: "沟通渠道数 = n(n-1)/2：人越多越乱，PM 要控小组规模", tag: "公式" },
+    { t: "沟通方法：交互式（会议）· 推式（邮件）· 拉式（知识库）", map: "communication" },
+    { t: "权力/利益方格：高权高利重点管理，高权低利令其满意", map: "stakeholder" },
+    { t: "干系人参与度五级：不了解→抵制→中立→支持→领导", map: "stakeholder" },
+    { t: "5C 沟通原则：正确·简洁·清晰·连贯·控制", map: "communication" },
+    { t: "干系人登记册 = 身份 + 评估 + 分类三本账", map: "stakeholder" }
+  ]},
+  { n: 7, points: [
+    { t: "威胁四应对：规避·转移·减轻·接受；机会：开拓·分享·提高·接受", map: "risk" },
+    { t: "EMV = Σ(概率×损益)，决策树选期望值大的分支", tag: "公式" },
+    { t: "转移≠消除：买保险/外包只是把风险挪给别人", map: "risk" },
+    { t: "总价合同买方险小；成本补偿合同卖方险小", map: "procurement" },
+    { t: "自制 vs 外购：看成本·能力·保密·战略四方面", map: "procurement" },
+    { t: "风险登记册：描述·类别·概率影响·应对措施·责任人", map: "risk" }
+  ]},
+  { n: 8, points: [
+    { t: "闭卷默写 49 过程，按「章-计-导-知-控-变-终」自检整合", map: "integration" },
+    { t: "每个领域记三样：关键过程、关键输出、一个计算", map: "integration" },
+    { t: "错题按「概念/计算/审题」三类归因", tag: "考场" },
+    { t: "铁三角基准：范围→进度→成本，三者联动", map: "scope" },
+    { t: "变更、风险、质量三条流程线最爱考流程排序", map: "integration" },
+    { t: "本轮真题只求找漏，不求分数", tag: "考场" }
+  ]},
+  { n: 9, points: [
+    { t: "八大绩效域：干系人·团队·开发方法·规划·项目工作·交付·度量·不确定性", map: "integration" },
+    { t: "绩效域写论文：预期成果 + 域间协同 + 度量指标", tag: "论文" },
+    { t: "变更管基线变化；配置管交付项的版本与一致性", map: "integration" },
+    { t: "交付绩效域三件事：范围·质量·价值", tag: "论文" },
+    { t: "度量绩效域：挣值仪表盘 + 预测型/敏捷的不同度量", map: "integration" },
+    { t: "不确定性绩效域：风险·复杂性·模糊性·易变性", map: "risk" }
+  ]},
+  { n: 10, points: [
+    { t: "信息化六要素：信息资源·网络·技术·人才·法规标准·应用", tag: "IT" },
+    { t: "大数据 5V：Volume 大量·Velocity 高速·Variety 多样·Value 价值·Veracity 真实", tag: "IT" },
+    { t: "云计算三层：IaaS 基础设施·PaaS 平台·SaaS 软件", tag: "IT" },
+    { t: "信息系统生命周期：立项→开发→运维→消亡", tag: "IT" },
+    { t: "两化融合：信息化与工业化深度融合是主线", tag: "IT" },
+    { t: "高频概念一天 10 条，碎片时间过卡片", tag: "IT" }
+  ]},
+  { n: 11, points: [
+    { t: "信息系统管理四层：规划·组织·实施·运维", tag: "IT" },
+    { t: "霍尔三维：时间维·逻辑维·知识维", tag: "IT" },
+    { t: "ITSS 四要素：People 人员·Process 过程·Technology 技术·Resource 资源", tag: "IT" },
+    { t: "信息安全 CIA 三要素：机密性·完整性·可用性", tag: "IT" },
+    { t: "OSI 七层 / TCP-IP 四层，按层记协议", tag: "IT" },
+    { t: "网络存储：DAS→NAS→SAN 的差别", tag: "IT" }
+  ]},
+  { n: 12, points: [
+    { t: "CMMI 五级：初始→已管理→已定义→量化管理→优化", tag: "IT" },
+    { t: "项目集管协同收益；项目组合管择优投资对齐战略", tag: "IT" },
+    { t: "招投标：自招标文件发出至提交截止 ≥ 20 日", tag: "IT" },
+    { t: "政府采购主要方式：公开招标", tag: "IT" },
+    { t: "著作权：职务作品著作权一般归作者，单位有优先使用权", tag: "IT" },
+    { t: "标准分级：国标 GB·行标·地标·团标·企标", tag: "IT" }
+  ]},
+  { n: 13, points: [
+    { t: "错题本第一轮：每题写「为什么错 + 正确逻辑」", tag: "考场" },
+    { t: "项目英语高频：PV/EV/AC/BAC/CPI/SPI 英文全称", tag: "公式" },
+    { t: "综合 150 分钟 75 题，单题不超 2 分钟，先过再回", tag: "考场" },
+    { t: "英语题 5 分：背 20 个高频术语英文就够", tag: "公式" },
+    { t: "错题闭环：重做→对了才划掉，不是看了就划掉", tag: "考场" }
+  ]},
+  { n: 14, points: [
+    { t: "案例计算答题模板：写公式→代入→结果→结论判断", tag: "公式" },
+    { t: "EAC = AC + (BAC − EV)/CPI（典型偏差继续）", tag: "公式" },
+    { t: "ETC = EAC − AC；TCPI = (BAC−EV)/(BAC−AC)", tag: "公式" },
+    { t: "自由时差 = 紧后最早开始最小值 − 本工作最早结束", tag: "公式" },
+    { t: "总时差 = 最迟开始 − 最早开始；关键路径总时差为 0", tag: "公式" },
+    { t: "计算题步骤分：公式写对就有分，别空着", tag: "公式" }
+  ]},
+  { n: 15, points: [
+    { t: "PERT 标准差 σ=(P−O)/6；±1σ 约 68%，±2σ 约 95%", tag: "公式" },
+    { t: "决策树：方块=决策节点，圆圈=机会节点，选 EMV 最大", tag: "公式" },
+    { t: "EMV 记得扣初始投资（净 EMV），题干埋了坑", tag: "公式" },
+    { t: "决策树要画全分支再算，漏分支=漏分", tag: "公式" },
+    { t: "错因清单：单位换算 / 用错公式 / 忘扣投资", tag: "公式" }
+  ]},
+  { n: 16, points: [
+    { t: "找错题模板：指出违背的过程→抄题干证据→写正确做法", tag: "论文" },
+    { t: "措施题按「计划-执行-检查-改进」四步各写 1-2 条", tag: "论文" },
+    { t: "六大场景：变更失控·需求蔓延·进度延误·质量事故·团队冲突·干系人不满", tag: "论文" },
+    { t: "先定位「违背了哪个过程」再写措施，顺序不能反", tag: "论文" },
+    { t: "答案按点给分：每点一行，序号清楚", tag: "论文" }
+  ]},
+  { n: 17, points: [
+    { t: "案例 90 分钟 3 大题：先易后难，计算题最后验算", tag: "考场" },
+    { t: "每问答到点即停，按点给分，不贪多不空题", tag: "考场" },
+    { t: "时间分配：每大题 30 分钟，超时先跳", tag: "考场" },
+    { t: "整卷后复盘：哪类题慢了、哪类题漏点了", tag: "考场" }
+  ]},
+  { n: 18, points: [
+    { t: "项目卡定稿：一个数字能报、一个难点能讲、一个成果能晒", tag: "论文" },
+    { t: "质量论文提纲：规划质量→管理质量→控制质量各 3 点", map: "quality" },
+    { t: "风险论文提纲：识别→定性→定量→应对→监控", map: "risk" },
+    { t: "项目背景 400 字：规模/工期/投资/角色/成果", tag: "论文" },
+    { t: "提纲只写关键词句，考场上再扩成段落", tag: "论文" }
+  ]},
+  { n: 19, points: [
+    { t: "范围提纲：收集需求→定义范围→WBS→确认范围→控制范围", map: "scope" },
+    { t: "进度提纲：排序→估算工期→制定计划→控制，嵌 CPM 案例", map: "schedule" },
+    { t: "成本提纲：估算→预算→控制，嵌 EVM 案例数字", map: "cost" },
+    { t: "每个提纲 3 个子问题各 3 点，一页纸搞定", tag: "论文" },
+    { t: "提纲之间可复用背景段，一鱼多吃", tag: "论文" }
+  ]},
+  { n: 20, points: [
+    { t: "干系人提纲：识别→分析排序→参与计划→管理参与度", map: "stakeholder" },
+    { t: "交付绩效域提纲：范围 + 质量 + 价值三条线", tag: "论文" },
+    { t: "写「我做了什么」比写「书上说什么」得分高", tag: "论文" },
+    { t: "干系人案例：反对者转化为支持者的具体动作", map: "stakeholder" }
+  ]},
+  { n: 21, points: [
+    { t: "不确定性提纲：风险 + 复杂性 + 模糊性三个源头", tag: "论文" },
+    { t: "AI 素材 3 句：智能需求分析·AI 辅助估算·智能客服机器人", tag: "论文" },
+    { t: "数据素材：数据资产入表·数据治理·数据驱动决策", tag: "论文" },
+    { t: "安全素材：等保 2.0 三级·零信任·安全左移", tag: "论文" },
+    { t: "热点素材要能「套进任何过程」，别写成科普", tag: "论文" }
+  ]},
+  { n: 22, points: [
+    { t: "论文七段式：摘要 320 字→背景→过渡→主体 2-3 过程→不足→总结", tag: "论文" },
+    { t: "主体占 60% 篇幅：每个过程「理论 + 我项目实例 + 数字」", tag: "论文" },
+    { t: "不足段写具体事 + 改进，别写「沟通不够」这种废话", tag: "论文" },
+    { t: "摘要 = 背景 1 句 + 做法 3 句 + 成果 2 句，独立成段", tag: "论文" },
+    { t: "自评四维：切题·实践·结构·字数", tag: "论文" }
+  ]},
+  { n: 23, points: [
+    { t: "限时 120 分钟写完：前 10 分钟列骨架，最后 10 分钟收尾", tag: "论文" },
+    { t: "字数 2200-2500：字不够主体凑，字超了不足段收", tag: "论文" },
+    { t: "卷面分真实存在：段落清晰、序号工整", tag: "论文" },
+    { t: "案例保温：每天 1 题找错或计算", tag: "论文" }
+  ]},
+  { n: 24, points: [
+    { t: "错题三轮：第一轮全做·第二轮只做错·第三轮全对", tag: "考场" },
+    { t: "整卷计时：75 题 150 分钟含涂卡", tag: "考场" },
+    { t: "错题按板块统计，找出失分最多的 2 个板块", tag: "考场" },
+    { t: "概念题回导图，计算题回公式卡", map: "integration" }
+  ]},
+  { n: 25, points: [
+    { t: "模考三科同日：练「上午综合 + 下午案例论文」的体能", tag: "考场" },
+    { t: "失分归类：概念不清 / 计算失误 / 审题偏差 / 时间不够", tag: "考场" },
+    { t: "模考后只补「性价比最高」的失分点", tag: "考场" },
+    { t: "下午论文前吃点东西，血糖稳定手不抖", tag: "考场" }
+  ]},
+  { n: 26, points: [
+    { t: "弱项专项：每个弱板块 20 题连刷 + 回导图补概念", map: "integration" },
+    { t: "计算弱：EVM/CPM/PERT 各 5 题限时", tag: "公式" },
+    { t: "案例弱：每天 1 题找错 + 1 题措施", tag: "论文" },
+    { t: "概念弱：错题回对应导图，用口诀串起来", map: "integration" }
+  ]},
+  { n: 27, points: [
+    { t: "论文骨架默写：3 个高频主题各默一遍提纲", tag: "论文" },
+    { t: "高频主题：质量·风险·干系人·交付绩效域·AI数据安全", tag: "论文" },
+    { t: "骨架默写到「闭卷能写出 3×3 要点」为止", tag: "论文" },
+    { t: "模考 3 收尾：分数趋势只看是否稳定过线", tag: "考场" }
+  ]},
+  { n: 28, points: [
+    { t: "四张清单：错题·公式·49 过程·论文骨架，各一页纸", tag: "公式" },
+    { t: "公式闭卷默写：EV/CPI/SPI/EAC/PERT/EMV/渠道数", tag: "公式" },
+    { t: "49 过程按领域默写，缺哪个补哪个", map: "integration" },
+    { t: "错题清单只留「还会错的」，已经会的划掉", tag: "考场" },
+    { t: "论文骨架清单：每主题一行关键词", tag: "论文" }
+  ]},
+  { n: 29, points: [
+    { t: "考场清单：身份证·准考证·手表·2B 笔·黑色签字笔", tag: "考场" },
+    { t: "作息对表：按考试时间安排每天用脑高峰", tag: "考场" },
+    { t: "案例时间分配：3 大题 90 分钟，每题 30 分钟", tag: "考场" },
+    { t: "综合策略：先过一遍，标记难题最后攻", tag: "考场" },
+    { t: "轻量回顾：翻四张清单，不做新题", tag: "考场" }
+  ]},
+  { n: 30, points: [
+    { t: "只看错题 + 公式 + 项目卡，不碰新题", tag: "考场" },
+    { t: "项目卡再读一遍：数字、难点、成果张口就来", tag: "论文" },
+    { t: "早上过一个公式，晚上过一个骨架，保持手感", tag: "公式" },
+    { t: "考前一晚：清单过一遍，11 点前睡", tag: "考场" },
+    { t: "你已经走完 30 周，按节奏答题就是胜利", tag: "考场" }
+  ]}
 ];
 
 const PHASES = [
@@ -2789,6 +3035,86 @@ function renderHome() {
   renderFormulaStrip();
 }
 
+/* ---------------- 今日记忆点 ---------------- */
+function pointsForWeek(w) {
+  const wp = WEEK_POINTS.find(x => x.n === w);
+  return (wp && wp.points) || [];
+}
+
+function todayPoints(w) {
+  const pool = pointsForWeek(w);
+  if (!pool.length) return [];
+  const dayIndex = (today().getDay() + 6) % 7; // 周一=0
+  const out = [];
+  for (let i = 0; i < 3; i++) out.push(pool[(dayIndex * 3 + i) % pool.length]);
+  return out;
+}
+
+/* 导图章节 → 背诵卡分类映射：带导图锚点的记忆点自动获得「去背」入口 */
+const AREA_TAG = {
+  integration: "整合", scope: "范围", schedule: "进度", cost: "成本",
+  quality: "质量", resource: "资源", communication: "沟通", risk: "风险",
+  procurement: "采购", stakeholder: "干系人"
+};
+
+function pointRow(p, opts) {
+  const highlight = opts && opts.highlight;
+  const reciteTag = p.tag || AREA_TAG[p.map];
+  return `
+    <div class="point-row${highlight ? " hot" : ""}">
+      <span class="point-txt">${esc(p.t)}</span>
+      <span class="point-acts">
+        ${reciteTag ? `<button class="point-btn" data-recite="${esc(reciteTag)}">去背</button>` : ""}
+        ${p.map ? `<button class="point-btn map" data-mapjump="${esc(p.map)}">导图</button>` : ""}
+        ${!reciteTag && !p.map ? `<span class="point-only"></span>` : ""}
+      </span>
+    </div>`;
+}
+
+function renderTodayStudy() {
+  const box = document.getElementById("todayStudyBox");
+  if (!box) return;
+  const w = currentWeek();
+  if (w === 0) {
+    box.innerHTML = `<p class="tiny" style="margin:4px 2px;color:#8a918f">开营前（第 1 周开始后，这里每天给出 3 个当日记忆点）。</p>`;
+    return;
+  }
+  const week = WEEK_FOCUS[Math.min(29, w - 1)];
+  const pool = pointsForWeek(w);
+  const dayIndex = (today().getDay() + 6) % 7;
+  const todays = todayPoints(w);
+  const phase = phaseOfWeek(w);
+  box.innerHTML = `
+    <div class="ts-head">
+      <span class="pill" style="background:${phase.color};color:#fff">第 ${w} 周 · ${esc(phase.name)}</span>
+      <span class="tiny" style="color:#7d6848">周${weekdayCN(today())} · ${esc(week.focus)}</span>
+    </div>
+    <p class="ts-label">今天要记住的 3 个点</p>
+    ${todays.map(p => pointRow(p, { highlight: true })).join("")}
+    <div class="ts-divider">本周记忆点全清单（每天换 3 个，轮流过完）</div>
+    ${pool.map((p, i) => pointRow(p, { highlight: todays.includes(p) })).join("")}
+    <div class="tiny" style="margin-top:8px;color:#8a918f">本周产出：${esc(week.output)} · 距考试 ${Math.max(0, dayDiff(today(), parseDate(state.examDate)))} 天</div>
+  `;
+}
+
+function goReciteTag(tag) {
+  state.cardFilter = tag;
+  saveState();
+  showPage("cards");
+  renderCards(true);
+  showToast(`已切换到「${tag}」卡片`);
+}
+
+function goMapArea(areaId) {
+  showPage("map");
+  const card = document.querySelector(`.area-card[data-area="${areaId}"]`);
+  if (card) {
+    document.querySelectorAll(".area-card.open").forEach(x => { if (x !== card) x.classList.remove("open"); });
+    card.classList.add("open");
+    try { card.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) {}
+  }
+}
+
 function renderTodayTask(w) {
   const box = document.getElementById("todayTaskBox");
   if (!box) return;
@@ -2840,6 +3166,15 @@ function renderTodayTask(w) {
     `).join("")}
     <div class="mini-progress"><i style="width:${Math.min(100, Math.round((items.filter(x => state.tasks[x.id]).length / items.length) * 100))}%"></i></div>
     <div class="tiny" style="margin-top:5px">今日 3 件完成 ${items.filter(x => state.tasks[x.id]).length}/${items.length} · 总任务 ${taskStats().done}/${taskStats().total} · 不必追求完美，先保持每天打开</div>
+    ${(w >= 1 && w <= 30) ? (() => {
+      const pts = todayPoints(w);
+      if (!pts.length) return "";
+      return `
+        <div class="tp-box">
+          <div class="tp-head"><b>今日记忆点 ×3</b><button class="link" data-page="plan">本周全部 →</button></div>
+          ${pts.map(p => pointRow(p, { highlight: true })).join("")}
+        </div>`;
+    })() : ""}
   `;
 }
 
@@ -2882,7 +3217,7 @@ function renderMap() {
   const areaBox = document.getElementById("areaList");
   if (areaBox) {
     areaBox.innerHTML = AREAS.map((a, idx) => `
-      <article class="card area-card ${idx === 0 ? "open" : ""}">
+      <article class="card area-card ${idx === 0 ? "open" : ""}" data-area="${a.id}">
         <button class="area-head" data-area-toggle type="button" aria-expanded="${idx === 0 ? "true" : "false"}">
           <span class="area-no" style="background:${a.color}">${a.no}</span>
           <span class="area-title">
@@ -3528,7 +3863,7 @@ function showPage(id, push = true) {
   if (id === "home") renderHome();
   if (id === "map") renderMap();
   if (id === "cards") renderCards();
-  if (id === "plan") renderPlan();
+  if (id === "plan") { renderPlan(); renderTodayStudy(); }
   if (id === "case") renderCase();
   if (id === "essay") renderEssay();
   state.activeTab = id;
@@ -3557,6 +3892,12 @@ document.addEventListener("click", (e) => {
     renderCards(true);
     return;
   }
+
+  const recite = e.target.closest("[data-recite]");
+  if (recite) { goReciteTag(recite.dataset.recite); return; }
+
+  const mapJump = e.target.closest("[data-mapjump]");
+  if (mapJump) { goMapArea(mapJump.dataset.mapjump); return; }
 
   if (e.target.closest("#maskBtn")) { toggleMask(); return; }
   if (e.target.closest("#listBtn")) {
@@ -3678,6 +4019,7 @@ function renderAll() {
   renderMap();
   renderCards();
   renderPlan();
+  renderTodayStudy();
   renderCase();
   renderEssay();
   renderActivity();
