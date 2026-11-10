@@ -1821,6 +1821,243 @@ const WEEK_POINTS = [
   ]}
 ];
 
+/* ============ 每周记忆点扩充池（与 WEEK_POINTS 按周合并，每天出 6 条）============ */
+const WEEK_POINTS_EXTRA = {
+  1: [
+    { t: "考试为机考：综合客观题，案例与论文也是上机作答", tag: "考场" },
+    { t: "工作台核心资产：10 张章节导图 + 130 张卡 + 30 周计划，信工具不硬啃书", tag: "考场" },
+    { t: "五大过程组：启动 · 规划 · 执行 · 监控 · 收尾", map: "integration" },
+    { t: "项目 vs 运营：项目临时且独特，运营持续且重复", map: "integration" },
+    { t: "项目经理的角色：整合各领域、向上向下横向沟通", map: "integration" }
+  ],
+  2: [
+    { t: "十大知识领域 → 49 个过程：一天记 1-2 个过程链，两周记完", map: "integration" },
+    { t: "敏捷宣言：个体和互动高于流程和工具", tag: "IT" },
+    { t: "生命周期三型：预测型 · 迭代型 · 增量型（混合型是组合）", map: "integration" },
+    { t: "组织结构：职能型/矩阵（弱-平衡-强）/项目型，PM 权力依次变大", map: "resource" },
+    { t: "PM 能力三角形：技术项目管理 · 领导力 · 战略与商业管理", map: "resource" }
+  ],
+  3: [
+    { t: "项目管理计划 = 子计划 + 基线；范围/进度/成本三大基准", map: "integration" },
+    { t: "变更请求四类：纠正措施 · 预防措施 · 缺陷补救 · 更新", map: "integration" },
+    { t: "收集需求工具：访谈 · 焦点小组 · 问卷 · 原型法 · 标杆对照", map: "scope" },
+    { t: "范围基准 = 批准的 WBS + WBS 字典 + 范围说明书", map: "scope" }
+  ],
+  4: [
+    { t: "网络图四种依赖：FS 最常用，SS/FF/SF 会辨认即可", map: "schedule" },
+    { t: "工期估算三招：类比 · 参数 · 三点（PERT）", map: "schedule" },
+    { t: "关键链法加缓冲：项目缓冲在末端，接驳缓冲在路径汇入处", map: "schedule" },
+    { t: "直接成本记到项目头上；间接成本多项目分摊", map: "cost" },
+    { t: "挣值偏差对：CV=EV−AC、SV=EV−PV，负了就是差", tag: "公式" }
+  ],
+  5: [
+    { t: "质量是规划/建造出来的，不是检查出来的", map: "quality" },
+    { t: "质量七工具：鱼骨 · 核查 · 帕累托 · 直方 · 控制 · 散点 · 流程", map: "quality" },
+    { t: "塔克曼震荡期冲突正常；领导风格随阶段切换", map: "resource" },
+    { t: "激励理论三件套：马斯洛 · 赫茨伯格保健/激励 · X/Y 理论", map: "resource" },
+    { t: "虚拟团队难点是沟通与信任：用规则+高频同步补", map: "resource" }
+  ],
+  6: [
+    { t: "重要事项正式书面，日常小事非正式口头，升级有路径", map: "communication" },
+    { t: "沟通失真链：发送方编码 → 通道噪声 → 接收方解码，反馈闭环", map: "communication" },
+    { t: "干系人分析四步：识别 → 分析排序 → 规划参与 → 管理监督", map: "stakeholder" },
+    { t: "参与度评估矩阵：当前 C / 期望 D，逐列找差距", map: "stakeholder" },
+    { t: "干系人识别要早：漏掉的干系人就是最大的风险", map: "stakeholder" }
+  ],
+  7: [
+    { t: "风险两维：概率 × 影响；定性排序，定量算钱", map: "risk" },
+    { t: "SWOT 分析定战略；RBS 风险分解结构分类别", map: "risk" },
+    { t: "风险审计查应对有效性；风险再评估是定期回顾", map: "risk" },
+    { t: "总价合同范围要清晰；成本补偿合同用在不明确时", map: "procurement" },
+    { t: "集中采购拿折扣，分散采购更灵活", map: "procurement" }
+  ],
+  8: [
+    { t: "整合管理是 PM 亲自抓、不可下放的十个过程", map: "integration" },
+    { t: "基线变更必须走 CCB；口头变更不响应", map: "integration" },
+    { t: "十大管理过程链背进肌肉记忆，综合选择爱考顺序", map: "integration" },
+    { t: "错题归因三色：概念红 · 计算黄 · 审题灰", tag: "考场" },
+    { t: "综合卷遇到计算题卡壳就标记跳过，最后回来", tag: "考场" }
+  ],
+  9: [
+    { t: "配置项状态：草稿 · 正式 · 变更；配置台账记版本", map: "integration" },
+    { t: "配置管理活动：定计划 → 识别 → 建基线 → 控制变更 → 审计", map: "integration" },
+    { t: "裁剪：按项目规模与复杂度裁过程，裁剪要说明理由", map: "integration" },
+    { t: "交付绩效域成果：合格的可交付物 + 客户满意", tag: "论文" },
+    { t: "度量绩效域：度量为了行动，不为度量而度量", tag: "论文" }
+  ],
+  10: [
+    { t: "5G 三场景：eMBB 大带宽 · uRLLC 低时延 · mMTC 大连接", tag: "IT" },
+    { t: "物联网三层：感知层 · 网络层 · 应用层", tag: "IT" },
+    { t: "区块链特征：去中心化 · 不可篡改 · 可追溯 · 集体维护", tag: "IT" },
+    { t: "AI 三学派：符号主义 · 连接主义 · 行为主义", tag: "IT" },
+    { t: "数字化转型：数据驱动 + 流程再造，不是把纸质表单电子化", tag: "IT" }
+  ],
+  11: [
+    { t: "中间件在操作系统与应用之间：消息 · 事务 · RPC", tag: "IT" },
+    { t: "数据库范式：1NF 原子 · 2NF 消除部分依赖 · 3NF 消除传递依赖", tag: "IT" },
+    { t: "数据仓库四特征：面向主题 · 集成 · 相对稳定 · 反映历史变化", tag: "IT" },
+    { t: "信息安全五层：物理 · 系统 · 网络 · 应用 · 管理", tag: "IT" },
+    { t: "云部署四模式：公有云 · 私有云 · 社区云 · 混合云", tag: "IT" }
+  ],
+  12: [
+    { t: "CMMI 量化管理在第 4 级，第 5 级是持续优化", tag: "IT" },
+    { t: "PMO 三类型：支持型 · 控制型 · 指令型", map: "integration" },
+    { t: "合同订立要约与承诺；违约承担赔偿", tag: "IT" },
+    { t: "招投标流程：招标 → 投标 → 开标 → 评标 → 中标 → 签约", tag: "IT" },
+    { t: "著作权：软件开发者对其创作的软件享有著作权", tag: "IT" }
+  ],
+  13: [
+    { t: "英语高频词：deliverable · baseline · milestone · variance", tag: "公式" },
+    { t: "英语高频词：corrective action · stakeholder · procurement", tag: "公式" },
+    { t: "综合 150 分钟 75 题，单题不超 2 分钟", tag: "考场" },
+    { t: "错题本三栏：题干 · 错因 · 正确逻辑", tag: "考场" },
+    { t: "用错题定位薄弱板块，弱板块回导图补", map: "integration" },
+    { t: "本周只求错题本第一轮闭环，不求分数", tag: "考场" }
+  ],
+  14: [
+    { t: "挣值四基础值：PV 计划 · EV 挣得 · AC 实际 · BAC 总预算", tag: "公式" },
+    { t: "TCPI>1 = 剩余工作要干得比现在更有效率才能达标", tag: "公式" },
+    { t: "顺推取 max 得最早，逆推取 min 得最迟", tag: "公式" },
+    { t: "关键路径可能变化：赶工后重新确认新关键路径", tag: "公式" },
+    { t: "答题按步骤：公式对了就有分，结果错了别空着", tag: "公式" }
+  ],
+  15: [
+    { t: "PERT 贝塔分布最可能×4；三角分布是 (O+M+P)/3", tag: "公式" },
+    { t: "±1σ≈68% · ±2σ≈95% · ±3σ≈99%", tag: "公式" },
+    { t: "决策树多阶段从最远端往回算（逆向剪枝）", tag: "公式" },
+    { t: "EMV 适用条件：概率已知 + 方案互斥", tag: "公式" },
+    { t: "EMV 题先画分支列全再计算，漏分支=漏分", tag: "公式" },
+    { t: "注意单位：万元 vs 元、天 vs 小时", tag: "公式" }
+  ],
+  16: [
+    { t: "进度延误场景：分析原因 → 压缩措施 → 更新基线 → 预防机制", tag: "论文" },
+    { t: "成本超支场景：挣值分析 → 措施 → 预测 EAC → 监控机制", tag: "论文" },
+    { t: "质量缺陷场景：根因分析 → 返工/预防 → 质量关口", tag: "论文" },
+    { t: "答案第一句是结论，证据跟在后面", tag: "论文" },
+    { t: "按点分行作答、标序号，不写成一段连笔文", tag: "论文" },
+    { t: "不抄题干原文，用自己的话概括", tag: "论文" }
+  ],
+  17: [
+    { t: "案例 90 分钟 3 题：计算题先做，最后的验证留时间", tag: "考场" },
+    { t: "找错题三步：定过程 → 引证据 → 正确做法", tag: "论文" },
+    { t: "不确定的也要写：写相关过程的通用套话也能拿分", tag: "考场" },
+    { t: "整卷复盘统计：错题类型 + 慢题在哪", tag: "考场" },
+    { t: "按关键词给分：写过程全称，不写外号", tag: "论文" },
+    { t: "答题前 5 分钟通读全卷，圈出关键要求", tag: "考场" },
+    { t: "节奏训练 25+30+35 分钟，难题留兜底", tag: "考场" }
+  ],
+  18: [
+    { t: "项目卡数字感：投资额 · 工期 · 团队规模 · 三个成果随手报", tag: "论文" },
+    { t: "角色写「主持项目整体管理工作」，不写「参与开发」", tag: "论文" },
+    { t: "质量论文例：预防/评价/失败成本各配一个做法", map: "quality" },
+    { t: "风险论文例：漏识别一个风险→出事→进登记册的教训", map: "risk" },
+    { t: "摘要不分段不写小标题，320 字左右一段成文", tag: "论文" },
+    { t: "提纲套路：一个子问题 = 三个要点 = 三个小标题", tag: "论文" }
+  ],
+  19: [
+    { t: "范围论文坑：确认范围是客户验收，别写成内部测试", map: "scope" },
+    { t: "进度论文例：关键路径上赶工 vs 快速跟进，选一个展开", map: "schedule" },
+    { t: "成本论文例：EV/AC/PV 三个数 + 一个 CPI/SPI 结论", map: "cost" },
+    { t: "主体每个过程写成：是什么 → 我怎么做 → 结果如何", tag: "论文" },
+    { t: "小标题体现过程名，阅卷人先扫小标题", tag: "论文" },
+    { t: "跑题扣分最重：每写完一段回看题目要求", tag: "论文" }
+  ],
+  20: [
+    { t: "干系人论文例：高权低利「令其满意」策略 + 月度简报", map: "stakeholder" },
+    { t: "干系人登记册要动态更新，不是登记一次就完", map: "stakeholder" },
+    { t: "交付绩效域论文：产出 → 成果 → 价值 的验证链", tag: "论文" },
+    { t: "写干系人要「识别→参与」双线，别只写沟通", map: "stakeholder" },
+    { t: "项目实例要具体到会议/文件/数字，空泛扣分", tag: "论文" },
+    { t: "心得体会加一句域间协同，显专业", tag: "论文" },
+    { t: "每天读一篇范文找语感", tag: "论文" }
+  ],
+  21: [
+    { t: "不确定性论文：风险应对 + 复杂性分解 + 模糊性原型，三板斧", tag: "论文" },
+    { t: "AI 素材：大模型辅助需求分析排序 + 人工确认", tag: "论文" },
+    { t: "数据素材：数据资产入表/治理驱动决策的真实做法", tag: "论文" },
+    { t: "安全素材：等保三级备案 + 渗透测试整改闭环", tag: "论文" },
+    { t: "热点写进过程，不单独开段写科普", tag: "论文" },
+    { t: "AI/数据/安全各备 3 句，案例论文通用", tag: "论文" }
+  ],
+  22: [
+    { t: "全文一气呵成，中途不回改开头", tag: "论文" },
+    { t: "主体过渡句：在XX管理中，我主要做了三件事", tag: "论文" },
+    { t: "成果段用数字：按时率 · 缺陷率 · 满意度", tag: "论文" },
+    { t: "不足段三步：具体事 → 根因 → 改进动作", tag: "论文" },
+    { t: "结尾升华一句话，不喊口号", tag: "论文" },
+    { t: "自评表四维：切题 · 实践 · 结构 · 字数各打分", tag: "论文" }
+  ],
+  23: [
+    { t: "120 分钟拆分：10 列骨架 + 100 写正文 + 10 收尾", tag: "论文" },
+    { t: "论文「我的项目」细节贯穿，理论带过两句话", tag: "论文" },
+    { t: "案例保温：每天 1 道找错题，过程名保持热", tag: "论文" },
+    { t: "主体里写一个小挫折+解决，全顺的项目假", tag: "论文" },
+    { t: "卷面就是隐形分：段落清晰、序号工整", tag: "论文" },
+    { t: "一周两篇全文，主题交替", tag: "论文" },
+    { t: "摘要别照抄正文，用总结语言重写", tag: "论文" }
+  ],
+  24: [
+    { t: "整卷 150 分钟含涂卡，别在一题上死磕", tag: "考场" },
+    { t: "错题三轮法：全做 → 只做错 → 全对", tag: "考场" },
+    { t: "失败的知识点回章节导图重学框架", map: "integration" },
+    { t: "EVM 错题每周重做一遍直到清零", tag: "公式" },
+    { t: "每周末清空错题本；剩下的才是真薄弱", tag: "考场" },
+    { t: "模考分数求稳不求满分", tag: "考场" },
+    { t: "IT 类错题记「类属优先」：先分类再回忆", tag: "IT" }
+  ],
+  25: [
+    { t: "三科同日模拟：脑力高峰对齐考试时间表", tag: "考场" },
+    { t: "午休不超 30 分钟，避免深睡昏沉", tag: "考场" },
+    { t: "失分分类汇总：概念/计算/审题/时间，先补最大桶", tag: "考场" },
+    { t: "模考后半天内重做错题，趁热", tag: "考场" },
+    { t: "论文 46 分目标：切题+实践+结构平均就是 46", tag: "论文" },
+    { t: "案例及格靠计算题：计算必须全对", tag: "公式" },
+    { t: "模考前三天饮食睡眠：不熬夜不暴食", tag: "考场" }
+  ],
+  26: [
+    { t: "弱项专项原则：20 题 + 回导图，一个板块一个循环", map: "integration" },
+    { t: "计算弱：EVM 5 题 + CPM 5 题 + PERT/EMV 5 题，限时 30 分钟", tag: "公式" },
+    { t: "概念弱：错题 20 道 + 合书推导图", map: "integration" },
+    { t: "专项结束记录正确率变化，看到进步", tag: "考场" },
+    { t: "弱项回填错题本，错的三轮走起", tag: "考场" },
+    { t: "论文弱项：重写最弱主题提纲 + 正文第一段", tag: "论文" },
+    { t: "一次只补一个板块，贪多必累", tag: "考场" }
+  ],
+  27: [
+    { t: "三个论文骨架默写：质量 · 风险 · 干系人", tag: "论文" },
+    { t: "骨架默写标准：3 子问题 × 3 要点，闭卷", tag: "论文" },
+    { t: "49 过程按领域默写，缺哪个补哪个", map: "integration" },
+    { t: "模考 3 收尾：只看趋势不纠结单次", tag: "考场" },
+    { t: "英文术语再过一遍：PV/EV/AC/BAC/CPI/SPI/EMV", tag: "公式" },
+    { t: "错题本红题最后一轮清零", tag: "考场" },
+    { t: "本周不碰新内容，只巩固", tag: "考场" }
+  ],
+  28: [
+    { t: "四张清单各一页：错题 · 公式 · 过程 · 论文骨架", tag: "公式" },
+    { t: "公式默写清单：CV/SV/CPI/SPI/EAC/ETC/TCPI/EMV/PERT/渠道数", tag: "公式" },
+    { t: "49 过程默写限时 20 分钟，缺口立即补", map: "integration" },
+    { t: "错题清单红题转「一句话卡片」", tag: "考场" },
+    { t: "论文骨架浓缩成关键词，8 个主题过一遍", tag: "论文" },
+    { t: "清单是考前最后一周唯一材料", tag: "考场" }
+  ],
+  29: [
+    { t: "带齐：身份证 · 准考证 · 黑色签字笔；考场看屏幕时间", tag: "考场" },
+    { t: "机考界面：提前熟悉答题标记/回看操作", tag: "考场" },
+    { t: "综合策略：75 题 150 分钟，先 0.8 倍速过一遍再回标记题", tag: "考场" },
+    { t: "案例策略：先读题 5 分钟圈要求再作答", tag: "考场" },
+    { t: "论文策略：列骨架再写，正文 1800 字以上", tag: "考场" },
+    { t: "本周对齐考试作息，不熬夜", tag: "考场" }
+  ],
+  30: [
+    { t: "最后一周三件事：错题清单 · 公式卡 · 项目卡", tag: "考场" },
+    { t: "项目卡数字最后一遍：投资 · 工期 · 团队 · 成果", tag: "论文" },
+    { t: "早起一个公式，睡前一个论文骨架", tag: "公式" },
+    { t: "不做新题不做新模考：稳住心态就是答题", tag: "考场" },
+    { t: "考场流程心里过一遍：提前到 · 存物品 · 时间分配", tag: "考场" },
+    { t: "你已经走到这里：按自己节奏答完就是胜利", tag: "考场" }
+  ]
+};
+
 const PHASES = [
   { id: "p1", name: "启动", weeks: [1, 2], color: "#0d5c5c", desc: "先看清战场：规则、分值、49过程框架、项目卡。", output: "考试地图 / 目标分 / 项目卡", score: "摸底定位 · 无分值侧重" },
   { id: "p2", name: "基础精学", weeks: [3, 13], color: "#256b8a", desc: "按分值顺序学：十大管理→绩效域→IT基础→高级/法规。", output: "10张导图 / 49过程 / 错题本", score: "十大管理 S·36-38分 + 绩效域 S + IT基础 A·14-17分" },
@@ -2687,9 +2924,10 @@ function fmtRange(start, end) {
 
 /* ---------------- 计划 ---------------- */
 function currentWeek() {
+  const N = Math.min(30, planWeeksN());
   const diff = dayDiff(parseDate(state.planStart), today());
   if (diff < 0) return 0;
-  return Math.min(30, Math.floor(diff / 7) + 1);
+  return Math.min(N, Math.floor(diff / 7) + 1);
 }
 function weekRange(n) {
   const start = addDays(parseDate(state.planStart), (n - 1) * 7);
@@ -2985,7 +3223,7 @@ function renderHome() {
   const exam = parseDate(state.examDate);
   const days = dayDiff(d, exam);
   const w = currentWeek();
-  const phase = w > 0 ? phaseOfWeek(w) : PHASES[0];
+  const phase = w > 0 ? phaseAt(w) : PHASES[0];
   const ts = taskStats();
   const cs = cardStats();
   const readiness = Math.round(ts.pct * 0.6 + cs.pct * 0.4);
@@ -3038,15 +3276,52 @@ function renderHome() {
 /* ---------------- 今日记忆点 ---------------- */
 function pointsForWeek(w) {
   const wp = WEEK_POINTS.find(x => x.n === w);
-  return (wp && wp.points) || [];
+  const base = (wp && wp.points) || [];
+  const extra = WEEK_POINTS_EXTRA[w] || [];
+  return base.concat(extra);
+}
+
+/* ---- 弹性排期：计划开始日→考试日不足 30 周时，整体计划按比例压缩 ---- */
+function planWeeksN() {
+  const days = dayDiff(parseDate(state.planStart), parseDate(state.examDate));
+  if (days < 0) return 0;
+  return Math.max(1, Math.ceil(days / 7));
+}
+/* 计划周 n(1..N) → WEEK_FOCUS 原始周号（N=30 时完全等于 n，向后兼容） */
+function weekIndexAt(n) {
+  const N = Math.min(30, planWeeksN());
+  if (N >= 30) return Math.max(0, Math.min(29, n - 1));
+  return Math.max(0, Math.min(29, Math.ceil(n * 30 / N) - 1));
+}
+/* 计划期是否已走完（today 超过 planStart + N 周） */
+function planFinished() {
+  const N = Math.min(30, planWeeksN());
+  return planWeeksN() > 0 && dayDiff(parseDate(state.planStart), today()) >= N * 7;
+}
+function weekFocusAt(n) {
+  return WEEK_FOCUS[weekIndexAt(n)] || WEEK_FOCUS[29];
+}
+function phaseAt(n) {
+  const m = weekIndexAt(n) + 1;
+  return PHASES.find(p => m >= p.weeks[0] && m <= p.weeks[1]) || PHASES[0];
+}
+function tasksForPlanWeek(n) {
+  return tasksForWeek(weekIndexAt(n) + 1);
+}
+/* 压缩模式下阶段对应计划周区间与日期（并裁到考试日之前） */
+function phaseRangePlan(p) {
+  const N = Math.min(30, planWeeksN());
+  const s = Math.max(1, Math.floor(N * (p.weeks[0] - 1) / 30) + 1);
+  const e = Math.min(N, Math.max(s, Math.ceil(N * p.weeks[1] / 30)));
+  return { ws: s, we: e, start: weekRange(s).start, end: weekRange(e).end };
 }
 
 function todayPoints(w) {
-  const pool = pointsForWeek(w);
+  const pool = pointsForWeek(weekIndexAt(w) + 1);
   if (!pool.length) return [];
   const dayIndex = (today().getDay() + 6) % 7; // 周一=0
   const out = [];
-  for (let i = 0; i < 3; i++) out.push(pool[(dayIndex * 3 + i) % pool.length]);
+  for (let i = 0; i < 6; i++) out.push(pool[(dayIndex * 6 + i) % pool.length]);
   return out;
 }
 
@@ -3076,22 +3351,21 @@ function renderTodayStudy() {
   if (!box) return;
   const w = currentWeek();
   if (w === 0) {
-    box.innerHTML = `<p class="tiny" style="margin:4px 2px;color:#8a918f">开营前（第 1 周开始后，这里每天给出 3 个当日记忆点）。</p>`;
+    box.innerHTML = `<p class="tiny" style="margin:4px 2px;color:#8a918f">开营前（第 1 周开始后，这里每天给出 6 个当日记忆点）。</p>`;
     return;
   }
-  const week = WEEK_FOCUS[Math.min(29, w - 1)];
-  const pool = pointsForWeek(w);
-  const dayIndex = (today().getDay() + 6) % 7;
+  const week = weekFocusAt(w);
+  const pool = pointsForWeek(weekIndexAt(w) + 1);
   const todays = todayPoints(w);
-  const phase = phaseOfWeek(w);
+  const phase = phaseAt(w);
   box.innerHTML = `
     <div class="ts-head">
       <span class="pill" style="background:${phase.color};color:#fff">第 ${w} 周 · ${esc(phase.name)}</span>
-      <span class="tiny" style="color:#7d6848">周${weekdayCN(today())} · ${esc(week.focus)}</span>
+      <span class="tiny" style="color:#7d6848">周${weekdayCN(today())} · ${esc(week.focus)}${planWeeksN() < 30 ? `（整体已压缩为 ${Math.min(30, planWeeksN())} 周）` : ""}</span>
     </div>
-    <p class="ts-label">今天要记住的 3 个点</p>
+    <p class="ts-label">今天要记住的 6 个点</p>
     ${todays.map(p => pointRow(p, { highlight: true })).join("")}
-    <div class="ts-divider">本周记忆点全清单（每天换 3 个，轮流过完）</div>
+    <div class="ts-divider">本周记忆点全清单（每天换 6 个，轮流过完）</div>
     ${pool.map((p, i) => pointRow(p, { highlight: todays.includes(p) })).join("")}
     <div class="tiny" style="margin-top:8px;color:#8a918f">本周产出：${esc(week.output)} · 距考试 ${Math.max(0, dayDiff(today(), parseDate(state.examDate)))} 天</div>
   `;
@@ -3118,7 +3392,7 @@ function goMapArea(areaId) {
 function renderTodayTask(w) {
   const box = document.getElementById("todayTaskBox");
   if (!box) return;
-  const week = WEEK_FOCUS[Math.max(0, Math.min(29, (w || 1) - 1))];
+  const week = weekFocusAt(Math.max(1, w || 1));
   let items = [];
   let intro = "";
   if (w === 0) {
@@ -3129,7 +3403,7 @@ function renderTodayTask(w) {
       { id: "pre-2", text: "把 10 个领域 + 49 个过程抄一遍，拍下来", min: 40 },
       { id: "pre-3", text: "建项目卡：选 1 个你真实参与过的项目", min: 30 }
     ];
-  } else if (w > 30) {
+  } else if (dayDiff(parseDate(state.planStart), today()) >= Math.min(30, planWeeksN()) * 7) {
     intro = "计划已走完。今天只做轻量回顾，保持手感：";
     items = [
       { id: "post-1", text: "错题本 20 分钟：只看标红的 10 题", min: 20 },
@@ -3137,7 +3411,7 @@ function renderTodayTask(w) {
       { id: "post-3", text: "公式卡 1 遍，早点休息", min: 15 }
     ];
   } else {
-    const tasks = tasksForWeek(w);
+    const tasks = tasksForPlanWeek(w);
     const dayIndex = (today().getDay() + 6) % 7;
     const main = tasks[dayIndex];
     intro = `第 ${w} 周 · ${week.focus}`;
@@ -3150,8 +3424,8 @@ function renderTodayTask(w) {
 
   box.innerHTML = `
     <div class="today-top">
-      <span class="day">${w === 0 ? "开营准备" : w > 30 ? "考前/考后" : `TODAY · 周${weekdayCN(today())}`}</span>
-      <span class="pill pill-a">${w === 0 ? "预备" : w > 30 ? "收尾" : "约 " + items.reduce((s, x) => s + x.min, 0) + " 分钟"}</span>
+      <span class="day">${w === 0 ? "开营准备" : planFinished() ? "考前/考后" : `TODAY · 周${weekdayCN(today())}`}</span>
+      <span class="pill pill-a">${w === 0 ? "预备" : planFinished() ? "收尾" : "约 " + items.reduce((s, x) => s + x.min, 0) + " 分钟"}</span>
     </div>
     <p class="small" style="margin:0 0 4px;color:#7d6848">${esc(intro)}</p>
     ${items.map((x, i) => `
@@ -3171,7 +3445,7 @@ function renderTodayTask(w) {
       if (!pts.length) return "";
       return `
         <div class="tp-box">
-          <div class="tp-head"><b>今日记忆点 ×3</b><button class="link" data-page="plan">本周全部 →</button></div>
+          <div class="tp-head"><b>今日记忆点 ×6</b><button class="link" data-page="plan">本周全部 →</button></div>
           ${pts.map(p => pointRow(p, { highlight: true })).join("")}
         </div>`;
     })() : ""}
@@ -3440,29 +3714,29 @@ function renderPlan() {
   const w = currentWeek();
   const ts = taskStats();
   const days = dayDiff(today(), parseDate(state.examDate));
-  const phase = w > 0 ? phaseOfWeek(w) : null;
+  const phase = w > 0 ? phaseAt(w) : null;
 
   const pWeek = document.getElementById("planWeek");
-  if (pWeek) pWeek.textContent = w === 0 ? "未开营" : w > 30 ? "已走完" : `第 ${w}`;
+  if (pWeek) pWeek.textContent = w === 0 ? "未开营" : planFinished() ? "已走完" : `第 ${w}`;
   const pDays = document.getElementById("planDays");
   if (pDays) pDays.textContent = days > 0 ? days : 0;
   const pTask = document.getElementById("planTaskPct");
   if (pTask) pTask.textContent = `${ts.pct}%`;
   const pPhase = document.getElementById("planPhase");
-  if (pPhase) pPhase.textContent = phase ? phase.name : w > 30 ? "收尾" : "准备";
+  if (pPhase) pPhase.textContent = phase ? phase.name : planFinished() ? "收尾" : "准备";
   const pTag = document.getElementById("thisWeekTag");
   if (pTag) pTag.textContent = w ? `W${w}` : "预备";
 
   const phaseBox = document.getElementById("phaseList");
   if (phaseBox) {
     phaseBox.innerHTML = PHASES.map(p => {
-      const r = phaseRange(p);
-      const cur = w >= p.weeks[0] && w <= p.weeks[1];
+      const r = phaseRangePlan(p);
+      const cur = w >= r.ws && w <= r.we;
       return `
         <div class="phase-item ${cur ? "current" : ""}">
           <span class="phase-dot" style="${cur ? "" : `border-color:${p.color}`}"></span>
           <div class="phase-body">
-            <b>${esc(p.name)} <span class="tiny">W${p.weeks[0]}—W${p.weeks[1]}</span></b>
+            <b>${esc(p.name)} <span class="tiny">W${r.ws}—W${r.we}${planWeeksN() < 30 ? `（原W${p.weeks[0]}—W${p.weeks[1]} 压缩）` : ""}</span></b>
             <span class="dates">${fmtRange(r.start, r.end)} · ${esc(p.desc)}</span>
             <span>产出：${esc(p.output)}</span>
             <span class="phase-score">分值侧重：${esc(p.score)}</span>
@@ -3477,11 +3751,11 @@ function renderPlan() {
     if (w === 0) {
       const left = Math.abs(dayDiff(today(), parseDate(state.planStart)));
       thisWeek.innerHTML = `<div class="empty"><b>距开营 ${left} 天</b>先做摸底 + 49 过程框架，开营后直接进入第 1 周。</div>`;
-    } else if (w > 30) {
-      thisWeek.innerHTML = `<div class="empty"><b>30 周计划已走完</b>现在只看错题、公式、项目卡，保持手感。</div>`;
+    } else if (planFinished()) {
+      thisWeek.innerHTML = `<div class="empty"><b>计划已走完</b>现在只看错题、公式、项目卡，保持手感。</div>`;
     } else {
-      const wk = WEEK_FOCUS[w - 1];
-      const tasks = tasksForWeek(w);
+      const wk = weekFocusAt(w);
+      const tasks = tasksForPlanWeek(w);
       thisWeek.innerHTML = `
         <div class="today-top">
           <span class="day">W${w} · ${fmtRange(weekRange(w).start, weekRange(w).end)}</span>
@@ -3503,28 +3777,30 @@ function renderPlan() {
 
   const weekList = document.getElementById("weekList");
   if (weekList) {
-    weekList.innerHTML = WEEK_FOCUS.map(wk => {
-      const tasks = tasksForWeek(wk.n);
-      const isCur = wk.n === w;
-      const doneN = tasks.filter((_, i) => state.tasks[taskId(wk.n, i + 1)]).length;
-      const r = weekRange(wk.n);
+    const NW = Math.min(30, planWeeksN());
+    weekList.innerHTML = Array.from({ length: NW }, (_, i) => i + 1).map(n => {
+      const wk = weekFocusAt(n);
+      const tasks = tasksForPlanWeek(n);
+      const isCur = n === w;
+      const doneN = tasks.filter((_, i2) => state.tasks[taskId(n, i2 + 1)]).length;
+      const r = weekRange(n);
       return `
         <details ${isCur ? "open" : ""} class="${isCur ? "current" : ""}">
           <summary>
-            <span class="week-no">W${String(wk.n).padStart(2, "0")}</span>
+            <span class="week-no">W${String(n).padStart(2, "0")}</span>
             <span class="week-main">
               <b>${esc(wk.focus)}</b>
-              <span>${fmtRange(r.start, r.end)} · ${doneN}/7 完成 · ${esc(phaseOfWeek(wk.n).name)}</span>
+              <span>${fmtRange(r.start, r.end)} · ${doneN}/${tasks.length} 完成 · ${esc(phaseAt(n).name)}${planWeeksN() < 30 ? `（原W${weekIndexAt(n)+1}）` : ""}</span>
             </span>
           </summary>
           <div style="padding-bottom:8px">
             <p class="tiny" style="margin:0 0 4px">本周产出：${esc(wk.output)}</p>
-            ${tasks.map((t, i) => {
-              const id = taskId(wk.n, i + 1);
+            ${tasks.map((t, i2) => {
+              const id = taskId(n, i2 + 1);
               const done = !!state.tasks[id];
               return `<label class="task ${done ? "done" : ""}">
                 <input type="checkbox" data-task="${id}" ${done ? "checked" : ""} />
-                <span>${esc(t.text)}<small>周${"一二三四五六日"[i]} · 约 ${t.min} 分钟</small></span>
+                <span>${esc(t.text)}<small>周${"一二三四五六日"[i2]} · 约 ${t.min} 分钟</small></span>
               </label>`;
             }).join("")}
           </div>
@@ -3982,8 +4258,8 @@ function saveDates() {
   const exam = document.getElementById("examDateInput")?.value;
   const start = document.getElementById("planStartInput")?.value;
   if (!exam || !start) { showToast("请把两个日期都填上"); return; }
-  if (dayDiff(parseDate(start), parseDate(exam)) < 30) {
-    showToast("计划开始日至少要比考试日早 30 天");
+  if (dayDiff(parseDate(start), parseDate(exam)) < 14) {
+    showToast("计划开始日至少要比考试日早 14 天");
     return;
   }
   state.examDate = exam;
@@ -3991,7 +4267,8 @@ function saveDates() {
   saveState();
   closeSheet();
   renderAll();
-  showToast("日期已更新，计划已重排");
+  const N = Math.min(30, planWeeksN());
+  showToast(N < 30 ? `已按剩余 ${N} 周自动压缩整体计划` : "日期已更新，计划已重排");
 }
 
 function resetLearning() {
